@@ -29,7 +29,6 @@ namespace josocon;
 
 \passthru (<<<EOF
 git --version
-git init --separate-git-dir=../db/git .
 git fetch origin master
 git reset --hard origin/master
 EOF
