@@ -1,0 +1,7 @@
+*.json
+.DS_Store
+*~
+._*
+*.log
+*.sqlite
+*.sqlite3
