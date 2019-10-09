@@ -46,7 +46,7 @@ RewriteEngine on
 RewriteCond %{ENV:HTTPS} !on
 RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-RewriteCond %{HTTP_HOST} !%{ENV:MAIN_HOSTNAME}
+RewriteCond expr "! %{HTTP_HOST} == %{ENV:MAIN_HOSTNAME}"
 RewriteRule .* https://%{ENV:MAIN_HOSTNAME}%{REQUEST_URI} [R=301,L]
 
 # Create /maint.txt to suspend public operation
