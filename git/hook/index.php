@@ -29,8 +29,8 @@ namespace josocon;
 
 \passthru (<<<EOF
 git --version
-git fetch origin master
-git reset --hard origin/master
+git fetch origin master 2>&1
+git reset --hard origin/master 2>&1
 EOF
 );
 
