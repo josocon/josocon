@@ -30,6 +30,7 @@ namespace josocon;
 \passthru (<<<EOF
 git --version
 git status
+git show
 EOF
 );
 
