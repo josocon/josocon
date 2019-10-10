@@ -15,9 +15,9 @@
 	limitations under the License.
 */
 
-@namespace url('http://www.w3.org/1999/xhtml');
-
 @import url('/resources/common.css');
+
+@namespace url('http://www.w3.org/1999/xhtml');
 
 .site-navigation {
 	position: -webkit-sticky;
