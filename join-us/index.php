@@ -31,7 +31,7 @@ print_header ('/join-us/', 'スタッフ募集');
 東大女装子コンテスト実行委員会はスタッフをいつでも募集中です。女装に興味がある方大歓迎です！
 駒場祭でのステージパフォーマンスに向けて企画、広報、運営などの業務を行います。
 
-スタッフ希望の方はut.josocon @ gmail.com あるいは東大女装子コンテスト公式Twitterアカウント [@ut_josocon](https://twitter.com/ut_josocon) までご連絡ください。
+スタッフ希望の方は ut.josocon @ gmail.com あるいは東大女装子コンテスト公式Twitterアカウント [@ut_josocon](https://twitter.com/ut_josocon) までご連絡ください。
 ]]></josocon-markdown>
 <?php
 print_footer ();
