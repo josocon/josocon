@@ -18,6 +18,26 @@
 'use strict'; // for non-module scripts
 
 
+if ('serviceWorker' in navigator) {
+	(async () => {
+		let registration = await navigator.serviceWorker.getRegistration ('/');
+		if (registration) {
+			registration.update ()
+			.catch (error => console.log (error));
+		}
+		
+		try {
+			registration = await navigator.serviceWorker
+			.register ('/resources/sw.js', {scope: '/'});
+		} catch (error) {
+			console.log ('Service worker registration failed:', error);
+		}
+	}) ();
+} else {
+	console.log('Service workers are not supported.');
+}
+
+
 const shadowRoots = new WeakMap ();
 
 const md = markdownit ();

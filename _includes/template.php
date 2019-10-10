@@ -108,6 +108,8 @@ ________________________________________________________________________________
 <meta name='twitter:description' content='<?= escape ($description) ?>'/>
 <meta name='twitter:image' content='<?= escape (SITE_IMAGE) ?>'/>
 
+<meta name='robots' content='noarchive, nostore'/>
+
 <meta name='viewport' content='width=device-width, initial-scale=1'/>
 
 <link rel='stylesheet' href='/resources/root.css'/>
