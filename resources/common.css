@@ -52,6 +52,19 @@ body {
 
 h1, h2, h3, h4, h5, h6, strong {
 	font-weight: 500;
+	color: #6a3321;
+}
+
+h1 {
+	font-size: 200%;
+	margin-inline: 0;
+	margin-block: 1em;
+}
+
+h2 {
+	font-size: 150%;
+	margin-inline: 0;
+	margin-block: 1em;
 }
 
 a {
@@ -85,6 +98,7 @@ iframe {
 	position: absolute;
 	inline-size: 100%;
 	block-size: 100%;
+	inset-block-start: 0;
 }
 
 .removed {

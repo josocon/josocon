@@ -108,7 +108,13 @@
 	color: #6a3321;
 	text-align: center;
 	padding: 1rem;
-	margin-block: 2rem;
+	margin-block: 1rem;
+}
+
+.page-header {
+	margin-block: 1rem;
+	background-color: #fff;
+	padding-inline: 1rem;
 }
 
 .site-footer {
@@ -120,6 +126,10 @@
 	padding: 1rem;
 	max-inline-size: 50rem;
 	margin-inline: auto;
+}
+
+.site-footer h2 {
+	color: inherit;
 }
 
 .ad-wrapper {
