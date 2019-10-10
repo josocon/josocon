@@ -24,13 +24,47 @@
 <template id='template-page'>
 <link rel='stylesheet' href='/resources/template-page.css'/>
 <header class='site-header'>
-<h1 class='site-title'><slot name='site-title'/></h1>
-<h2 class='site-subtitle'><slot name='site-subtitle'/></h2>
+<h1 class='site-title'>東大女装子コンテスト</h1>
+<h2 class='site-subtitle'>駒場祭参加企画</h2>
 </header>
+<nav class='site-navigation'>
+<ul>
+<li><a href='/'>新着情報</a></li>
+<li class='item'><a href='/join-us/'>スタッフ募集</a></li>
+<li class='item'><a href='/contact/'>お問い合わせ</a></li>
+<li class='item'><a href='/login/'>関係者向け</a></li>
+</ul>
+</nav>
 <article class='page'>
 <aside class='page-notice'><slot name='page-notice'/></aside>
 <slot name='page-content'/>
 </article>
+<footer class='site-footer'>
+<div>
+<h2>じょそこん</h2>
+<nav><ul>
+<li><a href='/contact/'>お問い合わせ</a></li>
+<li><a href='https://twitter.com/ut_josocon'>Twitter @ut_josocon</a></li>
+</ul></nav>
+<p class='ad-wrapper'>
+<a href='https://goo.gl/maps/ucGHKbCNhSo'>
+<img class='ad-map' src='/resources/isshin-map.png'/>
+</a>
+<a href='https://twitter.com/IsshinKomaba'>
+<div class='ad-top'>東大女装子コンテストは</div>
+<div class='ad-main'>らーめん一信</div>
+<div class='ad-bottom'>の協賛でお送りいたします</div>
+<div class='ad-twitter'>Twitter @IsshinKomaba</div>
+<div class='ad-address'>
+駒場キャンパス裏門徒歩0秒！<br/>
+渋谷区富ケ谷2丁目21-13<br/>
+Tel. 03 - 3467 - 7290
+</div>
+</a>
+</p>
+<p>Copyright © 2019 東大女装子コンテスト実行委員会 All rights reserved.</p>
+</div>
+</footer>
 </template>
 </body>
 </html>
