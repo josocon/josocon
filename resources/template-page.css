@@ -132,6 +132,21 @@
 	color: inherit;
 }
 
+.site-footer-nav > ul {
+	display: grid;
+	grid-auto-columns: 1fr;
+	margin: 0;
+	padding: 0;
+}
+
+.site-footer-nav a {
+	color: inherit;
+}
+
+.site-footer-nav a:hover, .site-footer-nav a:active {
+	text-decoration: underline;
+}
+
 .ad-wrapper {
 	background-color: #fff;
 	box-shadow: -.5rem -.5rem 0 #ccc;
