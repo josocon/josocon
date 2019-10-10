@@ -34,7 +34,7 @@
 	display: block;
 	content: '';
 	grid-column: 1;
-	grid-row: 1;
+	grid-row: 1 / 3;
 	background-repeat: no-repeat;
 	background-image: url(/resources/icon.png);
 	background-size: 4rem;
