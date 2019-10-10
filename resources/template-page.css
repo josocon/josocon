@@ -99,8 +99,9 @@
 .page {
 	flex-grow: 1;
 	margin-inline: auto;
-	max-inline-size: 50rem;
 	padding: 1rem;
+	inline-size: calc(100% - 2rem);
+	max-inline-size: 50rem;
 }
 
 .page-notice {
