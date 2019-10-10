@@ -23,6 +23,11 @@
 	inset-block-start: 0;
 }
 
+.site-footer {
+	background-color: #c64d6c;
+	color: #fff;
+}
+
 .ad-wrapper {
 	background-color: #fff;
 	box-shadow: -.5rem -.5rem 0 #ccc;
