@@ -19,10 +19,15 @@
 
 @namespace url('http://www.w3.org/1999/xhtml');
 
+.site-header-wrapper {
+	background-color: #fff;
+}
+
 .site-header {
 	display: flex;
 	flex-direction: row;
-	background-color: #fff;
+	max-inline-size: 50rem;
+	margin-inline: auto;
 }
 
 .site-header::before {
@@ -38,8 +43,6 @@
 
 .site-header-inner {
 	flex-grow: 1;
-	max-width: 50rem;
-	margin-inline: auto;
 }
 
 .site-title {
