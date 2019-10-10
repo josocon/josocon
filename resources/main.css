@@ -33,8 +33,6 @@ vim: ts=4 noet ai */
 }
 
 body {
-	display: flex;
-	flex-direction: column;
 	margin: 0;
 	border: 0;
 	padding: 0;
