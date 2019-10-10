@@ -66,7 +66,29 @@
 
 .site-navigation > ul {
 	max-inline-size: 50rem;
+	overflow-inline: auto;
 	margin-inline: auto;
+	margin-block: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+}
+
+.site-navigation > ul > li {
+	margin: 0;
+}
+
+.site-navigation a {
+	display: block;
+	padding: 1rem;
+	color: inherit;
+}
+
+.site-navigation li:hover, .site-navigation li:active {
+	background-color: #ea0064;
+	color: #fff;
 }
 
 .page {
