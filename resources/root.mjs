@@ -39,7 +39,7 @@ customElements.define ('josocon-page', class extends HTMLElement {
 		const root = shadowRoots.get (this);
 		if (root.childNodes.length) return true;
 		
-		const template = await getTemplate ('josocon-page');
+		const template = await getTemplate ('template-page');
 		const content = document.importNode (template.content, true);
 		root.appendChild (content);
 		return true;
