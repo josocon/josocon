@@ -24,33 +24,31 @@
 	flex-direction: row;
 }
 
+.site-header::before {
+	display: block;
+	content: '';
+	inline-size: 5rem;
+	min-block-size: 5rem;
+	background-repeat: no-repeat;
+	background-image: url(/resources/icon.png);
+	background-size: 4rem;
+	background-position: center;
+}
+
 .site-header-inner {
 	flex-grow: 1;
 }
 
-.site-header-inner::before {
-	display: block;
-	content: '';
-	inline-size: 4rem;
-	min-block-size: 4rem;
-	background-repeat: no-repeat;
-	background-image: url(/resources/icon.png);
-	background-size: contain;
-	background-position: center;
-	margin-inline-end: 1rem;
-}
-
 .site-title {
-	margin: 0;
-	padding: 1rem;
+	margin: 1rem;
 	flex-grow: 1;
 	font-size: 1.25rem;
 }
 
 .site-subtitle {
-	margin: 0;
-	padding: 1rem;
+	margin: 1rem;
 	font-size: 1rem;
+	text-align: end;
 }
 
 .site-navigation {
