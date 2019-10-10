@@ -28,7 +28,7 @@ if ('serviceWorker' in navigator) {
 		
 		try {
 			registration = await navigator.serviceWorker
-			.register ('/resources/sw.js', {scope: '/'});
+			.register ('/sw.js', {scope: '/'});
 		} catch (error) {
 			console.log ('Service worker registration failed:', error);
 		}
