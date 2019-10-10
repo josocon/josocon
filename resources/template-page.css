@@ -22,6 +22,7 @@
 .site-header {
 	display: flex;
 	flex-direction: row;
+	background-color: #fff;
 }
 
 .site-header::before {
@@ -37,12 +38,15 @@
 
 .site-header-inner {
 	flex-grow: 1;
+	max-width: 50rem;
+	margin-inline: auto;
 }
 
 .site-title {
 	margin: 1rem;
 	flex-grow: 1;
 	font-size: 1.25rem;
+	color: #888;
 }
 
 .site-subtitle {
