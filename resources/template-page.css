@@ -64,7 +64,7 @@
 	background-color: #ffd9e0;
 }
 
-.site-navigation > nav {
+.site-navigation > ul {
 	max-inline-size: 50rem;
 	margin-inline: auto;
 }
