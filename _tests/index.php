@@ -40,7 +40,7 @@ ________________________________________________________________________________
 <link rel='stylesheet' href='/resources/root.css'/>
 <script defer='' src='/resources/root.mjs'></script>
 </head>
-<josocon-page>
+<body is='josocon-page'>
 <div slot='page-notice'>サイト準備中</div>
 <div slot='page-title'>じょそこん</div>
 <div slot='page-content'>
@@ -52,6 +52,6 @@ ________________________________________________________________________________
 今年も、東京大学第69回駒場祭にて東大女装子コンテストを開催いたします！ 女装子たちによるパフォーマンスステージをお楽しみください。 
 </p>
 </div>
-</josocon-page>
+</body>
 </html>
 
