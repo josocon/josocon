@@ -38,7 +38,7 @@ ________________________________________________________________________________
 <link rel='canonical' href='https://www.josocon.u-tokyo.eu.org/'/>
 <meta name='viewport' content='width=device-width, initial-scale=1'/>
 <link rel='stylesheet' href='/resources/root.css'/>
-<script type='module' src='/resources/root.mjs'></script>
+<script defer='' src='/resources/root.mjs'></script>
 </head>
 <body>
 <josocon-page>
