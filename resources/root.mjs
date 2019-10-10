@@ -24,7 +24,7 @@ const templatesPromise = (async () => {
 }) ();
 
 const getTemplate = async id => {
-	const templates = async templatesPromise;
+	const templates = await templatesPromise;
 	return templates.getElementById (id);
 };
 
@@ -39,7 +39,7 @@ customElements.define ('josocon-page', class extends HTMLElement {
 		const root = shadowRoots.get (this);
 		if (root.childNodes.length) return true;
 		
-		const template = async getTemplate ('josocon-page');
+		const template = await getTemplate ('josocon-page');
 		const content = document.importNode (template.content, true);
 		root.appendChild (content);
 		return true;
