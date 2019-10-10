@@ -15,6 +15,9 @@
 	limitations under the License.
 */
 
+'use strict'; // for non-module scripts
+
+
 const shadowRoots = new WeakMap ();
 
 const templatesPromise = (async () => {
