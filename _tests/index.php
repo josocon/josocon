@@ -38,8 +38,8 @@ ________________________________________________________________________________
 <link rel='canonical' href='https://www.josocon.u-tokyo.eu.org/'/>
 <meta name='viewport' content='width=device-width, initial-scale=1'/>
 <link rel='stylesheet' href='/resources/root.css'/>
-<script defer='' src='/resources/root.mjs'/>
 <script src='/resources/markdown-it_10.0.0.min.js'/>
+<script src='/resources/root.mjs'/>
 </head>
 <body is='josocon-page'>
 <div slot='page-notice'>サイト準備中</div>

@@ -20,6 +20,8 @@
 
 const shadowRoots = new WeakMap ();
 
+const md = markdownit ();
+
 const templatesPromise = (async () => {
 	const res = await fetch ('/resources/templates.xhtml');
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
@@ -52,3 +54,13 @@ customElements.define ('josocon-page', class extends HTMLBodyElement {
 		this.load ().then (a => console.log ('connected:', a)).catch (e => console.error (e));
 	}
 }, {extends: 'body'});
+
+customElements.define ('josocon-markdown', class extends HTMLElement {
+	constructor () {
+		super ();
+		const shadowRoot = this.attachShadow({ mode: 'closed' });
+		const html = '<div>' + md.render(this.textContent) + '</div>';
+		const node = new DOMParser ().parseFromString (html, 'text/html').body.children[0];
+		shadowRoot.appendChild (document.adoptNode (node));
+	}
+});
