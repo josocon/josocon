@@ -31,7 +31,7 @@ const getTemplate = async id => {
 	return templates.getElementById (id);
 };
 
-customElements.define ('josocon-page', class extends HTMLElement {
+customElements.define ('josocon-page', class extends HTMLBodyElement {
 	constructor () {
 		super ();
 		const shadowRoot = this.attachShadow({ mode: 'closed' });
