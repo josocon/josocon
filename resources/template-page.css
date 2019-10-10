@@ -25,6 +25,10 @@
 	inset-block-start: 0;
 }
 
+.page {
+	flex-grow: 1;
+}
+
 .site-footer {
 	background-color: #c64d6c;
 	color: #fff;
