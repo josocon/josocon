@@ -29,9 +29,16 @@
 	src: url('https://fonts.menherausercontent.org/mplus-1-medium-sub.woff') format('woff');
 }
 
+:root {
+	display: flex;
+	flex-direction: column;
+	min-block-size: 100%;
+}
+
 body {
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 	margin: 0;
 	background-color: #fffef3;
 	font-family: 'M+ Type-1', 'Fira Sans', 'Roboto', 'Noto Sans', 'Noto Sans CJK JP', 'Noto Sans JP', 'Noto Sans Japanese', system-ui, sans-serif;
