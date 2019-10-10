@@ -38,6 +38,7 @@ customElements.define ('josocon-page', class extends HTMLBodyElement {
 		super ();
 		const shadowRoot = this.attachShadow({ mode: 'closed' });
 		shadowRoots.set (this, shadowRoot);
+		this.classList.add ('removed');
 	}
 	
 	async load () {
@@ -47,6 +48,7 @@ customElements.define ('josocon-page', class extends HTMLBodyElement {
 		const template = await getTemplate ('template-page');
 		const content = document.importNode (template.content, true);
 		root.appendChild (content);
+		this.classList.remove ('removed');
 		return true;
 	}
 	
