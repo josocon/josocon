@@ -59,6 +59,11 @@ customElements.define ('josocon-markdown', class extends HTMLElement {
 	constructor () {
 		super ();
 		const shadowRoot = this.attachShadow({ mode: 'closed' });
+		shadowRoots.set (this, shadowRoot);
+	}
+	
+	connectedCallback () {
+		const shadowRoot = shadowRoots.get (this);
 		const html = '<div>' + md.render(this.textContent) + '</div>';
 		const node = new DOMParser ().parseFromString (html, 'text/html').body.children[0];
 		const link = document.createElement ('link');
