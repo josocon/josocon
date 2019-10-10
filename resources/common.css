@@ -17,6 +17,30 @@
 
 @namespace url('http://www.w3.org/1999/xhtml');
 
+@font-face {
+	font-family: 'M+ Type-1';
+	font-weight: 300;
+	src: url('https://fonts.menherausercontent.org/mplus-1-light-sub.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'M+ Type-1';
+	font-weight: 500;
+	src: url('https://fonts.menherausercontent.org/mplus-1-medium-sub.woff') format('woff');
+}
+
+body {
+	margin: 0;
+	background-color: #fffef3;
+	font-family: 'M+ Type-1', 'Fira Sans', 'Roboto', 'Noto Sans', 'Noto Sans CJK JP', 'Noto Sans JP', 'Noto Sans Japanese', system-ui, sans-serif;
+	font-weight: 300;
+	font-synthesis: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	color: #333;
+}
+
 a {
 	text-decoration: none;
 	color: #915ecd

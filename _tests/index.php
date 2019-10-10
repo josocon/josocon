@@ -40,7 +40,6 @@ ________________________________________________________________________________
 <link rel='stylesheet' href='/resources/root.css'/>
 <script defer='' src='/resources/root.mjs'></script>
 </head>
-<body>
 <josocon-page>
 <div slot='page-notice'>サイト準備中</div>
 <div slot='page-title'>じょそこん</div>
@@ -54,6 +53,5 @@ ________________________________________________________________________________
 </p>
 </div>
 </josocon-page>
-</body>
 </html>
 
