@@ -19,41 +19,40 @@
 
 @namespace url('http://www.w3.org/1999/xhtml');
 
-.site-header-wrapper {
+.site-header {
 	background-color: #fff;
 }
 
-.site-header {
-	display: flex;
-	flex-direction: row;
+.site-header-inner {
+	display: grid;
+	grid-template-columns: 5rem 1fr;
 	max-inline-size: 50rem;
 	margin-inline: auto;
 }
 
-.site-header::before {
+.site-header-inner::before {
 	display: block;
 	content: '';
-	inline-size: 5rem;
-	min-block-size: 5rem;
+	grid-column: 1;
+	grid-row: 1;
 	background-repeat: no-repeat;
 	background-image: url(/resources/icon.png);
 	background-size: 4rem;
 	background-position: center;
 }
 
-.site-header-inner {
-	flex-grow: 1;
-}
-
 .site-title {
 	margin: 1rem;
-	flex-grow: 1;
+	grid-column: 2;
+	grid-row: 1;
 	font-size: 1.25rem;
 	color: #888;
 }
 
 .site-subtitle {
 	margin: 1rem;
+	grid-column: 2;
+	grid-row: 2;
 	font-size: 1rem;
 	text-align: end;
 }
