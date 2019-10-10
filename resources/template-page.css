@@ -17,6 +17,11 @@
 
 @namespace url('http://www.w3.org/1999/xhtml');
 
+a {
+	text-decoration: none;
+	color: #915ecd
+}
+
 .site-navigation {
 	position: -webkit-sticky;
 	position: sticky;
