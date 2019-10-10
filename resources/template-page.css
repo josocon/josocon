@@ -61,6 +61,12 @@
 	position: -webkit-sticky;
 	position: sticky;
 	inset-block-start: 0;
+	background-color: #ffd9e0;
+}
+
+.site-navigation > nav {
+	max-inline-size: 50rem;
+	margin-inline: auto;
 }
 
 .page {
