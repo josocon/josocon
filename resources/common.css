@@ -29,7 +29,7 @@
 	src: url('https://fonts.menherausercontent.org/mplus-1-medium-sub.woff') format('woff');
 }
 
-josocon-page {
+body {
 	margin: 0;
 	background-color: #fffef3;
 	font-family: 'M+ Type-1', 'Fira Sans', 'Roboto', 'Noto Sans', 'Noto Sans CJK JP', 'Noto Sans JP', 'Noto Sans Japanese', system-ui, sans-serif;
