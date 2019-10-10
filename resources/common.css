@@ -67,6 +67,26 @@ nav ul {
 	list-style: none;
 }
 
+iframe {
+	border: none;
+	padding: 0;
+}
+
+.square {
+	display: block;
+	position: relative;
+	inline-size: 100%;
+	block-size: 0;
+	padding-block-start: 100%;
+	overflow: auto;
+}
+
+.square > iframe {
+	position: absolute;
+	inline-size: 100%;
+	block-size: 100%;
+}
+
 .removed {
 	visibility: hidden;
 }

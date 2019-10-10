@@ -52,7 +52,9 @@ ________________________________________________________________________________
 今年も、東京大学第70回駒場祭にて東大女装子コンテストを開催いたします！ 女装子たちによるパフォーマンスステージをお楽しみください。 
 </p>
 <p>
+<span class='square'>
 <iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>
+</span>
 </p>
 </div>
 </body>
