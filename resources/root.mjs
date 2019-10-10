@@ -61,6 +61,10 @@ customElements.define ('josocon-markdown', class extends HTMLElement {
 		const shadowRoot = this.attachShadow({ mode: 'closed' });
 		const html = '<div>' + md.render(this.textContent) + '</div>';
 		const node = new DOMParser ().parseFromString (html, 'text/html').body.children[0];
+		const link = document.createElement ('link');
+		link.rel = 'stylesheet';
+		link.href = '/resources/common.css';
+		shadowRoot.appendChild (link);
 		shadowRoot.appendChild (document.adoptNode (node));
 	}
 });

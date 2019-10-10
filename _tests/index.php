@@ -45,13 +45,13 @@ ________________________________________________________________________________
 <div slot='page-notice'>サイト準備中</div>
 <div slot='page-title'>じょそこん</div>
 <div slot='page-content'>
-<p>
-<ruby>女装子<rp>（</rp><rt>じょそこ</rt><rp>）</rp></ruby>があふれる東大の学園祭…
+<josocon-markdown><![CDATA[
+女装子があふれる東大の学園祭…
+
 その中で一番の女装子は誰なのか――
-</p>
-<p>
+
 今年も、東京大学第70回駒場祭にて東大女装子コンテストを開催いたします！ 女装子たちによるパフォーマンスステージをお楽しみください。 
-</p>
+]]></josocon-markdown>
 <p>
 <span class='square'>
 <iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>
