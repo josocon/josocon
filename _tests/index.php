@@ -39,7 +39,7 @@ ________________________________________________________________________________
 <meta name='viewport' content='width=device-width, initial-scale=1'/>
 <link rel='stylesheet' href='/resources/root.css'/>
 <script defer='' src='/resources/root.mjs'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/markdown-it/10.0.0/markdown-it.min.js' crossorigin='anonymous'/>
+<script src='/resources/markdown-it_10.0.0.min.js'/>
 </head>
 <body is='josocon-page'>
 <div slot='page-notice'>サイト準備中</div>
