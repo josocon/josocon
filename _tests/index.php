@@ -38,7 +38,8 @@ ________________________________________________________________________________
 <link rel='canonical' href='https://www.josocon.u-tokyo.eu.org/'/>
 <meta name='viewport' content='width=device-width, initial-scale=1'/>
 <link rel='stylesheet' href='/resources/root.css'/>
-<script defer='' src='/resources/root.mjs'></script>
+<script defer='' src='/resources/root.mjs'/>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/markdown-it/10.0.0/markdown-it.min.js" integrity='sha256-YASERpEeN8gRNr/Fy4Km34WGFqIq1h6HkJMAQnVHlhk=' crossorigin='anonymous'/>
 </head>
 <body is='josocon-page'>
 <div slot='page-notice'>サイト準備中</div>
@@ -59,4 +60,3 @@ ________________________________________________________________________________
 </div>
 </body>
 </html>
-

@@ -22,7 +22,7 @@ SetEnvIf Request_URI .* MAIN_HOSTNAME=www.josocon.u-tokyo.eu.org
 SetEnvIf REDIRECT_HTTPS (.*) HTTPS=$1
 
 # Set global headers
-Header always set Content-Security-Policy "sandbox allow-forms allow-scripts allow-same-origin; default-src 'self' https://*.menherausercontent.org; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; upgrade-insecure-requests"
+Header always set Content-Security-Policy "sandbox allow-forms allow-scripts allow-same-origin; default-src 'self' https://*.menherausercontent.org 'sha256-YASERpEeN8gRNr/Fy4Km34WGFqIq1h6HkJMAQnVHlhk='; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; upgrade-insecure-requests"
 Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 Header always set Referrer-Policy "no-referrer"
 Header always set X-Frame-Options "DENY"
