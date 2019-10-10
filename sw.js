@@ -21,7 +21,7 @@ const CACHE_MAIN = 'cache-main';
 const PRECACHE = [
 	'/',
 	'/resources/root.css',
-	'/resorces/root.mjs',
+	'/resources/root.mjs',
 	'/resources/markdown-it_10.0.0.min.js',
 	'/resources/common.css',
 	'/resources/templates.xhtml',
@@ -37,7 +37,12 @@ self.addEventListener ('install', ev => {
 
 const preload = async () => {
 	const cache = await caches.open (CACHE_MAIN);
-	return cache.addAll (PRECACHE);
+	try {
+		const res = await cache.addAll (PRECACHE);
+		return res;
+	} catch (e) {
+		return false;
+	}
 };
 
 self.addEventListener ('fetch', ev => {
