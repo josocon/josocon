@@ -52,8 +52,15 @@ self.addEventListener ('fetch', ev => {
 
 const fromCache = async request => {
 	const cache = await caches.open(CACHE_MAIN);
-	const matching = await cache.match (request);
-	return matching || Promise.reject ('no-match');
+	let response = await cache.match (request);
+	if (!response) {
+		response = await cache.match ('/');
+	}
+	if (!response) {
+		response = await fetch (request);
+	}
+	await cache.put (request, response);
+	return response;
 };
 
 const update = async request => {

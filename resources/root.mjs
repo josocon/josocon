@@ -21,14 +21,14 @@
 if ('serviceWorker' in navigator) {
 	(async () => {
 		let registration = await navigator.serviceWorker.getRegistration ('/');
-		if (registration) {
-			registration.update ()
-			.catch (error => console.log (error));
-		}
+		if (registration) try {
+			await registration.update ();
+			return;
+		} catch (e) {}
 		
 		try {
 			registration = await navigator.serviceWorker
-			.register ('/sw.js', {scope: '/'});
+			.register ('/resources/sw.js', {scope: '/'});
 		} catch (error) {
 			console.log ('Service worker registration failed:', error);
 		}
