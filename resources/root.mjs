@@ -24,7 +24,12 @@ if ('serviceWorker' in navigator) {
 		if (registration) try {
 			await registration.update ();
 			return;
-		} catch (e) {}
+		} catch (e) {
+			console.log ('update failed:', e);
+		}
+		
+		registration = await navigator.serviceWorker.getRegistration ('/');
+		if (registration) return;
 		
 		try {
 			registration = await navigator.serviceWorker
