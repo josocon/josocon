@@ -51,7 +51,7 @@ self.addEventListener ('fetch', ev => {
 });
 
 const fromCache = async request => {
-	const cache = await caches.open(CACHE_MAIN);
+	const cache = await caches.open (CACHE_MAIN);
 	let response = await cache.match (request);
 	if (!response) {
 		response = await cache.match ('/');
@@ -64,7 +64,7 @@ const fromCache = async request => {
 };
 
 const update = async request => {
-	const cache = await caches.open(CACHE_MAIN);
+	const cache = await caches.open (CACHE_MAIN);
 	try {
 		const response = await fetch (request);
 		return cache.put (request, response);
