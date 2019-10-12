@@ -113,6 +113,7 @@ window.addEventListener ('DOMContentLoaded', e => {
 document.addEventListener ('click', ev => {
 	const composedPath = ev.composedPath ();
 	for (let target of composedPath) {
+		console.log (target);
 		if ('A' !== target.tagName) {
 			continue;
 		}
