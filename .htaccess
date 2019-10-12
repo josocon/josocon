@@ -40,6 +40,7 @@ Header always set X-Frame-Options "DENY"
 Header always set X-XSS-Protection "0"
 Header always set X-DNS-Prefetch-Control "off"
 Header always set X-Content-Type-Options "nosniff"
+Header always set Access-Control-Allow-Origin "https://%{MAIN_HOSTNAME}e"
 
 DirectoryIndex index.php index.xhtml index.svg index.html
 
