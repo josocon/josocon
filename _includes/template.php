@@ -90,6 +90,7 @@ ________________________________________________________________________________
 <title><?= escape ($full_title) ?></title>
 
 <link rel='icon' href='/resources/icon.png' type='image/png'/>
+<link rel='manifest' href='/resources/app.webmanifest'/>
 
 <meta itemprop='name' content='<?= escape ($full_title) ?>'/>
 <meta itemprop='image' content='<?= escape (SITE_IMAGE) ?>'/>

@@ -46,6 +46,7 @@ Header always set access-control-allow-headers "Origin, Content-Type, Accept"
 DirectoryIndex index.php index.xhtml index.svg index.html
 
 AddType text/javascript .mjs
+AddType application/manifest+json .webmanifest
 
 ErrorDocument 404 /error/
 

@@ -1,0 +1,15 @@
+{
+	"background_color": "#ffeeee",
+	"description": "じょそこんアプリです",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "/resources/icon.png",
+			"sizes": "400x400",
+			"type": "image/png"
+		}
+	],
+	"name": "東大女装子コンテスト",
+	"short_name": "じょそこん",
+	"start_url": "/"
+}
