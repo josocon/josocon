@@ -19,7 +19,6 @@
 
 const CACHE_MAIN = 'cache-main';
 const PRECACHE = [
-	'/',
 	'/resources/root.css',
 	'/resources/root.mjs',
 	'/resources/markdown-it_10.0.0.min.js',
