@@ -21,6 +21,7 @@
 if ('serviceWorker' in navigator) {
 	(async () => {
 		let registration = await navigator.serviceWorker.getRegistration ('/');
+		console.log ('registration:', registration);
 		if (registration) try {
 			registration = await registration.update ();
 			console.log ('updated registration:', registration);
@@ -30,11 +31,16 @@ if ('serviceWorker' in navigator) {
 		}
 		
 		registration = await navigator.serviceWorker.getRegistration ('/');
-		if (registration) return;
+		if (registration) {
+			console.log ('now registration is available');
+			return;
+		}
 		
 		try {
+			console.log ('trying to register');
 			registration = await navigator.serviceWorker
 			.register ('/resources/sw.js', {scope: '/'});
+			console.log ('register returned');
 		} catch (error) {
 			console.log ('Service worker registration failed:', error);
 		}
