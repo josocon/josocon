@@ -44,7 +44,7 @@ const preload = async () => {
 		console.log ('preload succeeded');
 		return res;
 	} catch (e) {
-		console.log ('preload failed');
+		console.log ('preload failed', e);
 		return false;
 	}
 };
