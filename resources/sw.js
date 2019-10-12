@@ -39,6 +39,7 @@ const preload = async () => {
 	console.log ('caches:', typeof caches, self.caches);
 	const cache = await caches.open (CACHE_MAIN);
 	try {
+		console.log ('cache:', cache);
 		const res = await cache.addAll (PRECACHE);
 		console.log ('preload succeeded');
 		return res;
