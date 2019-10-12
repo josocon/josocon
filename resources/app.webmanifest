@@ -4,7 +4,7 @@
 	"display": "standalone",
 	"icons": [
 		{
-			"src": "/resources/icon.png",
+			"src": "/resources/app-icon.png",
 			"sizes": "400x400",
 			"type": "image/png"
 		}
