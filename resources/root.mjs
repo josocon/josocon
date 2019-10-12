@@ -114,7 +114,7 @@ document.addEventListener ('click', ev => {
 	const composedPath = ev.composedPath ();
 	for (let target of composedPath) {
 		console.log (target);
-		if ('A' !== target.tagName) {
+		if ('a' !== target.tagName.toLowerCase ()) {
 			continue;
 		}
 		
