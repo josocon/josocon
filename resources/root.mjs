@@ -127,6 +127,5 @@ document.addEventListener ('click', ev => {
 		ev.preventDefault ();
 		return;
 	}
-	ev.preventDefault ();
 });
 
