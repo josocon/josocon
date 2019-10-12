@@ -1,4 +1,4 @@
 Header always set Access-Control-Allow-Origin "*"
-Header always set Content-Security-Policy "sandbox; default-src 'none'; connect-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; upgrade-insecure-requests"
+Header always set Content-Security-Policy "sandbox allow-same-origin; default-src 'none'; connect-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; upgrade-insecure-requests"
 Header always set Service-Worker-Allowed "/"
 
