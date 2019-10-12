@@ -18,11 +18,11 @@
 'use strict'; // for non-module scripts
 
 
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const CACHE_MAIN = 'cache-main-v' + CACHE_VERSION;
 const PRECACHE = [
 	'/resources/root.css',
-	'/resources/sw.js',
+	'/resources/empty.xhtml',
 	'/resources/root.mjs',
 	'/resources/markdown-it_10.0.0.min.js',
 	'/resources/common.css',
