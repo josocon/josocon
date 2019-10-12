@@ -44,6 +44,9 @@ const preload = async () => {
 		return res;
 	} catch (e) {
 		console.log ('preload failed', e);
+		fetch ('/resources/root.css')
+		.then (res => console.log ('fetch:', res))
+		.catch (e => console.log ('fetch:', e));
 		return false;
 	}
 };
