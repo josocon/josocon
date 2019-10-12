@@ -18,36 +18,37 @@
 'use strict'; // for non-module scripts
 
 
-if ('serviceWorker' in navigator) {
-	(async () => {
-		let registration = await navigator.serviceWorker.getRegistration ('/');
-		console.log ('registration:', registration);
-		if (registration) try {
-			registration = await registration.update ();
-			console.log ('updated registration:', registration);
-			return;
-		} catch (e) {
-			console.log ('update failed:', e);
-		}
-		
-		registration = await navigator.serviceWorker.getRegistration ('/');
-		if (registration) {
-			console.log ('now registration is available');
-			return;
-		}
-		
-		try {
-			console.log ('trying to register');
-			registration = await navigator.serviceWorker
-			.register ('/resources/sw.js', {scope: '/'});
-			console.log ('register returned');
-		} catch (error) {
-			console.log ('Service worker registration failed:', error);
-		}
-	}) ();
-} else {
-	console.log('Service workers are not supported.');
-}
+const register = async () => {
+	if (!('serviceWorker' in navigator)) {
+		console.log ('Service workers are not supported.');
+		return false;
+	}
+	
+	let registration = await navigator.serviceWorker.getRegistration ('/');
+	console.log ('registration:', registration);
+	if (registration) try {
+		registration = await registration.update ();
+		console.log ('updated registration:', registration);
+		return;
+	} catch (e) {
+		console.log ('update failed:', e);
+	}
+	
+	registration = await navigator.serviceWorker.getRegistration ('/');
+	if (registration) {
+		console.log ('now registration is available');
+		return;
+	}
+	
+	try {
+		console.log ('trying to register');
+		registration = await navigator.serviceWorker
+		.register ('/resources/sw.js', {scope: '/'});
+		console.log ('register returned');
+	} catch (error) {
+		console.log ('Service worker registration failed:', error);
+	}
+};
 
 
 const shadowRoots = new WeakMap ();
@@ -116,5 +117,9 @@ document.addEventListener ('load', e => {
 
 window.addEventListener ('DOMContentLoaded', e => {
 	document.documentElement.classList.remove ('removed');
+});
+
+window.addEventListener ('load', e => {
+	register ();
 });
 
