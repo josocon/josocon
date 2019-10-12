@@ -112,6 +112,7 @@ window.addEventListener ('DOMContentLoaded', e => {
 
 document.addEventListener ('click', ev => {
 	const target = ev.target;
+	console.log ('target:', target);
 	if ('A' !== target.tagName) {
 		return;
 	}
