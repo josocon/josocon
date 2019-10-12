@@ -111,19 +111,19 @@ window.addEventListener ('DOMContentLoaded', e => {
 });
 
 document.addEventListener ('click', ev => {
-	const target = ev.target;
-	console.log ('target:', target);
-	console.log ('composedPath:', ev.composedPath ());
-	if ('A' !== target.tagName) {
-		return;
+	const composedPath = ev.composedPath ();
+	for (let target of composedPath) {
+		if ('A' !== target.tagName) {
+			continue;
+		}
+		
+		if (!target.href) {
+			continue;
+		}
+		
+		const action = new URL (target.href, location.href);
+		console.log (action);
+		ev.preventDefault ();
 	}
-	
-	if (!target.href) {
-		return;
-	}
-	
-	const action = new URL (target.href, location.href);
-	console.log (action);
-	ev.preventDefault ();
 });
 
