@@ -22,7 +22,8 @@ if ('serviceWorker' in navigator) {
 	(async () => {
 		let registration = await navigator.serviceWorker.getRegistration ('/');
 		if (registration) try {
-			await registration.update ();
+			registration = await registration.update ();
+			console.log ('updated registration:', registration);
 			return;
 		} catch (e) {
 			console.log ('update failed:', e);
