@@ -39,10 +39,12 @@ const preload = async () => {
 	console.log ('scope:', self.registration.scope);
 	console.log ('origin:', self.location.origin);
 	console.log ('caches:', typeof caches, self.caches);
-	return caches.open (CACHE_MAIN)
-	.then (cache => {
-		return cache.addAll (PRECACHE);
-	});
+	
+	const testAddress = new URL ('/', location.origin).href;
+	fetch (testAddress)
+	.then (res => console.log ('fetch:', res))
+	.catch (e => console.log ('fetch:', e));
+	
 	const cache = await caches.open (CACHE_MAIN);
 	try {
 		console.log ('cache:', cache);
@@ -51,10 +53,6 @@ const preload = async () => {
 		return res;
 	} catch (e) {
 		console.log ('preload failed', e);
-		const testAddress = new URL ('/', location.origin).href;
-		fetch (testAddress)
-		.then (res => console.log ('fetch:', res))
-		.catch (e => console.log ('fetch:', e));
 		throw e;
 	}
 };
