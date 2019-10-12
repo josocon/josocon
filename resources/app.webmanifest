@@ -1,5 +1,6 @@
 {
 	"background_color": "#ffeeee",
+	"theme_color": "#fffef3",
 	"description": "じょそこんアプリです",
 	"display": "standalone",
 	"icons": [
