@@ -17,7 +17,8 @@
 
 'use strict'; // for non-module scripts
 
-const CACHE_MAIN = 'cache-main';
+const CACHE_VERSION = 1;
+const CACHE_MAIN = 'cache-main-v' + CACHE_VERSION;
 const PRECACHE = [
 	'/resources/root.css',
 	'/resources/root.mjs',
@@ -51,7 +52,27 @@ const preload = async () => {
 	}
 };
 
+self.addEventListener ('activate', function (event) {
+	event.waitUntil (
+		caches.keys ().then (function (cacheNames) {
+			return Promise.all(
+				cacheNames.map (function (cacheName) {
+					if (cacheName !== CACHE_MAIN) {
+						console.log ('Deleting out of date cache:', cacheName);
+						return caches.delete (cacheName);
+					}
+				})
+			);
+		})
+	);
+});
+
 self.addEventListener ('fetch', ev => {
+	if (!ev.request.url.startsWith (self.location.origin) || ev.request.method !== 'GET') {
+		// External request, or POST, ignore
+		return void ev.respondWith (fetch (event.request));
+	}
+	
 	ev.respondWith (fromCache (ev.request));
 	ev.waitUntil (update (ev.request));
 });
