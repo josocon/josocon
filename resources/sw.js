@@ -55,6 +55,8 @@ const preload = async () => {
 	}
 };
 
+self.addEventListener ('message', ev => console.log (ev));
+
 self.addEventListener ('activate', function (event) {
 	event.waitUntil (
 		caches.keys ().then (function (cacheNames) {
