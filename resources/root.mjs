@@ -124,6 +124,7 @@ document.addEventListener ('click', ev => {
 		const action = new URL (target.href, location.href);
 		console.log (action);
 		ev.preventDefault ();
+		return;
 	}
 });
 
