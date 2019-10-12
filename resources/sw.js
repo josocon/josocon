@@ -19,15 +19,15 @@
 
 const CACHE_MAIN = 'cache-main';
 const PRECACHE = [
-	'/',
-	'/resources/root.css',
-	'/resources/root.mjs',
-	'/resources/markdown-it_10.0.0.min.js',
-	'/resources/common.css',
-	'/resources/templates.xhtml',
-	'/resources/template-page.css',
-	'/resources/icon.png',
-	'/resources/isshin-map.png',
+	'./',
+	'./resources/root.css',
+	'./resources/root.mjs',
+	'./resources/markdown-it_10.0.0.min.js',
+	'./resources/common.css',
+	'./resources/templates.xhtml',
+	'./resources/template-page.css',
+	'./resources/icon.png',
+	'./resources/isshin-map.png',
 ];
 
 self.addEventListener ('install', ev => {
