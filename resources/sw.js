@@ -47,7 +47,8 @@ const preload = async () => {
 		return res;
 	} catch (e) {
 		console.log ('preload failed', e);
-		fetch ('/resources/root.css')
+		const testAddress = new URL ('/', location.origin).href;
+		fetch (testAddress)
 		.then (res => console.log ('fetch:', res))
 		.catch (e => console.log ('fetch:', e));
 		throw e;
