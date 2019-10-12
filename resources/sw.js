@@ -18,7 +18,7 @@
 'use strict'; // for non-module scripts
 
 
-const CACHE_VERSION = 3;
+const CACHE_VERSION = 4;
 const CACHE_MAIN = 'cache-main-v' + CACHE_VERSION;
 
 const SKELETON = '/resources/empty.xhtml';
