@@ -18,10 +18,11 @@
 'use strict'; // for non-module scripts
 
 
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 const CACHE_MAIN = 'cache-main-v' + CACHE_VERSION;
 const PRECACHE = [
 	'/resources/root.css',
+	'/resources/sw.js',
 	'/resources/root.mjs',
 	'/resources/markdown-it_10.0.0.min.js',
 	'/resources/common.css',
@@ -29,6 +30,8 @@ const PRECACHE = [
 	'/resources/template-page.css',
 	'/resources/icon.png',
 	'/resources/isshin-map.png',
+	'https://fonts.menherausercontent.org/mplus-1-light-sub.woff',
+	'https://fonts.menherausercontent.org/mplus-1-medium-sub.woff',
 ];
 
 
@@ -63,8 +66,8 @@ self.addEventListener ('message', ev => console.log (ev));
 
 self.addEventListener ('activate', function (event) {
 	event.waitUntil (
-		caches.keys ().then (function (cacheNames) {
-			return Promise.all(
+		caches.keys ().then (async cacheNames => {
+			return Promise.all (
 				cacheNames.map (function (cacheName) {
 					if (cacheName !== CACHE_MAIN) {
 						console.log ('Deleting out of date cache:', cacheName);
@@ -77,8 +80,8 @@ self.addEventListener ('activate', function (event) {
 });
 
 self.addEventListener ('fetch', ev => {
-	if (!ev.request.url.startsWith (self.location.origin) || ev.request.method !== 'GET') {
-		// External request, or POST, ignore
+	if (ev.request.method !== 'GET') {
+		// POST, ignore
 		console.log ('ignoring request');
 		return void ev.respondWith (fetch (ev.request));
 	}
@@ -96,6 +99,7 @@ const fromCache = async request => {
 		console.log ('matched /:', response);
 	}*/
 	if (!response) {
+		// not included in cache, ignoring
 		response = await fetch (request);
 		console.log ('fetched response:', response);
 	}

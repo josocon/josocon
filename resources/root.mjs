@@ -18,7 +18,7 @@
 'use strict'; // for non-module scripts
 
 
-const register = async () => {
+(async () => {
 	if (!('serviceWorker' in navigator)) {
 		console.log ('Service workers are not supported.');
 		return false;
@@ -26,17 +26,8 @@ const register = async () => {
 	
 	let registration = await navigator.serviceWorker.getRegistration ('/');
 	console.log ('registration:', registration);
-	if (registration) try {
-		registration = await registration.update ();
-		console.log ('updated registration:', registration);
-		return;
-	} catch (e) {
-		console.log ('update failed:', e);
-	}
 	
-	registration = await navigator.serviceWorker.getRegistration ('/');
 	if (registration) {
-		console.log ('now registration is available');
 		return;
 	}
 	
@@ -48,7 +39,7 @@ const register = async () => {
 	} catch (error) {
 		console.log ('Service worker registration failed:', error);
 	}
-};
+}) ();
 
 
 const shadowRoots = new WeakMap ();
@@ -117,9 +108,5 @@ document.addEventListener ('load', e => {
 
 window.addEventListener ('DOMContentLoaded', e => {
 	document.documentElement.classList.remove ('removed');
-});
-
-window.addEventListener ('load', e => {
-	register ();
 });
 
