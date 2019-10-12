@@ -34,7 +34,6 @@ const PRECACHE = [
 	'https://fonts.menherausercontent.org/mplus-1-medium-sub.woff',
 ];
 
-
 self.addEventListener ('install', ev => {
 	console.log ('install');
 	ev.waitUntil (preload ());
