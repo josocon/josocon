@@ -41,7 +41,7 @@ const preload = async () => {
 	console.log ('caches:', typeof caches, self.caches);
 	return caches.open (CACHE_MAIN)
 	.then (cache => {
-		cache.addAll (PRECACHE);
+		return cache.addAll (PRECACHE);
 	});
 	const cache = await caches.open (CACHE_MAIN);
 	try {
