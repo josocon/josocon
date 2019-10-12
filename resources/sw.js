@@ -20,9 +20,11 @@
 
 const CACHE_VERSION = 3;
 const CACHE_MAIN = 'cache-main-v' + CACHE_VERSION;
+
+const SKELETON = '/resources/empty.xhtml';
 const PRECACHE = [
+	SKELETON,
 	'/resources/root.css',
-	'/resources/empty.xhtml',
 	'/resources/root.mjs',
 	'/resources/markdown-it_10.0.0.min.js',
 	'/resources/common.css',
@@ -99,8 +101,13 @@ const fromCache = async request => {
 	}*/
 	if (!response) {
 		// not included in cache, ignoring
-		response = await fetch (request);
-		console.log ('fetched response:', response);
+		try {
+			response = await fetch (request);
+			console.log ('fetched response:', response);
+		} catch (e) {
+			console.log ('fetch failed:', e);
+			response = await cache.match (SKELETON);
+		}
 	}
 	//await cache.put (request, response);
 	console.log ('returning response:', response);
