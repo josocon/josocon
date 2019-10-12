@@ -89,23 +89,28 @@ const fromCache = async request => {
 	const cache = await caches.open (CACHE_MAIN);
 	let response = await cache.match (request);
 	console.log ('matched response:', response);
-	if (!response) {
+	/*if (!response) {
 		response = await cache.match ('/');
 		console.log ('matched /:', response);
-	}
+	}*/
 	if (!response) {
 		response = await fetch (request);
 		console.log ('fetched response:', response);
 	}
-	await cache.put (request, response);
+	//await cache.put (request, response);
 	console.log ('returning response:', response);
 	return response;
 };
 
 const update = async request => {
 	const cache = await caches.open (CACHE_MAIN);
+	let response = await cache.match (request);
 	try {
-		const response = await fetch (request);
+		if (!response) {
+			console.log ('skipping update:', request);
+			return;
+		}
+		response = await fetch (request);
 		return cache.put (request, response);
 	} catch (err) {
 		console.log (err);
