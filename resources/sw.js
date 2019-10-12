@@ -36,6 +36,7 @@ self.addEventListener ('install', ev => {
 });
 
 const preload = async () => {
+	console.log ('caches:', typeof caches, self.caches);
 	const cache = await caches.open (CACHE_MAIN);
 	try {
 		const res = await cache.addAll (PRECACHE);
