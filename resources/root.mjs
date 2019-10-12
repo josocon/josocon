@@ -124,6 +124,10 @@ document.addEventListener ('click', ev => {
 		
 		const action = new URL (target.href, location.href);
 		console.log (action);
+		if (action.host !== location.host) {
+			continue;
+		}
+		// TODO: handle navigation
 		ev.preventDefault ();
 		return;
 	}
