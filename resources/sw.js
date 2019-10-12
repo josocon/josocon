@@ -80,7 +80,7 @@ self.addEventListener ('fetch', ev => {
 	if (!ev.request.url.startsWith (self.location.origin) || ev.request.method !== 'GET') {
 		// External request, or POST, ignore
 		console.log ('ignoring request');
-		return void ev.respondWith (fetch (event.request));
+		return void ev.respondWith (fetch (ev.request));
 	}
 	
 	ev.respondWith (fromCache (ev.request));
