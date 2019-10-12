@@ -60,7 +60,7 @@ const getTemplate = async id => {
 customElements.define ('josocon-page', class extends HTMLBodyElement {
 	constructor () {
 		super ();
-		const shadowRoot = this.attachShadow({ mode: 'closed' });
+		const shadowRoot = this.attachShadow({ mode: 'open' });
 		shadowRoots.set (this, shadowRoot);
 		this.classList.add ('removed');
 	}
@@ -86,7 +86,7 @@ customElements.define ('josocon-page', class extends HTMLBodyElement {
 customElements.define ('josocon-markdown', class extends HTMLElement {
 	constructor () {
 		super ();
-		const shadowRoot = this.attachShadow({ mode: 'closed' });
+		const shadowRoot = this.attachShadow({ mode: 'open' });
 		shadowRoots.set (this, shadowRoot);
 	}
 	
@@ -108,5 +108,20 @@ document.addEventListener ('load', e => {
 
 window.addEventListener ('DOMContentLoaded', e => {
 	document.documentElement.classList.remove ('removed');
+});
+
+document.addEventListener ('click', ev => {
+	const target = ev.target;
+	if ('A' !== target.tagName) {
+		return;
+	}
+	
+	if (!target.href) {
+		return;
+	}
+	
+	const action = new URL (target.href, location.href);
+	console.log (action);
+	ev.preventDefault ();
 });
 
