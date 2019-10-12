@@ -77,6 +77,7 @@ self.addEventListener ('activate', function (event) {
 self.addEventListener ('fetch', ev => {
 	if (!ev.request.url.startsWith (self.location.origin) || ev.request.method !== 'GET') {
 		// External request, or POST, ignore
+		console.log ('ignoring request');
 		return void ev.respondWith (fetch (event.request));
 	}
 	
@@ -87,13 +88,17 @@ self.addEventListener ('fetch', ev => {
 const fromCache = async request => {
 	const cache = await caches.open (CACHE_MAIN);
 	let response = await cache.match (request);
+	console.log ('matched response:', response);
 	if (!response) {
 		response = await cache.match ('/');
+		console.log ('matched /:', response);
 	}
 	if (!response) {
 		response = await fetch (request);
+		console.log ('fetched response:', response);
 	}
 	await cache.put (request, response);
+	console.log ('returning response:', response);
 	return response;
 };
 
