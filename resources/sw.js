@@ -36,6 +36,8 @@ self.addEventListener ('install', ev => {
 });
 
 const preload = async () => {
+	console.log ('scope:', self.registration.scope);
+	console.log ('origin:', self.location.origin);
 	console.log ('caches:', typeof caches, self.caches);
 	const cache = await caches.open (CACHE_MAIN);
 	try {
