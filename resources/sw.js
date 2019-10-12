@@ -39,6 +39,10 @@ const preload = async () => {
 	console.log ('scope:', self.registration.scope);
 	console.log ('origin:', self.location.origin);
 	console.log ('caches:', typeof caches, self.caches);
+	return caches.open (CACHE_MAIN)
+	.then (cache => {
+		cache.addAll (PRECACHE);
+	});
 	const cache = await caches.open (CACHE_MAIN);
 	try {
 		console.log ('cache:', cache);
