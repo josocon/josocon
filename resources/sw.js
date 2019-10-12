@@ -17,6 +17,7 @@
 
 'use strict'; // for non-module scripts
 
+
 const CACHE_VERSION = 1;
 const CACHE_MAIN = 'cache-main-v' + CACHE_VERSION;
 const PRECACHE = [
@@ -29,6 +30,7 @@ const PRECACHE = [
 	'/resources/icon.png',
 	'/resources/isshin-map.png',
 ];
+
 
 self.addEventListener ('install', ev => {
 	console.log ('install');
