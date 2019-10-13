@@ -69,7 +69,7 @@ const navigate = async uri => {
 	.forEach (node => {
 		document.body.appendChild (node);
 		console.log ('appendChild:', node);
-	};
+	});
 };
 
 customElements.define ('josocon-page', class extends HTMLBodyElement {
