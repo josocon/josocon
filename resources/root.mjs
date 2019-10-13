@@ -143,14 +143,15 @@ document.addEventListener ('click', ev => {
 			continue;
 		}
 		
+		ev.preventDefault ();
+		
 		const action = new URL (target.href, location.href);
 		console.log (action);
 		if (action.host !== location.host) {
 			window.open (action.href, '_blank');
+		} else {
+			navigate (action.href);
 		}
-		// TODO: handle navigation
-		ev.preventDefault ();
-		navigate (action.href);
 		return;
 	}
 });
