@@ -22,7 +22,7 @@ SetEnvIf Request_URI .* MAIN_HOSTNAME=www.josocon.u-tokyo.eu.org
 SetEnvIf REDIRECT_HTTPS (.*) HTTPS=$1
 
 # Set global headers
-SetEnvIf Request_URI .* "CSP_SANDBOX=allow-forms allow-scripts allow-same-origin"
+SetEnvIf Request_URI .* "CSP_SANDBOX=allow-forms allow-scripts allow-same-origin allow-popups"
 SetEnvIf Request_URI .* "CSP_DEFAULT='none'"
 SetEnvIf Request_URI .* "CSP_FRAME=https://*.menherausercontent.org"
 SetEnvIf Request_URI .* "CSP_WORKER='self'"
