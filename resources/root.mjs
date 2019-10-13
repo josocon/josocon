@@ -146,7 +146,7 @@ document.addEventListener ('click', ev => {
 		const action = new URL (target.href, location.href);
 		console.log (action);
 		if (action.host !== location.host) {
-			continue;
+			window.open (action.href, '_blank');
 		}
 		// TODO: handle navigation
 		ev.preventDefault ();
