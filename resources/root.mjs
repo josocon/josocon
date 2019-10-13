@@ -63,11 +63,13 @@ const navigate = async uri => {
 	const doc = new DOMParser().parseFromString(await res.text(), type);
 	document.body.innerText = '';
 	console.log ('fetched document:', doc);
-	for (let node of doc.body.childNodes) {
-		node = document.adoptNode (node);
+	
+	[... doc.body.childNodes]
+	.map (node => document.adoptNode (node))
+	.forEach (node => {
 		document.body.appendChild (node);
 		console.log ('appendChild:', node);
-	}
+	};
 };
 
 customElements.define ('josocon-page', class extends HTMLBodyElement {
