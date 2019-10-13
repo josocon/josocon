@@ -5,8 +5,18 @@
 	"display": "standalone",
 	"icons": [
 		{
+			"src": "/resources/app-icon_192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
 			"src": "/resources/app-icon.png",
 			"sizes": "400x400",
+			"type": "image/png"
+		},
+		{
+			"src": "/resources/app-icon_512.png",
+			"sizes": "512x512",
 			"type": "image/png"
 		}
 	],
