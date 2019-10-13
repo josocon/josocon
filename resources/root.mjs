@@ -62,6 +62,7 @@ const navigate = async uri => {
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
 	document.body.innerText = '';
+	console.log ('fetched document:', doc);
 	for (let node of doc.body.childNodes) {
 		node = document.adoptNode (node);
 		document.body.appendChild (node);
