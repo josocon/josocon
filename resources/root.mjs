@@ -58,6 +58,10 @@ const getTemplate = async id => {
 };
 
 const navigate = async uri => {
+	if (new URL (uri, location.href).host !== location.host) {
+		throw new TypeError ('Navigation target must be on the same origin');
+	}
+	
 	const res = await fetch (uri);
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
@@ -70,6 +74,8 @@ const navigate = async uri => {
 		document.body.appendChild (node);
 		console.log ('appendChild:', node);
 	});
+	document.title = doc.title;
+	history.replaceState ({}, "", uri);
 };
 
 customElements.define ('josocon-page', class extends HTMLBodyElement {
