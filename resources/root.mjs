@@ -70,10 +70,7 @@ const navigate = async uri => {
 	
 	[... doc.body.childNodes]
 	.map (node => document.adoptNode (node))
-	.forEach (node => {
-		document.body.appendChild (node);
-		console.log ('appendChild:', node);
-	});
+	.forEach (node => document.body.appendChild (node));
 	document.title = doc.title;
 	history.replaceState ({}, "", uri);
 };
