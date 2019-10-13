@@ -57,6 +57,17 @@ const getTemplate = async id => {
 	return templates.getElementById (id);
 };
 
+const navigate = async uri => {
+	const res = await fetch (uri);
+	const type = res.headers.get ('content-type').split (';')[0].trim ();
+	const doc = new DOMParser().parseFromString(await res.text(), type);
+	document.body.innerText = '';
+	for (let node of doc.body.childNodes) {
+		node = document.adoptNode (node);
+		document.body.appendChild (node);
+	}
+};
+
 customElements.define ('josocon-page', class extends HTMLBodyElement {
 	constructor () {
 		super ();
@@ -129,6 +140,7 @@ document.addEventListener ('click', ev => {
 		}
 		// TODO: handle navigation
 		ev.preventDefault ();
+		navigate (action.href);
 		return;
 	}
 });
