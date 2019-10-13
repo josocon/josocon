@@ -84,7 +84,6 @@ Web開発者募集！
 連絡先 Twitter: @_uts2
 ________________________________________________________________________________
 -->
-
 <html itemscope='itemscope' itemtype='http://schema.org/Article' lang='ja' xml:lang='ja' xmlns='http://www.w3.org/1999/xhtml'>
 <head prefix='og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#'>
 <title><?= escape ($full_title) ?></title>

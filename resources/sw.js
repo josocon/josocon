@@ -103,7 +103,6 @@ const fromCache = async request => {
 		// not included in cache, ignoring
 		try {
 			response = await fetch (request);
-			console.log ('fetched response:', response);
 		} catch (e) {
 			console.log ('fetch failed:', e);
 			response = await cache.match (SKELETON);
