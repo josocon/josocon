@@ -66,6 +66,7 @@ const navigate = async uri => {
 	for (let node of doc.body.childNodes) {
 		node = document.adoptNode (node);
 		document.body.appendChild (node);
+		console.log ('appendChild:', node);
 	}
 };
 
