@@ -134,7 +134,7 @@ window.addEventListener ('DOMContentLoaded', e => {
 document.addEventListener ('click', ev => {
 	const composedPath = ev.composedPath ();
 	for (let target of composedPath) {
-		console.log (target);
+		//console.log (target);
 		if (!target.tagName || 'a' !== target.tagName.toLowerCase ()) {
 			continue;
 		}
