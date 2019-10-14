@@ -34,7 +34,7 @@ use josocon\data\StringList;
 
 class DB
 {
-	const SCHEMA_PATH = __DIR__ . '/schema.sql';
+	const SCHEMA_PATH = __DIR__ . '/../schema.sql';
 	
 	private $dbh;
 	private $getUsers;
