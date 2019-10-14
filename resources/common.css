@@ -108,18 +108,21 @@ iframe {
 .form-wrapper {
 	margin-inline: auto;
 	margin-block: 1em;
-	inline-size: max-content;
+	max-inline-size: 20rem;
 	padding: 1em;
 	background-color: #ffeeee;
+	display: grid;
 }
 
-.input-wrapper {
-	border: solid .125rem #ccc;
-	padding-inline: 1em;
-	padding-block: .5em;
+.form-wrapper > label {
+	grid-column: 1 / 2;
 }
 
-.input-wrapper input {
-	padding: 0;
-	border: none;
+.form-wrapper > .input-field {
+	grid-column: 2 / 3;
 }
+
+.form-wrapper > .submit {
+	grid-column: 1 / 3;
+}
+

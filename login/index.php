@@ -45,18 +45,22 @@ print_header ('/login/', '関係者向けログイン', '');
 <h2>ログイン</h2>
 <form class='login-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='login'/>
-<div><label>名前：<input type='text' name='name'/></label></div>
-<div><label>パスワード：<input type='password' name='pass'/></label></div>
-<div><button>ログイン</button></div>
+<label for='login-name'>名前：</label>
+<input class='input-field' id='login-name' type='text' name='name'/>
+<label for='login-pass'>パスワード：</label>
+<input class='input-field' id='login-pass' type='password' name='pass'/>
+<div class='submit'><button>ログイン</button></div>
 </form>
 </section>
 <section class='form-wrapper'>
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='signup'/>
-<div class='input-wrapper'><label>名前：<input type='text' name='name'/></label></div>
-<div class='input-wrapper'><label>パスワード：<input type='password' name='pass'/></label></div>
-<div><button>登録</button></div>
+<label for='signup-name'>名前：</label>
+<input class='input-field' id='signup-name' type='text' name='name'/>
+<label for='signup-pass'>パスワード：</label>
+<input class='input-field' id='signup-pass' type='password' name='pass'/>
+<div class='submit'><button>登録</button></div>
 </form>
 </section>
 <?php
