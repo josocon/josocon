@@ -162,6 +162,7 @@
 
 .ad-map {
 	width: 100%;
+	display: block;
 }
 
 @media (max-width: 48rem) {
