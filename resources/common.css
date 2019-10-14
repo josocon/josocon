@@ -50,6 +50,11 @@ body {
 	color: #333;
 }
 
+::selection {
+	background-color: #ea0064;
+	color: #fff;
+}
+
 h1, h2, h3, h4, h5, h6, strong {
 	font-weight: 500;
 	color: #6a3321;
