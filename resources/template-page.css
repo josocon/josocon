@@ -143,7 +143,9 @@
 
 .site-footer-nav > ul {
 	display: grid;
-	grid-auto-flow: column;
+	grid-auto-flow: row;
+	grid-gap: 1em;
+	grid-template-columns: repeat(auto-fit, 15em);
 	margin: 0;
 	padding: 0;
 }
