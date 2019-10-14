@@ -115,10 +115,14 @@ iframe {
 
 .input-form {
 	display: grid;
+	grid-row-gap: 1em;
+	grid-template-columns: max-content 1fr;
 }
 
 .input-form > label {
 	grid-column: 1 / 2;
+	display: block;
+	text-align: end;
 }
 
 .input-form > .input-field {
