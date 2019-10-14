@@ -164,7 +164,7 @@
 	width: 100%;
 }
 
-@media (max-width: 32rem) {
+@media (max-width: 48rem) {
 
 .ad-wrapper > * {
 	grid-column: 1 / 3;
