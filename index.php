@@ -30,6 +30,7 @@ require_once __DIR__ . '/_includes/template.php';
 $path = \substr (\explode ('?', $_SERVER['REQUEST_URI'])[0], 1);
 
 try {
+\ob_start ();
 $db = new DB (DB_PATH);
 
 if ('' === $path) {
@@ -90,7 +91,10 @@ print_footer ();
 		print_footer ();
 	}
 }
+
+\ob_flush ();
 } catch (\Throwable $e) {
+	\ob_clean ();
 	http_status (500);
 	print_header ('/' . $path, 'エラー', '');
 	\printf ('<pre>%s</pre>', escape ($e));
