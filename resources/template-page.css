@@ -166,8 +166,8 @@
 
 @media (max-width: 32rem) {
 
-.ad-wrapper {
-	grid-template-columns: 1fr;
+.ad-wrapper > * {
+	grid-column: 1 / 3;
 }
 
 }
