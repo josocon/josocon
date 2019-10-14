@@ -181,6 +181,7 @@
 
 .ad-main {
 	padding: 1rem;
+	padding-block: .5rem;
 	margin: .5rem;
 	background-color: #bb3036;
 	color: #fff;
@@ -206,7 +207,6 @@
 	font-size: 1rem;
 	color: #888;
 	margin: 0;
-	margin-block: .5rem;
 	padding: .5rem;
 }
 
