@@ -27,7 +27,11 @@ use josocon\DB;
 
 require_once __DIR__ . '/_includes/template.php';
 
-$path = \explode ('?', $_SERVER['REQUEST_URI'])[0];
+$path = \substr (\explode ('?', $_SERVER['REQUEST_URI'])[0], 1);
+
+$db = new DB (DB_PATH);
+
+if ('' === $path) {
 
 print_header ('/', 'じょそこん', '');
 ?>
@@ -59,6 +63,30 @@ print_header ('/', 'じょそこん', '');
 <iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>
 </span>
 </p>
+<nav class='items'>
+<ul>
+<?php
+$events = $db->getEvents ();
+foreach ($events as $event) {
+	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
+}
+?>
+</ul>
+</nav>
 <?php
 print_footer ();
+
+} else {
+	$event = $db->getEventByName ($path);
+	if (!$event) {
+		http_status (404);
+		print_header ('/' . $path, 'ページが見つかりませんでした', '');
+
+		print_footer ();
+	} else {
+		print_header ('/' . $path, $event->title, '');
+		\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($event->description));
+		print_footer ();
+	}
+}
 
