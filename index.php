@@ -29,10 +29,11 @@ require_once __DIR__ . '/_includes/template.php';
 
 $path = \substr (\explode ('?', $_SERVER['REQUEST_URI'])[0], 1);
 
+try {
 $db = new DB (DB_PATH);
 
 if ('' === $path) {
-
+$events = $db->getEvents ();
 print_header ('/', 'じょそこん', '');
 ?>
 <!--
@@ -66,7 +67,7 @@ print_header ('/', 'じょそこん', '');
 <nav class='items'>
 <ul>
 <?php
-$events = $db->getEvents ();
+
 foreach ($events as $event) {
 	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
 }
@@ -88,5 +89,11 @@ print_footer ();
 		\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($event->description));
 		print_footer ();
 	}
+}
+} catch (\Throwable $e) {
+	http_status (500);
+	print_header ('/' . $path, 'エラー', '');
+	\printf ('<pre>%s</pre>', escape ($e));
+	print_footer ();
 }
 
