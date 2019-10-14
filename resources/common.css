@@ -123,7 +123,7 @@ iframe {
 	display: grid;
 	grid-row-gap: 1em;
 	grid-template-columns: max-content 1fr;
-	align-content: center;
+	align-items: center;
 }
 
 .input-form > label {
