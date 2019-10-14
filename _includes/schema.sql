@@ -60,7 +60,7 @@ create table if not exists `item`
 	event_id integer not null,
 	item_name blob default '',
 	item_description blob default '',
-	item_vote_count int default 0
+	item_vote_count integer default 0
 );
 
 

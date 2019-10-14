@@ -145,7 +145,7 @@
 	display: grid;
 	grid-auto-flow: row;
 	grid-gap: 1em;
-	grid-template-columns: repeat(auto-fit, 15em);
+	grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
 	margin: 0;
 	padding: 0;
 }
