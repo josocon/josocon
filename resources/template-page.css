@@ -175,38 +175,42 @@
 
 .ad-top {
 	color: #666;
-	font-size: 1.4rem;
-	margin: 2rem 0;
+	font-size: 1rem;
+	margin: 0;
+	margin-block: 1rem;
 	padding: .5rem;
 }
 
 .ad-main {
-	padding: 1rem 1rem;
-	margin: 1rem .5rem;
+	padding: 1rem;
+	margin: .5rem;
 	background-color: #bb3036;
 	color: #fff;
-	font-size: 2.5rem;
+	font-size: 2rem;
 	font-weight: 500;
 }
 
 .ad-bottom {
-	font-size: 1.4rem;
+	font-size: 1rem;
 	color: #666;
-	margin: 1rem 0;
+	margin: 0;
+	margin-block: .5rem;
 	padding: .5rem;
 }
 
 .ad-twitter {
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	color: #888;
-	margin: 1rem 0;
+	margin: 0;
+	margin-block: .5rem;
 	padding: .5rem;
 }
 
 .ad-address {
-	font-size: 1.25rem;
+	font-size: 1rem;
 	color: #888;
-	margin: 1rem 0;
+	margin: 0;
+	margin-block: .5rem;
 	padding: .5rem;
 }
 
