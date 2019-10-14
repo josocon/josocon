@@ -25,10 +25,21 @@ namespace josocon;
 
 require_once __DIR__ . '/../_includes/template.php';
 
+try {
+\ob_start ();
+$action = $_POST['action'] ?? '';
+if ('signup' === $action) {
+	$db = new DB (DB_PATH);
+	$name = $_POST['name'];
+	$password = $_POST['pass'];
+	$db->addUser ($name, $password);
+	\header ('Location: /');
+} elseif ('login' === $action) {
+
 //$site_notice = '2018年もじょそこんやります…更新中';
 print_header ('/login/', '関係者向けログイン', '');
 ?>
-<section>
+<section class='form-wrapper'>
 <h2>ログイン</h2>
 <form class='login-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='login'/>
@@ -37,7 +48,7 @@ print_header ('/login/', '関係者向けログイン', '');
 <div><button>ログイン</button></div>
 </form>
 </section>
-<section>
+<section class='form-wrapper'>
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='signup'/>
@@ -48,4 +59,13 @@ print_header ('/login/', '関係者向けログイン', '');
 </section>
 <?php
 print_footer ();
+
+\ob_flush ();
+} catch (\Throwable $e) {
+	\ob_clean ();
+	http_status (500);
+	print_header ('/' . $path, 'エラー', '');
+	\printf ('<pre>%s</pre>', escape ($e));
+	print_footer ();
+}
 
