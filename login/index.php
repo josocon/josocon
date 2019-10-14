@@ -28,8 +28,8 @@ require_once __DIR__ . '/../_includes/template.php';
 try {
 \ob_start ();
 $action = $_POST['action'] ?? '';
+$db = new DB (DB_PATH);
 if ('signup' === $action) {
-	$db = new DB (DB_PATH);
 	$name = $_POST['name'];
 	$password = $_POST['pass'];
 	$db->addUser ($name, $password);
@@ -39,6 +39,7 @@ if ('signup' === $action) {
 
 } else {
 //$site_notice = '2018年もじょそこんやります…更新中';
+$users = $db->getUsers ();
 print_header ('/login/', '関係者向けログイン', '');
 ?>
 <section class='form-wrapper'>
@@ -52,6 +53,9 @@ print_header ('/login/', '関係者向けログイン', '');
 <div class='submit'><button>ログイン</button></div>
 </form>
 </section>
+<?php
+if (\count ($users) < 1) {
+?>
 <section class='form-wrapper'>
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
@@ -64,6 +68,7 @@ print_header ('/login/', '関係者向けログイン', '');
 </form>
 </section>
 <?php
+}
 print_footer ();
 }
 \ob_flush ();
