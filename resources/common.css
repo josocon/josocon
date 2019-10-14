@@ -111,18 +111,21 @@ iframe {
 	max-inline-size: 20rem;
 	padding: 1em;
 	background-color: #ffeeee;
+}
+
+.input-form {
 	display: grid;
 }
 
-.form-wrapper > label {
+.input-form > label {
 	grid-column: 1 / 2;
 }
 
-.form-wrapper > .input-field {
+.input-form > .input-field {
 	grid-column: 2 / 3;
 }
 
-.form-wrapper > .submit {
+.input-form > .submit {
 	grid-column: 1 / 3;
 }
 
