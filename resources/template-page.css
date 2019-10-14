@@ -71,7 +71,10 @@
 
 .site-navigation > ul {
 	max-inline-size: max-content;
+	overflow: auto;
 	overflow-inline: auto;
+	overflow-block: hidden;
+	margin: 0;
 	margin-inline: auto;
 	margin-block: 0;
 	padding: 0;
