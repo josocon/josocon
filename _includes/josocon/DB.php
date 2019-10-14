@@ -118,6 +118,7 @@ class DB
 			$event->name = $row->event_name;
 			$event->title = $row->event_title;
 			$event->description = $row->event_description;
+			$event->vote_status = $row->event_vote_status;
 			$events[] = $event;
 		}
 		return self::createEventList (... $events);
@@ -139,6 +140,7 @@ class DB
 		$event->name = $row->event_name;
 		$event->title = $row->event_title;
 		$event->description = $row->event_description;
+		$event->vote_status = $row->event_vote_status;
 		return $event;
 	}
 	
@@ -177,6 +179,7 @@ class DB
 			$item->event_id = $row->event_id;
 			$item->name = $row->item_name;
 			$item->description = $row->item_description;
+			$item->vote_count = $row->item_vote_count;
 			$items[] = $item;
 		}
 		return self::createItemList (... $items);
@@ -248,13 +251,14 @@ class DB
 	public function updateEvent (Event $event): void
 	{
 		if (!isset ($this->updateEvent)) {
-			$this->updateEvent = $this->dbh->prepare ('UPDATE `event` SET event_name = :name, event_title = :title, event_description = :description WHERE event_id = :id');
+			$this->updateEvent = $this->dbh->prepare ('UPDATE `event` SET event_name = :name, event_title = :title, event_description = :description, event_vote_status = :vote_status WHERE event_id = :id');
 		}
 		
 		$this->updateEvent->execute ([
 			':id' => $event->id,
 			':name' => $event->name,
 			':title' => $event->title,
+			':vote_status' => $event->vote_status,
 			':description' => $event->description,
 		]);
 	}
@@ -275,12 +279,13 @@ class DB
 	public function updateItem (Item $item): void
 	{
 		if (!isset ($this->updateItem)) {
-			$this->updateItem = $this->dbh->prepare ('UPDATE `item` SET item_name = :name, item_description = :description WHERE item_id = :id');
+			$this->updateItem = $this->dbh->prepare ('UPDATE `item` SET item_name = :name, item_description = :description, item_vote_count = :vote_count WHERE item_id = :id');
 		}
 		
 		$this->updateItem->execute ([
 			':id' => $item->id,
 			':name' => $item->name,
+			':vote_count' => $item->vote_count,
 			':description' => $item->description,
 		]);
 	}

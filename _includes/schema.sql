@@ -38,6 +38,7 @@ create table if not exists `event`
 	event_id integer primary key,
 	event_name blob unique,
 	event_title blob default '',
+	event_vote_status int default 0,
 	event_description blob default ''
 );
 
@@ -58,7 +59,8 @@ create table if not exists `item`
 	item_id integer primary key,
 	event_id integer not null,
 	item_name blob default '',
-	item_description blob default ''
+	item_description blob default '',
+	item_vote_count int default 0
 );
 
 

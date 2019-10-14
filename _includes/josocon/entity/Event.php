@@ -29,5 +29,6 @@ class Event
 	public $name;
 	public $title;
 	public $description;
+	public $vote_status;
 }
 

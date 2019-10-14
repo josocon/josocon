@@ -27,6 +27,8 @@ use josocon\DB;
 
 require_once __DIR__ . '/_includes/template.php';
 
+$path = \explode ('?', $_SERVER['REQUEST_URI'])[0];
+
 print_header ('/', 'じょそこん', '');
 ?>
 <!--

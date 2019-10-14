@@ -31,5 +31,6 @@ class Item
 	public $event_id;
 	public $name;
 	public $description;
+	public $vote_count;
 }
 
