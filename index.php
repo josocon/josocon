@@ -88,6 +88,24 @@ print_footer ();
 	} else {
 		print_header ('/' . $path, $event->title, '');
 		\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($event->description));
+		$subevents = $db->getSubevents ($event);
+		foreach ($subevents as $subevent) {
+			echo '<section>';
+			echo '<h2>', escape ($subevent->title), '</h2>';
+			\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($subevent->description));
+			echo '</section>';
+		}
+		
+		echo '<section>';
+		echo '<h2>項目一覧</h2>';
+		$items = $db->getItems ($event);
+		foreach ($items as $item) {
+			echo '<section>';
+			echo '<h3>', escape ($item->name), '</h3>';
+			\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($item->description));
+			echo '</section>';
+		}
+		echo '</section>';
 		print_footer ();
 	}
 }
