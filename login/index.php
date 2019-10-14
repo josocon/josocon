@@ -36,6 +36,8 @@ if ('signup' === $action) {
 	\header ('Location: /');
 } elseif ('login' === $action) {
 
+
+} else {
 //$site_notice = '2018年もじょそこんやります…更新中';
 print_header ('/login/', '関係者向けログイン', '');
 ?>
@@ -59,7 +61,7 @@ print_header ('/login/', '関係者向けログイン', '');
 </section>
 <?php
 print_footer ();
-
+}
 \ob_flush ();
 } catch (\Throwable $e) {
 	\ob_clean ();
