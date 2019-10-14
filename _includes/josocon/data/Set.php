@@ -1,7 +1,7 @@
 <?php /* -*- tab-width: 4; indent-tabs-mode: t -*-
 vim: ts=4 noet ai */
 
-namespace josocon;
+namespace josocon\data;
 
 /**
 	Copyright 2019 (C) 東大女装子コンテスト実行委員会
@@ -23,18 +23,39 @@ namespace josocon;
 */
 
 
-require_once __DIR__ . '/../_includes/template.php';
-
-print_header ('/contact/', 'お問い合わせ');
-?>
-<josocon-markdown><![CDATA[
-東大女装子コンテストへのお問い合わせは以下のメールアドレスまでお願いいたします。
-ご質問・ご意見など、お気軽にご連絡ください。 
-
-ut.josocon @ gmail.com
-
-サイトの技術的な問題、セキュリティに関する問題などは tech @ josocon.u-tokyo.eu.org または [Twitter: @_uts2](https://twitter.com/_uts2) に直接連絡していただいても構いません。
-]]></josocon-markdown>
-<?php
-print_footer ();
-
+class Set extends Collection
+{
+	private $items = [];
+	
+	// @override
+	public function getIterator (): \Traversable
+	{
+		\sort ($this->items);
+		
+		return new \ArrayIterator ($this->items);
+	}
+	
+	// @override
+	public function count (): int
+	{
+		return \count ($this->items);
+	}
+	
+	public function add ($item): void
+	{
+		if (\in_array ($item, $this->items, true)) return;
+		$this->items[] = $item;
+	}
+	
+	public function remove ($item): void
+	{
+		$key = \array_search ($item, $this->items, true);
+		if (false === $key) return;
+		unset ($this->items[$key]);
+	}
+	
+	public function has ($item): bool
+	{
+		return \in_array ($item, $this->items, true);
+	}
+}

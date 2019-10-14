@@ -23,7 +23,8 @@ namespace josocon\db;
 */
 
 
-abstract class Database
+interface Database
 {
-	
+	public function transaction (array $names, int $mode = Transaction::MODE_READWRITE)
+	: Transaction;
 }

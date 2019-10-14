@@ -1,7 +1,7 @@
 <?php /* -*- tab-width: 4; indent-tabs-mode: t -*-
 vim: ts=4 noet ai */
 
-namespace josocon\db;
+namespace josocon\db\internal;
 
 /**
 	Copyright 2019 (C) 東大女装子コンテスト実行委員会

@@ -6,7 +6,7 @@ namespace josocon;
 /**
 	サイトの構造を単純化するための簡素なテンプレートエンジン。
 	
-	Copyright 2017 (C) 東大女装子コンテスト実行委員会
+	Copyright 2019 (C) 東大女装子コンテスト実行委員会
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -23,6 +23,9 @@ namespace josocon;
 	@license Apache-2.0
 	@file
 */
+
+require_once __DIR__ . '/autoload.php';
+
 
 const ORIGIN = 'https://www.josocon.u-tokyo.eu.org';
 const SITE_NAME = '東大女装子コンテスト';
