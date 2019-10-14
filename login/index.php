@@ -54,8 +54,8 @@ print_header ('/login/', '関係者向けログイン', '');
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='signup'/>
-<div><label>名前：<input type='text' name='name'/></label></div>
-<div><label>パスワード：<input type='password' name='pass'/></label></div>
+<div class='input-wrapper'><label>名前：<input type='text' name='name'/></label></div>
+<div class='input-wrapper'><label>パスワード：<input type='password' name='pass'/></label></div>
 <div><button>登録</button></div>
 </form>
 </section>
