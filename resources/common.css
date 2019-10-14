@@ -133,6 +133,7 @@ iframe {
 .input-form > .input-field {
 	grid-column: 2 / 3;
 	width: 100%;
+	box-sizing: border-box;
 }
 
 .input-form > .submit {
