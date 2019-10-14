@@ -155,20 +155,19 @@
 .ad-wrapper {
 	background-color: #fff;
 	box-shadow: 0 0 .25rem #888, -.5rem -.5rem 0 #ccc;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: 1fr 1fr;
 }
 
 .ad-map {
-	float: right;
-	width: 40%;
-	margin-left: 1rem;
+	width: 100%;
 }
 
 @media (max-width: 32rem) {
 
-.ad-map {
-	float: none;
-	width: 100%;
-	margin: 0 !important;
+.ad-wrapper {
+	grid-template-columns: 1fr;
 }
 
 }
