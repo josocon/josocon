@@ -31,7 +31,7 @@ print_header ('/login/', '関係者向けログイン', '');
 <section>
 <h2>ログイン</h2>
 <form class='login-form input-form' action='/login/' method='POST'>
-<input name='hidden' name='action' value='login'/>
+<input type='hidden' name='action' value='login'/>
 <div><label>名前：<input type='text' name='name'/></label></div>
 <div><label>パスワード：<input type='password' name='pass'/></label></div>
 <div><button>ログイン</button></div>
@@ -40,7 +40,7 @@ print_header ('/login/', '関係者向けログイン', '');
 <section>
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
-<input name='hidden' name='action' value='signup'/>
+<input type='hidden' name='action' value='signup'/>
 <div><label>名前：<input type='text' name='name'/></label></div>
 <div><label>パスワード：<input type='password' name='pass'/></label></div>
 <div><button>登録</button></div>
