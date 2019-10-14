@@ -37,6 +37,16 @@ if ('' === $path) {
 $events = $db->getEvents ();
 print_header ('/', 'じょそこん', '');
 ?>
+<nav class='items'>
+<ul>
+<?php
+
+foreach ($events as $event) {
+	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
+}
+?>
+</ul>
+</nav>
 <!--
 <p>
 <ruby>女装子<rp>（</rp><rt>じょそこ</rt><rp>）</rp></ruby>があふれる東大の学園祭…
@@ -65,16 +75,6 @@ print_header ('/', 'じょそこん', '');
 <iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>
 </span>
 </p>
-<nav class='items'>
-<ul>
-<?php
-
-foreach ($events as $event) {
-	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
-}
-?>
-</ul>
-</nav>
 <?php
 print_footer ();
 
