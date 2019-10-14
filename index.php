@@ -22,6 +22,8 @@ namespace josocon;
 	@file
 */
 
+use josocon\DB;
+
 
 require_once __DIR__ . '/_includes/template.php';
 
