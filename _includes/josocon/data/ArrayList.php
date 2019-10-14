@@ -81,7 +81,7 @@ class ArrayList extends Collection implements \ArrayAccess
 			
 			public function valid (): bool
 			{
-				return $list->count () > $this->index
+				return $this->list->count () > $this->index
 					&& 0 <= $this->index && \is_integer ($this->index);
 			}
 		};
