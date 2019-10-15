@@ -23,7 +23,7 @@ namespace josocon;
 */
 
 
-require_once __DIR__ . '/../_includes/template.php';
+require_once __DIR__ . '/../../_includes/template.php';
 
 try {
 $db = new DB (DB_PATH);
