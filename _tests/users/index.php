@@ -25,10 +25,17 @@ namespace josocon;
 
 require_once __DIR__ . '/../_includes/template.php';
 
+try {
 $db = new DB (DB_PATH);
 $users = $db->getUsers ();
-
 print_header ('/' . $path, 'アカウント一覧', '');
 \printf ('<pre>%s</pre>', escape (\print_r ($users, true)));
 print_footer ();
+
+} catch (\Throwable $e) {
+print_header ('/' . $path, 'エラー', '');
+\printf ('<pre>%s</pre>', escape ($e));
+print_footer ();
+
+}
 
