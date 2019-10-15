@@ -30,13 +30,31 @@ try {
 $action = $_POST['action'] ?? '';
 $db = new DB (DB_PATH);
 if ('signup' === $action) {
-	$name = $_POST['name'];
-	$password = $_POST['pass'];
+	$users = $db->getUsers ();
+	// TODO: safely allow multiple accounts
+	if (\count ($users) > 0) {
+		throw new \Exception ('user already exists');
+	}
+	$name = $_POST['name'] ?? '';
+	$password = $_POST['pass'] ?? '';
+	if ('' === $name || '' === $password) {
+		throw new \Exception ('invalid credentials');
+	}
 	$db->addUser ($name, $password);
+	$_SESSION['user'] = $name;
 	\header ('Location: /');
 } elseif ('login' === $action) {
-
-
+	$name = $_POST['name'];
+	$password = $_POST['pass'];
+	$user = $db->getUserByName ($name);
+	if (!$user) {
+		throw new \Exception ('user not found');
+	}
+	if (!$user->verifyPassword ($password)) {
+		throw new \Exception ('invalid password');
+	}
+	$_SESSION['user'] = $user->name;
+	\header ('Location: /');
 } else {
 //$site_notice = '2018年もじょそこんやります…更新中';
 $users = $db->getUsers ();

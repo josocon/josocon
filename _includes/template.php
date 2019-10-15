@@ -34,6 +34,9 @@ const AVAILABILITY = false;
 
 const DB_PATH = __DIR__ . '/../../db/josocon-db-v1.sqlite3';
 
+\session_name ('js');
+\session_start ();
+
 
 /** 出力に必ず使用すること。 */
 function escape ($text = '')
@@ -77,6 +80,10 @@ function print_header ($uri, $title, $postfix = ' | 東大女装子コンテス�
 		$site_notice = '';
 	} else {
 		$site_notice = 'サイト準備中';
+	}
+	
+	if (isset ($_SESSION['user'])) {
+		$site_notice .= \sprintf (' (%sとしてログイン中)', $_SESSION['user']);
 	}
 	
 	?>
