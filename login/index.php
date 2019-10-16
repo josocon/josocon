@@ -34,11 +34,24 @@ if (isset ($_SESSION['user'])) {
 	print_header ('/' . $path, '管理画面', '');
 	echo "<h2>ユーザ一覧</h2>";
 	\printf ('<pre>%s</pre>', escape (\print_r ($users, true)));
+	?>
+<section class='form-wrapper'>
+<h2>ユーザー登録</h2>
+<form class='signup-form input-form' action='/login/' method='POST'>
+<input type='hidden' name='action' value='signup'/>
+<label for='signup-name'>名前：</label>
+<input class='input-field' id='signup-name' type='text' name='name'/>
+<label for='signup-pass'>パスワード：</label>
+<input class='input-field' id='signup-pass' type='password' name='pass'/>
+<div class='submit'><button>登録</button></div>
+</form>
+</section>
+<?php
 	print_footer ();
 } elseif ('signup' === $action) {
 	$users = $db->getUsers ();
 	// TODO: safely allow multiple accounts
-	if (\count ($users) > 0) {
+	if (\count ($users) > 0 && !isset ($_SESSION['user'])) {
 		throw new \Exception ('user already exists');
 	}
 	$name = $_POST['name'] ?? '';
