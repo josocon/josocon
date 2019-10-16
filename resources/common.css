@@ -77,6 +77,11 @@ a {
 	color: #915ecd
 }
 
+pre {
+	font-size: inherit;
+	white-space: pre-wrap;
+}
+
 input, button, select {
 	font: inherit;
 	padding: .5rem;
