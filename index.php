@@ -40,6 +40,9 @@ print_header ('/', 'じょそこん', '');
 <nav class='items'>
 <ul>
 <?php
+if (isset ($_SESSION['user'])) {
+?><li><a href='/new/'>新規作成</a></li><?php
+}
 
 foreach ($events as $event) {
 	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
