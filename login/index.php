@@ -29,7 +29,7 @@ try {
 \ob_start ();
 $action = $_POST['action'] ?? '';
 $db = new DB (DB_PATH);
-if (isset ($_SESSION['user'])) {
+if (isset ($_SESSION['user']) && '' === $action) {
 	$users = $db->getUsers ();
 	print_header ('/' . $path, '管理画面', '');
 	echo "<h2>ユーザ一覧</h2>";
