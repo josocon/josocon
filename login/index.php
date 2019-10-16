@@ -29,7 +29,13 @@ try {
 \ob_start ();
 $action = $_POST['action'] ?? '';
 $db = new DB (DB_PATH);
-if ('signup' === $action) {
+if (isset ($_SESSION['user'])) {
+	$users = $db->getUsers ();
+	print_header ('/' . $path, '管理画面', '');
+	echo "<h2>ユーザ一覧</h2>";
+	\printf ('<pre>%s</pre>', escape (\print_r ($users, true)));
+	print_footer ();
+} elseif ('signup' === $action) {
 	$users = $db->getUsers ();
 	// TODO: safely allow multiple accounts
 	if (\count ($users) > 0) {
