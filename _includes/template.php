@@ -129,7 +129,11 @@ ________________________________________________________________________________
 <script src='/resources/root.mjs'/>
 </head>
 <body is='josocon-page'>
-<div slot='page-notice'><?= escape ($site_notice) ?></div>
+<div slot='page-notice'><?= escape ($site_notice) ?><?php
+if (isset ($_SESSION['user'])) {
+	echo " <a href='/logout/'>ログアウト</a>";
+}
+?></div>
 <div slot='page-title'><?= escape ($title) ?></div>
 <div slot='page-content'>
 <?php
