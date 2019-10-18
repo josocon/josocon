@@ -33,6 +33,11 @@ if (!Session::isLoggedIn ()) {
 	throw new \Exception ('Must be logged in to do this');
 } elseif ('delete' === $action) {
 	$id = (int) ($_POST['id'] ?? '0');
+	$nonce = $_POST['nonce'] ?? '';
+	$token = $_POST['token'] ?? '';
+	if (!Session::verifyToken ($nonce, $token)) {
+		throw new \Exception ('invalid token');
+	}
 	if (!$id) {
 		throw new \Exception ('invalid id');
 	}
@@ -46,12 +51,16 @@ if (!Session::isLoggedIn ()) {
 $name = $_GET['name'] ?? '';
 
 $event = $db->getEventByName ($name);
+$nonce = Session::getNonce ();
+$token = Session::getToken ($nonce);
 print_header ('/login/', $event->title);
 ?>
 <section class='form-wrapper edit-form-wrapper'>
 <h2>ページの削除</h2>
 <form class='edit-form input-form' action='/delete/' method='POST'>
 <input type='hidden' name='action' value='delete'/>
+<input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
+<input type='hidden' name='token' value='<?= escape ($token) ?>'/>
 <input type='hidden' name='id' value='<?= $event->id ?>'/>
 <div class='submit'><button>削除実行</button></div>
 </form>

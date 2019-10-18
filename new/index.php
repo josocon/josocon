@@ -34,6 +34,11 @@ if (!Session::isLoggedIn ()) {
 } elseif ('create' === $action) {
 	$name = $_POST['name'] ?? '';
 	$title = $_POST['title'] ?? '';
+	$nonce = $_POST['nonce'] ?? '';
+	$token = $_POST['token'] ?? '';
+	if (!Session::verifyToken ($nonce, $token)) {
+		throw new \Exception ('invalid token');
+	}
 	if ('' === $title) {
 		$title = $name;
 	}
@@ -48,11 +53,15 @@ if (!Session::isLoggedIn ()) {
 	\header (\sprintf ("location: /%s", \rawurlencode ($name)));
 } else {
 print_header ('/login/', '新規作成', '');
+$nonce = Session::getNonce ();
+$token = Session::getToken ($nonce);
 ?>
 <section class='form-wrapper'>
 <h2>ページの作成</h2>
 <form class='create-form input-form' action='/new/' method='POST'>
 <input type='hidden' name='action' value='create'/>
+<input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
+<input type='hidden' name='token' value='<?= escape ($token) ?>'/>
 <label for='create-name'>名前：/</label>
 <input class='input-field' id='create-name' type='text' name='name'/>
 <label for='create-title'>タイトル：</label>

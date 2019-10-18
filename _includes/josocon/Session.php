@@ -51,5 +51,21 @@ class Session
 	{
 		unset ($_SESSION['user']);
 	}
+	
+	public static function getNonce (): string
+	{
+		// assuming 64-bit (or more)
+		return (string) ((int) (1000 * \microtime (true)));
+	}
+	
+	public static function getToken (string $nonce): string
+	{
+		return \hash_hmac ('sha512', $nonce, $_SESSION['token'] ?? \random_bytes (16));
+	}
+	
+	public static function verifyToken (string $nonce, string $token): bool
+	{
+		return \hash_equals (self::getToken ($nonce), $token);
+	}
 }
 

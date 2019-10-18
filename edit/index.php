@@ -33,6 +33,11 @@ if (!Session::isLoggedIn ()) {
 	throw new \Exception ('Must be logged in to do this');
 } elseif ('edit' === $action) {
 	$id = (int) ($_POST['id'] ?? '0');
+	$nonce = $_POST['nonce'] ?? '';
+	$token = $_POST['token'] ?? '';
+	if (!Session::verifyToken ($nonce, $token)) {
+		throw new \Exception ('invalid token');
+	}
 	if (!$id) {
 		throw new \Exception ('invalid id');
 	}
@@ -65,12 +70,16 @@ if (!Session::isLoggedIn ()) {
 $name = $_GET['name'] ?? '';
 
 $event = $db->getEventByName ($name);
+$nonce = Session::getNonce ();
+$token = Session::getToken ($nonce);
 print_header ('/login/', '編集');
 ?>
 <section class='form-wrapper edit-form-wrapper'>
 <h2>ページの編集</h2>
 <form class='edit-form input-form' action='/edit/' method='POST'>
 <input type='hidden' name='action' value='edit'/>
+<input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
+<input type='hidden' name='token' value='<?= escape ($token) ?>'/>
 <input type='hidden' name='id' value='<?= $event->id ?>'/>
 <label for='edit-name'>名前：/</label>
 <input class='input-field' id='edit-name' type='text' name='name' value='<?= escape ($event->name) ?>'/>
