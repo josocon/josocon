@@ -81,7 +81,7 @@ class DB
 	public function getUsers ($page = 0, $size = 10): ArrayList // User
 	{
 		if (!isset ($this->getUsers)) {
-			$this->getUsers = $this->dbh->prepare ('SELECT * FROM `user` LIMIT :offset, :limit');
+			$this->getUsers = $this->dbh->prepare ('SELECT * FROM `user` ORDER BY user_id DESC LIMIT :offset, :limit');
 		}
 		
 		$limit = $size;
@@ -104,7 +104,7 @@ class DB
 	public function getEvents ($page = 0, $size = 10): ArrayList // Event
 	{
 		if (!isset ($this->getEvents)) {
-			$this->getEvents = $this->dbh->prepare ('SELECT * FROM `event` LIMIT :offset, :limit');
+			$this->getEvents = $this->dbh->prepare ('SELECT * FROM `event` ORDER BY event_id DESC LIMIT :offset, :limit');
 		}
 		
 		$limit = $size;
