@@ -27,6 +27,13 @@ class Session
 {
 	public static function init (): void
 	{
+		\session_set_cookie_params ([
+			'lifetime' => 60 * 60 * 24 * 365 * 2,
+			'path' => '/',
+			'secure' => true,
+			'httponly' => true,
+			'samesite' => 'Lax',
+		]);
 		\session_name ('js');
 		\session_start ();
 	}
