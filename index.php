@@ -44,10 +44,8 @@ print_header ('/', 'じょそこん', '');
 if (isset ($_SESSION['user'])) {
 ?><li><a href='/new/'>新規作成</a></li><?php
 }
-\printf ('<!--%s-->', escape (\print_r ($events, true)));
-\printf ('<!--%s-->', escape (\print_r ($events[0], true)));
+
 foreach ($events as $event) {
-	\printf ('<!--%s %s-->', \gettype ($event), escape (\print_r ($event, true)));
 	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
 }
 ?>
