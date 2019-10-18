@@ -80,8 +80,8 @@ print_header ('/login/', '編集');
 <textarea class='input-field' id='edit-text' name='text'><?= escape ($event->description) ?></textarea>
 <label for='edit-vote_status'>投票状態：</label>
 <select class='input-field' id='edit-vote_status' name='vote_status'>
-<option value='0'<?= $event->vote_status ? '' : "selected='selected'" ?>>無効</option>
-<option value='1'<?= !$event->vote_status ? '' : "selected='selected'" ?>>有効</option>
+<option value='0'<?= $event->vote_status ? '' : " selected='selected'" ?>>無効</option>
+<option value='1'<?= !$event->vote_status ? '' : " selected='selected'" ?>>有効</option>
 </select>
 <div class='submit'><button>編集実行</button></div>
 </form>
