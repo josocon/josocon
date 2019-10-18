@@ -26,7 +26,7 @@
 }
 
 .items ul > li {
-	margin: 1rem;
+	margin-block: 1rem;
 }
 
 .items ul > li > a {
