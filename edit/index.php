@@ -76,7 +76,7 @@ print_header ('/login/', '編集');
 <input class='input-field' id='edit-name' type='text' name='name' value='<?= escape ($event->name) ?>'/>
 <label for='edit-title'>タイトル：</label>
 <input class='input-field' id='edit-title' type='text' name='title' value='<?= escape ($event->title) ?>'/>
-<label for='edit-text'>本文：</label>
+<label for='edit-text'>本文 (<a href='https://ja.wikipedia.org/wiki/Markdown'>Markdown 形式</a>)：</label>
 <textarea class='input-field' id='edit-text' name='text'><?= escape ($event->description) ?></textarea>
 <label for='edit-vote_status'>投票状態：</label>
 <select class='input-field' id='edit-vote_status' name='vote_status'>
@@ -98,4 +98,3 @@ print_footer ();
 	print_footer ();
 }
 
-https://ja.wikipedia.org/wiki/Markdown
