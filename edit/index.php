@@ -67,7 +67,7 @@ $name = $_GET['name'] ?? '';
 $event = $db->getEventByName ($name);
 print_header ('/login/', '編集');
 ?>
-<section class='form-wrapper'>
+<section class='form-wrapper edit-form-wrapper'>
 <h2>ページの編集</h2>
 <form class='edit-form input-form' action='/edit/' method='POST'>
 <input type='hidden' name='action' value='edit'/>
