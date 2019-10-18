@@ -65,7 +65,7 @@ if (!isset ($_SESSION['user'])) {
 $name = $_GET['name'] ?? '';
 
 $event = $db->getEventByName ($name);
-print_header ('/login/', '編集', '');
+print_header ('/login/', '編集');
 ?>
 <section class='form-wrapper'>
 <h2>ページの編集</h2>

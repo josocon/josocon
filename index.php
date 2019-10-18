@@ -89,7 +89,7 @@ print_footer ();
 
 		print_footer ();
 	} else {
-		print_header ('/' . $path, $event->title, '');
+		print_header ('/' . $path, $event->title);
 		if (isset ($_SESSION['user'])) {
 			\printf ("<menu class='page-menu'><ul><li><a href='%s'>ページを編集</a></li></ul></menu>", escape ('/edit?name=' . \urlencode ($event->name)));
 		}
