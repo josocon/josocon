@@ -43,7 +43,7 @@ if (!isset ($_SESSION['user'])) {
 print_header ('/login/', '新規作成', '');
 ?>
 <section class='form-wrapper'>
-<h2>ログイン</h2>
+<h2>ページの作成</h2>
 <form class='create-form input-form' action='/new/' method='POST'>
 <input type='hidden' name='action' value='create'/>
 <label for='create-name'>名前：</label>
