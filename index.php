@@ -37,26 +37,24 @@ if ('' === $path) {
 $events = $db->getEvents ();
 
 print_header ('/', 'じょそこん', '');
-?>
-<nav class='items'>
-<ul>
-<?php
+
+echo "<nav class='items'>";
+echo "<ul>";
+
 if (Session::isLoggedIn ()) {
-?><li><a href='/new/'>新規作成</a></li><?php
+	echo "<li><a href='/new/'>新規作成</a></li>";
 }
 
 foreach ($events as $event) {
 	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
 }
-?>
-</ul>
-</nav>
-<p>
-<span class='square'>
-<iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>
-</span>
-</p>
-<?php
+
+echo "</ul>";
+echo "</nav>";
+echo "<p><span class='square'>";
+echo "<iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>";
+echo "</span></p>";
+
 print_footer ();
 
 } else {
