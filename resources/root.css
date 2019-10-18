@@ -19,3 +19,26 @@
 
 @namespace url('http://www.w3.org/1999/xhtml');
 
+.items ul {
+	margin: 0;
+	padding: 0;
+	
+}
+
+.items ul > li {
+	margin: 1rem;
+}
+
+.items ul > li > a {
+	display: block;
+	padding: 1rem;
+	background-color: #fff;
+	border: solid .125rem;
+}
+
+.items ul > li > a:hover, .items ul > li > a:active {
+	--main-color: #ea0064;
+	color: #fff;
+	background-color: var(--main-color);
+	border-color: var(--main-color);
+}
