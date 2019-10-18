@@ -27,8 +27,12 @@ class Session
 {
 	public static function init (): void
 	{
+		// TODO: too long gc maxlifetime may cause storage bloat
+		$lifetime = 60 * 60 * 24 * 365 * 2;
+		\ini_set ('session.use_strict_mode', 1);
+		\ini_set ('session.gc_maxlifetime', $lifetime);
 		\session_set_cookie_params ([
-			'lifetime' => 60 * 60 * 24 * 365 * 2,
+			'lifetime' => $lifetime,
 			'path' => '/',
 			'secure' => true,
 			'httponly' => true,
@@ -36,6 +40,13 @@ class Session
 		]);
 		\session_name ('js');
 		\session_start ();
+		\setcookie (\session_name (), \session_id (), [
+			'expires' => time () + $lifetime,
+			'path' => '/',
+			'secure' => true,
+			'httponly' => true,
+			'samesite' => 'Lax',
+		]);
 	}
 	
 	public static function start (string $name): void
