@@ -50,7 +50,7 @@ print_header ('/login/', $event->title);
 ?>
 <section class='form-wrapper edit-form-wrapper'>
 <h2>ページの削除</h2>
-<form class='edit-form input-form' action='/edit/' method='POST'>
+<form class='edit-form input-form' action='/delete/' method='POST'>
 <input type='hidden' name='action' value='delete'/>
 <input type='hidden' name='id' value='<?= $event->id ?>'/>
 <div class='submit'><button>削除実行</button></div>
