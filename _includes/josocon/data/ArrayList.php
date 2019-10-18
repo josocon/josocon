@@ -58,7 +58,7 @@ class ArrayList extends Collection implements \ArrayAccess
 			
 			public function current () // : mixed
 			{
-				return $list[$this->index];
+				return $this->list[$this->index];
 			}
 			
 			public function key (): int
