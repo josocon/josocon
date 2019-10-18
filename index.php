@@ -92,7 +92,10 @@ print_footer ();
 	} else {
 		print_header ('/' . $path, $event->title);
 		if (isset ($_SESSION['user'])) {
-			\printf ("<menu class='page-menu'><ul><li><a href='%s'>ページを編集</a></li></ul></menu>", escape ('/edit?name=' . \urlencode ($event->name)));
+			echo "<menu class='page-menu'><ul>";
+			\printf ("<li><a href='%s'>ページを編集</a></li>", escape ('/edit?name=' . \urlencode ($event->name)));
+			\printf ("<li><a href='%s'>ページを削除</a></li>", escape ('/delete?name=' . \urlencode ($event->name)));
+			echo "</ul></menu>";
 		}
 		\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($event->description));
 		$subevents = $db->getSubevents ($event);

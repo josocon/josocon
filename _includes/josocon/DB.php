@@ -373,6 +373,17 @@ class DB
 		]);
 	}
 	
+	public function removeEvent (Event $event): void
+	{
+		if (!isset ($this->removeEvent)) {
+			$this->removeEvent = $this->dbh->prepare ('DELETE FROM `event` WHERE event_id = :id');
+		}
+		
+		$this->removeEvent->execute ([
+			':id' => $event->id,
+		]);
+	}
+	
 	public function updateItemPicture (ItemPicture $item): void
 	{
 		if (!isset ($this->updateItemPicture)) {
