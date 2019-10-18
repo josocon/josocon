@@ -35,6 +35,7 @@ $db = new DB (DB_PATH);
 
 if ('' === $path) {
 $events = $db->getEvents ();
+
 print_header ('/', 'じょそこん', '');
 ?>
 <nav class='items'>
@@ -45,6 +46,7 @@ if (isset ($_SESSION['user'])) {
 }
 
 foreach ($events as $event) {
+	\printf ('<!--%s-->', escape (\print_r ($event, true)));
 	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
 }
 ?>
