@@ -69,7 +69,7 @@ print_header ('/login/', '編集');
 ?>
 <section class='form-wrapper'>
 <h2>ページの編集</h2>
-<form class='edit-form input-form' action='/new/' method='POST'>
+<form class='edit-form input-form' action='/edit/' method='POST'>
 <input type='hidden' name='action' value='edit'/>
 <input type='hidden' name='id' value='<?= $event->id ?>'/>
 <label for='edit-name'>名前：/</label>
