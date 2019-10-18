@@ -47,7 +47,7 @@ print_header ('/login/', '新規作成', '');
 <form class='create-form input-form' action='/new/' method='POST'>
 <input type='hidden' name='action' value='create'/>
 <label for='create-name'>名前：</label>
-<input class='input-field' id='create-name' type='text' name='name'/>
+/<input class='input-field' id='create-name' type='text' name='name'/>
 <label for='create-title'>タイトル：</label>
 <input class='input-field' id='create-title' type='text' name='title'/>
 <div class='submit'><button>ページ作成</button></div>
