@@ -29,7 +29,7 @@ try {
 \ob_start ();
 $action = $_POST['action'] ?? '';
 $db = new DB (DB_PATH);
-if (isset ($_SESSION['user']) && '' === $action) {
+if (Session::isLoggedIn () && '' === $action) {
 	$users = $db->getUsers ();
 	print_header ('/' . $path, '管理画面', '');
 	echo "<h2>ユーザ一覧</h2>";
@@ -51,7 +51,7 @@ if (isset ($_SESSION['user']) && '' === $action) {
 } elseif ('signup' === $action) {
 	$users = $db->getUsers ();
 	// TODO: safely allow multiple accounts
-	if (\count ($users) > 0 && !isset ($_SESSION['user'])) {
+	if (\count ($users) > 0 && !Session::isLoggedIn ()) {
 		throw new \Exception ('user already exists');
 	}
 	$name = $_POST['name'] ?? '';
@@ -60,7 +60,7 @@ if (isset ($_SESSION['user']) && '' === $action) {
 		throw new \Exception ('invalid credentials');
 	}
 	$db->addUser ($name, $password);
-	$_SESSION['user'] = $name;
+	Session::start ($name);
 	\header ('Location: /');
 } elseif ('login' === $action) {
 	$name = $_POST['name'];
@@ -72,7 +72,7 @@ if (isset ($_SESSION['user']) && '' === $action) {
 	if (!$user->verifyPassword ($password)) {
 		throw new \Exception ('invalid password');
 	}
-	$_SESSION['user'] = $user->name;
+	Session::start ($user->name);
 	\header ('Location: /');
 } else {
 //$site_notice = '2018年もじょそこんやります…更新中';

@@ -29,7 +29,7 @@ try {
 \ob_start ();
 $action = $_POST['action'] ?? '';
 $db = new DB (DB_PATH);
-if (!isset ($_SESSION['user'])) {
+if (!Session::isLoggedIn ()) {
 	throw new \Exception ('Must be logged in to do this');
 } elseif ('delete' === $action) {
 	$id = (int) ($_POST['id'] ?? '0');

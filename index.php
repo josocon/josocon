@@ -41,7 +41,7 @@ print_header ('/', 'じょそこん', '');
 <nav class='items'>
 <ul>
 <?php
-if (isset ($_SESSION['user'])) {
+if (Session::isLoggedIn ()) {
 ?><li><a href='/new/'>新規作成</a></li><?php
 }
 
@@ -68,7 +68,7 @@ print_footer ();
 		print_footer ();
 	} else {
 		print_header ('/' . $path, $event->title);
-		if (isset ($_SESSION['user'])) {
+		if (Session::isLoggedIn ()) {
 			echo "<menu class='page-menu'><ul>";
 			\printf ("<li><a href='%s'>ページを編集</a></li>", escape ('/edit?name=' . \urlencode ($event->name)));
 			\printf ("<li><a href='%s'>ページを削除</a></li>", escape ('/delete?name=' . \urlencode ($event->name)));

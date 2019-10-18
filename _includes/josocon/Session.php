@@ -23,8 +23,33 @@ namespace josocon;
 */
 
 
-require_once __DIR__ . '/../_includes/template.php';
-
-Session::logOut ();
-\header ('location: /');
+class Session
+{
+	public static function init (): void
+	{
+		\session_name ('js');
+		\session_start ();
+	}
+	
+	public static function start (string $name): void
+	{
+		$_SESSION['user'] = $name;
+		$_SESSION['token'] = \bin2hex (\random_bytes (16));
+	}
+	
+	public static function getUserName (): string
+	{
+		return $_SESSION['user'] ?? '';
+	}
+	
+	public static function isLoggedIn (): bool
+	{
+		return isset ($_SESSION['user']);
+	}
+	
+	public static function logOut (): bool
+	{
+		unset ($_SESSION['user']);
+	}
+}
 

@@ -34,8 +34,8 @@ const AVAILABILITY = false;
 
 const DB_PATH = __DIR__ . '/../../db/josocon-db-v1.sqlite3';
 
-\session_name ('js');
-\session_start ();
+
+Session::init ();
 
 
 /** 出力に必ず使用すること。 */
