@@ -144,6 +144,26 @@ class DB
 		return $event;
 	}
 	
+	public function getEventById (int $id): ?Event
+	{
+		if (!isset ($this->getEventById)) {
+			$this->getEventById = $this->dbh->prepare ('SELECT * FROM `event` WHERE event_id = :id');
+		}
+		
+		$this->getEventById->execute ([':id' => $id]);
+		$row = $this->getEventById->fetch (\PDO::FETCH_OBJ);
+		if (!$row) {
+			return null;
+		}
+		$event = new Event;
+		$event->id = $row->event_id;
+		$event->name = $row->event_name;
+		$event->title = $row->event_title;
+		$event->description = $row->event_description;
+		$event->vote_status = $row->event_vote_status;
+		return $event;
+	}
+	
 	public function getSubevents (Event $event): ArrayList // Subevent
 	{
 		if (!isset ($this->getSubevents)) {

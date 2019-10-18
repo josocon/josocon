@@ -37,6 +37,13 @@ if (!isset ($_SESSION['user'])) {
 	if ('' === $title) {
 		$title = $name;
 	}
+	if ('' === $name) {
+		throw new \Exception ('invalid name');
+	}
+	$reserved = ['login', 'logout', 'new', 'edit', 'delete', 'git'];
+	if (\in_array ($name, $reserved, true)) {
+		throw new \Exception ('reserved name');
+	}
 	$db->addEvent ($name, $title);
 	\header (\sprintf ("location: /%s", \rawurlencode ($name)));
 } else {
