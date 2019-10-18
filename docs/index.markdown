@@ -12,3 +12,6 @@
 - Service Worker
 - Progressive Web app
 
+## 開発者
+- 真空 [@_uts2](https://twitter.com/_uts2)
+
