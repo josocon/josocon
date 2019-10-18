@@ -96,59 +96,55 @@ Web開発者募集！
 連絡先 Twitter: @_uts2
 ________________________________________________________________________________
 -->
-<html itemscope='itemscope' itemtype='http://schema.org/Article' lang='ja' xml:lang='ja' xmlns='http://www.w3.org/1999/xhtml' class='removed'>
-<head prefix='og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#'>
-<title><?= escape ($full_title) ?></title>
+<html itemscope='itemscope' itemtype='http://schema.org/Article' lang='ja' xml:lang='ja' xmlns='http://www.w3.org/1999/xhtml' class='removed'><head prefix='og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#'><?php
 
-<link rel='icon' href='/resources/icon.png' type='image/png'/>
-<link rel='manifest' href='/resources/app.webmanifest'/>
+echo '<title>', escape ($full_title), '</title>';
 
-<meta itemprop='name' content='<?= escape ($full_title) ?>'/>
-<meta itemprop='image' content='<?= escape (SITE_IMAGE) ?>'/>
+echo "<meta name='robots' content='noarchive, nostore'/>";
 
-<meta property='article:published_time' content='<?= escape (time ()) ?>'/>
-<meta property='og:title' content='<?= escape ($full_title) ?>'/>
-<meta property='og:type' content='article'/>
-<meta property='og:url' content='<?= escape ($full_uri) ?>'/>
-<meta property='og:image' content='<?= escape (SITE_IMAGE) ?>'/>
-<meta property='og:description' content='<?= escape ($description) ?>'/>
-<meta property='og:site_name' content='<?= escape ($site_name) ?>'/>
+echo "<meta name='viewport' content='width=device-width, initial-scale=1'/>";
+echo "<link rel='stylesheet' href='/resources/root.css'/>";
 
-<meta name='twitter:card' content='summary'/>
-<meta name='twitter:site' content='@ut_josocon'/>
-<meta name='twitter:title' content='<?= escape ($full_title) ?>'/>
-<meta name='twitter:description' content='<?= escape ($description) ?>'/>
-<meta name='twitter:image' content='<?= escape (SITE_IMAGE) ?>'/>
+echo "<link rel='icon' href='/resources/icon.png' type='image/png'/>";
+echo "<link rel='manifest' href='/resources/app.webmanifest'/>";
 
-<meta name='robots' content='noarchive, nostore'/>
 
-<meta name='viewport' content='width=device-width, initial-scale=1'/>
+// Meta properties
+?><meta itemprop='name' content='<?= escape ($full_title) ?>'/><?php
+?><meta itemprop='image' content='<?= escape (SITE_IMAGE) ?>'/><?php
 
-<link rel='stylesheet' href='/resources/root.css'/>
-<script src='/resources/markdown-it_10.0.0.min.js'/>
-<script src='/resources/root.mjs'/>
-</head>
-<body is='josocon-page'>
-<div slot='page-notice'><?= escape ($site_notice) ?><?php
+?><meta property='article:published_time' content='<?= escape (time ()) ?>'/><?php
+?><meta property='og:title' content='<?= escape ($full_title) ?>'/><?php
+echo "<meta property='og:type' content='article'/>";
+?><meta property='og:url' content='<?= escape ($full_uri) ?>'/><?php
+?><meta property='og:image' content='<?= escape (SITE_IMAGE) ?>'/><?php
+?><meta property='og:description' content='<?= escape ($description) ?>'/><?php
+?><meta property='og:site_name' content='<?= escape ($site_name) ?>'/><?php
+
+
+// scripts
+echo "<script src='/resources/markdown-it_10.0.0.min.js'/>";
+echo "<script src='/resources/root.mjs'/>";
+
+echo "</head>";
+
+echo "<body is='josocon-page'>";
+
+?><div slot='page-notice'><?= escape ($site_notice) ?><?php
 if (isset ($_SESSION['user'])) {
 	echo " <a href='/logout/'>ログアウト</a>";
 }
-?></div>
-<div slot='page-title'><?= escape ($title) ?></div>
-<div slot='page-content'>
-<?php
+echo "</div>";
+
+?><div slot='page-title'><?= escape ($title) ?></div><?php
+echo "<div slot='page-content'>";
 	
 }
 
 /** フッタ部。 */
 function print_footer ()
 {
-	//
-	?>
-</div>
-</body>
-</html>
-<?php
+	echo "</div></body></html>";
 }
 
 
