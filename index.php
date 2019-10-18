@@ -46,7 +46,7 @@ if (isset ($_SESSION['user'])) {
 }
 
 foreach ($events as $event) {
-	\printf ('<!--%s-->', escape (\print_r ($event, true)));
+	\printf ('<!--%s %s-->', \get_class ($event), escape (\print_r ($event, true)));
 	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
 }
 ?>
