@@ -26,17 +26,30 @@ namespace josocon;
 require_once __DIR__ . '/../_includes/template.php';
 
 try {
-	$text = "12345";
+	$text = Session::get ('captcha-v1');
+	if ('' === $text) {
+		$text = \base64_encode (\random_bytes (6));
+		$text = \strtr ($text, '0O', '_=');
+		Session::set ('captcha-v1', $text);
+	}
 
 	\header ('content-type: image/png');
 	
-	$im = \imagecreate (256, 64);
-	
-	$bg = \imagecolorallocate ($im, 255, 255, 255);
+	$im = \imagecreatetruecolor (128, 32);
+	\imagesetinterpolation ($im, \IMG_BICUBIC_FIXED);
+	\imagesavealpha ($im, true);
+	$transparent = \imagecolorallocatealpha ($im, 0, 0, 0, 127);
+    \imagefill ($im, 0, 0, $transparent);
 	$textcolor = \imagecolorallocate ($im, 0, 0, 0);
 	
-	\imagestring ($im, 5, 24, 64, $text, $textcolor);
-	$im = \imagerotate ($im, \mt_rand (0, 60) - 30, $bg);
+	$rand = function () {
+		return \mt_rand () / \mt_getrandmax ();
+	};
+	\imagestring ($im, 5, 8, 8, $text, $textcolor);
+	$im = \imagescale ($im, 256, 64);
+	\imagesavealpha ($im, true);
+	$im = \imageaffine ($im, [1 - $rand () / 4, $rand () / 4, $rand () / 4, 1 - $rand () / 4, 0, 0]);
+	
 	\imagepng ($im);
 	\imagedestroy ($im);
 } catch (\Throwable $e) {

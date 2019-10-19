@@ -85,5 +85,15 @@ class Session
 	{
 		return \hash_equals (self::getToken ($nonce), $token);
 	}
+	
+	public static function set (string $name, string $value): void
+	{
+		$_SESSION["set_{$name}"] = $value;
+	}
+	
+	public static function get (string $name): string
+	{
+		return $_SESSION["set_{$name}"] ?? '';
+	}
 }
 
