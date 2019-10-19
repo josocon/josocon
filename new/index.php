@@ -52,7 +52,7 @@ if (!Session::isLoggedIn ()) {
 	$db->addEvent ($name, $title);
 	\header (\sprintf ("location: /%s", \rawurlencode ($name)));
 } else {
-print_header ('/login/', '新規作成', '');
+print_header ('/new/', '新規作成', '');
 $nonce = Session::getNonce ();
 $token = Session::getToken ($nonce);
 ?>
@@ -76,7 +76,7 @@ print_footer ();
 } catch (\Throwable $e) {
 	\ob_clean ();
 	http_status (500);
-	print_header ('/' . $path, 'エラー', '');
+	print_header ('/new/', 'エラー', '');
 	\printf ('<pre>%s</pre>', escape ($e));
 	print_footer ();
 }

@@ -337,6 +337,19 @@ class DB
 		]);
 	}
 	
+	public function addItem (Event $event, string $name, string $description = ''): void
+	{
+		if (!isset ($this->addItem)) {
+			$this->addItem = $this->dbh->prepare ('INSERT INTO `item` (event_id, item_name, item_description) VALUES (:event_id, :name, :description)');
+		}
+		
+		$this->addItem->execute ([
+			':event_id' => $event->id,
+			':name' => $name,
+			':description' => $description,
+		]);
+	}
+	
 	public function addItemPicture (Item $item, string $uri, string $description = ''): void
 	{
 		if (!isset ($this->addItemPicture)) {

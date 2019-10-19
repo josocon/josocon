@@ -53,7 +53,7 @@ $name = $_GET['name'] ?? '';
 $event = $db->getEventByName ($name);
 $nonce = Session::getNonce ();
 $token = Session::getToken ($nonce);
-print_header ('/login/', $event->title);
+print_header ('/delete/', $event->title);
 ?>
 <section class='form-wrapper edit-form-wrapper'>
 <h2>ページの削除</h2>
@@ -72,7 +72,7 @@ print_footer ();
 } catch (\Throwable $e) {
 	\ob_clean ();
 	http_status (500);
-	print_header ('/' . $path, 'エラー', '');
+	print_header ('/delete/', 'エラー', '');
 	\printf ('<pre>%s</pre>', escape ($e));
 	print_footer ();
 }
