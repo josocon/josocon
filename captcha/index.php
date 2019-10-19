@@ -28,7 +28,7 @@ require_once __DIR__ . '/../_includes/template.php';
 try {
 	$text = "12345";
 
-	\header ('content-type: text/png');
+	\header ('content-type: image/png');
 	
 	$im = \imagecreate (256, 64);
 	
