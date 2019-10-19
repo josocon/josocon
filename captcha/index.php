@@ -36,7 +36,7 @@ try {
 	$textcolor = \imagecolorallocate ($im, 0, 0, 0);
 	
 	\imagestring ($im, 5, 0, 0, $text, $textcolor);
-	
+	\imagerotate ($im, \mt_rand (0, 60) - 30, $bg);
 	\imagepng ($im);
 	\imagedestroy ($im);
 } catch (\Throwable $e) {
