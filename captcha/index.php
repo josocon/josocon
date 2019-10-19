@@ -28,27 +28,17 @@ require_once __DIR__ . '/../_includes/template.php';
 try {
 	$text = "12345";
 
-	$image = new \Imagick ();
-	$draw = new \ImagickDraw ();
-	$color = new \ImagickPixel ('#000000');
-	$background = new \ImagickPixel ('none'); // Transparent
-
-	$draw->setFont ('Arial');
-	$draw->setFontSize (50);
-	$draw->setFillColor ($color);
-	$draw->setStrokeAntialias (true);
-	$draw->setTextAntialias (true);
-
-	$metrics = $image->queryFontMetrics ($draw, $text);
-
-	$draw->annotation (0, $metrics['ascender'], $text);
-
-	$image->newImage ($metrics['textWidth'], $metrics['textHeight'], $background);
-	$image->setImageFormat ('png');
-	$image->drawImage ($draw);
-
 	\header ('content-type: text/png');
-	echo $image;
+	
+	$im = \imagecreate (256, 64);
+	
+	$bg = \imagecolorallocate ($im, 255, 255, 255);
+	$textcolor = \imagecolorallocate ($im, 0, 0, 0);
+	
+	\imagestring ($im, 5, 0, 0, $text, $textcolor);
+	
+	\imagepng ($im);
+	\imagedestroy ($im);
 } catch (\Throwable $e) {
 	print_header ('/captcha/', 'エラー');
 	\printf ('<pre>%s</pre>', escape ($e));
