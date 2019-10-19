@@ -48,7 +48,7 @@ try {
 	\imagestring ($im, 5, 8, 8, $text, $textcolor);
 	$im = \imagescale ($im, 256, 64);
 	\imagesavealpha ($im, true);
-	$im = \imageaffine ($im, [1 - $rand () / 4, $rand () / 4, $rand () / 4, 1 - $rand () / 4, 0, 0]);
+	$im = \imageaffine ($im, [1 - $rand () / 4, $rand () / 4 - 0.125, $rand () / 4 - 0.125, 1 - $rand () / 4, 0, 0]);
 	
 	\imagepng ($im);
 	\imagedestroy ($im);
