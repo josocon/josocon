@@ -34,28 +34,41 @@ try {
 $db = new DB (DB_PATH);
 
 if ('' === $path) {
-$events = $db->getEvents ();
+	$page = (int) ($_GET['page'] ?? '');
+	if ($page < 0) {
+		$page = 0;
+	}
+	$events = $db->getEvents ($page);
 
-print_header ('/', 'じょそこん', '');
+	print_header ('/', 'じょそこん', '');
 
-echo "<nav class='items'>";
-echo "<ul>";
+	echo "<nav class='items'>";
+	echo "<ul>";
 
-if (Session::isLoggedIn ()) {
-	echo "<li><a href='/new/'>新規作成</a></li>";
-}
+	if ($page > 0) {
+		\printf ("<li><a href='/?page=%d'>前のページ</a></li>", $page - 1);
+	}
 
-foreach ($events as $event) {
-	\printf ("<li><a href='/%s'>%s</a></li>", escape ($event->name), escape ($event->title));
-}
+	if (Session::isLoggedIn ()) {
+		echo "<li><a href='/new/'>新規作成</a></li>";
+	}
 
-echo "</ul>";
-echo "</nav>";
-echo "<p><span class='square'>";
-echo "<iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>";
-echo "</span></p>";
+	foreach ($events as $event) {
+		\printf ("<li><a href='/%s'>%s</a></li>"
+			, escape ($event->name), escape ($event->title));
+	}
+	
+	if (\count ($db->getEvents ($page + 1)) > 0) {
+		\printf ("<li><a href='/?page=%d'>次のページ</a></li>", $page + 1);
+	}
 
-print_footer ();
+	echo "</ul>";
+	echo "</nav>";
+	echo "<p><span class='square'>";
+	echo "<iframe src='https://twitter.menherausercontent.org/tweets.xhtml#ut_josocon'/>";
+	echo "</span></p>";
+
+	print_footer ();
 
 } else {
 	$event = $db->getEventByName ($path);
