@@ -25,27 +25,32 @@ namespace josocon;
 
 require_once __DIR__ . '/../_includes/template.php';
 
-$text = "12345";
+try {
+	$text = "12345";
 
-$image = new \Imagick ();
-$draw = new \ImagickDraw ();
-$color = new \ImagickPixel ('#000000');
-$background = new \ImagickPixel ('none'); // Transparent
+	$image = new \Imagick ();
+	$draw = new \ImagickDraw ();
+	$color = new \ImagickPixel ('#000000');
+	$background = new \ImagickPixel ('none'); // Transparent
 
-$draw->setFont ('Arial');
-$draw->setFontSize (50);
-$draw->setFillColor ($color);
-$draw->setStrokeAntialias (true);
-$draw->setTextAntialias (true);
+	$draw->setFont ('Arial');
+	$draw->setFontSize (50);
+	$draw->setFillColor ($color);
+	$draw->setStrokeAntialias (true);
+	$draw->setTextAntialias (true);
 
-$metrics = $image->queryFontMetrics ($draw, $text);
+	$metrics = $image->queryFontMetrics ($draw, $text);
 
-$draw->annotation (0, $metrics['ascender'], $text);
+	$draw->annotation (0, $metrics['ascender'], $text);
 
-$image->newImage ($metrics['textWidth'], $metrics['textHeight'], $background);
-$image->setImageFormat ('png');
-$image->drawImage ($draw);
+	$image->newImage ($metrics['textWidth'], $metrics['textHeight'], $background);
+	$image->setImageFormat ('png');
+	$image->drawImage ($draw);
 
-\header ('content-type: text/png');
-echo $image;
-
+	\header ('content-type: text/png');
+	echo $image;
+} catch (\Throwable $e) {
+	print_header ('/captcha/', 'エラー');
+	\printf ('<pre>%s</pre>', escape ($e));
+	print_footer ();
+}
