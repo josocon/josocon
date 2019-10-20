@@ -111,14 +111,12 @@ if ('' === $path) {
 				\printf ("<div class='widescreen'><div><img src='%s'/></div></div>"
 					, escape ($picture->uri));
 				
-				/*
 				if (Session::isLoggedIn ()) {
 					echo "<menu class='item-picture-menu'>";
 					\printf ("<li><a href='/delete-item-picture/?id=%d'>写真の削除…</a></li>"
 						, $picture->id);
 					echo "</menu>";
 				}
-				*/
 				
 				\printf ("<figcaption><josocon-markdown>%s</josocon-markdown></figcaption>"
 					, escape ($picture->description));
