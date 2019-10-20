@@ -50,7 +50,6 @@ if ('vote' === $action) {
 	}
 	
 	$voted = Session::get ("voted-{$event->id}");
-	Session::set ("voted-{$event->id}", '1');
 	
 	Session::set ('captcha-v1', '');
 	if ($captcha_text !== $text) {
@@ -72,6 +71,8 @@ if ('vote' === $action) {
 	if (!Session::verifyToken ($nonce, $token)) {
 		throw new \Exception ('invalid token');
 	}
+	
+	Session::set ("voted-{$event->id}", '1');
 	$item->vote_count += 1;
 	$db->updateItem ($item);
 	
