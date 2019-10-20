@@ -58,3 +58,15 @@
 	background-color: #666;
 }
 
+.vote-button {
+	margin-block: 1em;
+}
+
+.vote-button > a {
+	display: block;
+	background-color: #fff;
+	border: solid .125rem;
+	padding: 1em;
+	text-align: center;
+}
+

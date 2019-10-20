@@ -126,7 +126,7 @@ if ('' === $path) {
 			
 			if ($event->vote_status) {
 				echo "<div class='vote-button'>";
-				\printf ("<a href='/vote/?id=%d'>投票する</a>", $item->id);
+				\printf ("<a href='/vote/?id=%d'>投票する…</a>", $item->id);
 				echo "</div>";
 			}
 			
