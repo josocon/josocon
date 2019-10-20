@@ -101,22 +101,8 @@ if ('' === $path) {
 		foreach ($items as $item) {
 			echo '<section>';
 			echo '<h3>', escape ($item->name), '</h3>';
-			\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($item->description));
-			
-			if ($event->vote_status) {
-				echo "<div class='vote-button'>";
-				\printf ("<a href='/vote/?id=%d'>投票する</a>", $item->id);
-				echo "</div>";
-			}
-			
-			if (Session::isLoggedIn ()) {
-				echo "<menu class='item-menu'>";
-				\printf ("<li><a href='/edit-item/?id=%d'>項目の編集…</a></li>", $item->id);
-				\printf ("<li><a href='/add-item-picture/?item=%d'>写真の追加…</a></li>", $item->id);
-				\printf ("<li><a href='/delete-item/?id=%d'>項目の削除…</a></li>", $item->id);
-				echo "</menu>";
-			}
-			
+			\printf ('<josocon-markdown>%s</josocon-markdown>'
+				, escape ($item->description));
 			
 			echo "<ul class='item-pictures'>";
 			$pictures = $db->getItemPictures ($item);
@@ -132,11 +118,25 @@ if ('' === $path) {
 					echo "</menu>";
 				}
 				
-				\printf ("<figcaption>%s</figcaption>"
+				\printf ("<figcaption><josocon-markdown>%s</josocon-markdown></figcaption>"
 					, escape ($picture->description));
 				echo "</figure></li>";
 			}
 			echo "</ul>";
+			
+			if ($event->vote_status) {
+				echo "<div class='vote-button'>";
+				\printf ("<a href='/vote/?id=%d'>投票する</a>", $item->id);
+				echo "</div>";
+			}
+			
+			if (Session::isLoggedIn ()) {
+				echo "<menu class='item-menu'>";
+				\printf ("<li><a href='/edit-item/?id=%d'>項目の編集…</a></li>", $item->id);
+				\printf ("<li><a href='/add-item-picture/?item=%d'>写真の追加…</a></li>", $item->id);
+				\printf ("<li><a href='/delete-item/?id=%d'>項目の削除…</a></li>", $item->id);
+				echo "</menu>";
+			}
 			
 			echo '</section>';
 		}
