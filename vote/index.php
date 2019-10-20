@@ -84,6 +84,15 @@ if (!$item) {
 	throw new \Exception ('item not found');
 }
 
+$voted = Session::get ("voted-{$item->event_id}");
+if ($voted) {
+	http_status (400);
+	print_header ('/vote/', 'エラー');
+	echo "<josocon-markdown>すでにこの投票は投票済みです。</josocon-markdown>";
+	print_footer ();
+	exit;
+}
+
 $nonce = Session::getNonce ();
 $token = Session::getToken ($nonce);
 print_header ('/vote/', $item->name);
