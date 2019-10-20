@@ -30,7 +30,7 @@ require_once __DIR__ . '/autoload.php';
 const ORIGIN = 'https://www.josocon.u-tokyo.eu.org';
 const SITE_NAME = '東大女装子コンテスト';
 const SITE_IMAGE = 'https://www.josocon.u-tokyo.eu.org/resources/item.png';
-const AVAILABILITY = false;
+const AVAILABILITY = true;
 
 const DB_PATH = __DIR__ . '/../../db/josocon-db-v1.sqlite3';
 
