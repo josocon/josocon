@@ -63,10 +63,10 @@ if (!$item) {
 
 $nonce = Session::getNonce ();
 $token = Session::getToken ($nonce);
-print_header ('/delete-item/', $event->title);
+print_header ('/delete-item/', $item->name);
 ?>
 <section class='form-wrapper edit-form-wrapper'>
-<h2>ページの削除</h2>
+<h2>項目の削除</h2>
 <form class='edit-form input-form' action='/delete-item/' method='POST'>
 <input type='hidden' name='action' value='delete'/>
 <input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
