@@ -47,6 +47,10 @@ class Session
 			'httponly' => true,
 			'samesite' => 'Lax',
 		]);
+		
+		if (!isset ($_SESSION['token']) {
+			$_SESSION['token'] = \bin2hex (\random_bytes (16));
+		}
 	}
 	
 	public static function start (string $name): void
