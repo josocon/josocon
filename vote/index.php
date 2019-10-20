@@ -37,6 +37,13 @@ if ('vote' === $action) {
 	
 	$text = Session::get ('captcha-v1');
 	
+	if (!$id) {
+		throw new \Exception ('invalid id');
+	}
+	$item = $db->getItemById ($id);
+	if (!$item) {
+		throw new \Exception ('item not found');
+	}
 	$event = $db->getEventById ($item->event_id);
 	if (!$event) {
 		throw new \Exception ('event not found');
@@ -64,13 +71,6 @@ if ('vote' === $action) {
 	
 	if (!Session::verifyToken ($nonce, $token)) {
 		throw new \Exception ('invalid token');
-	}
-	if (!$id) {
-		throw new \Exception ('invalid id');
-	}
-	$item = $db->getItemById ($id);
-	if (!$item) {
-		throw new \Exception ('item not found');
 	}
 	$item->vote_count += 1;
 	$db->updateItem ($item);
