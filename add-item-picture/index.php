@@ -36,6 +36,7 @@ if (!Session::isLoggedIn ()) {
 	$item_id = $_POST['item_id'] ?? '';
 	$nonce = $_POST['nonce'] ?? '';
 	$token = $_POST['token'] ?? '';
+	
 	if (!Session::verifyToken ($nonce, $token)) {
 		throw new \Exception ('invalid token');
 	}
