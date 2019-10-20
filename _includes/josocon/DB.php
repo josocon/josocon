@@ -241,6 +241,7 @@ class DB
 			$item->id = $row->item_picture_id;
 			$item->item_id = $row->item_id;
 			$item->uri = $row->item_picture_uri;
+			$items->push ($item);
 		}
 		return $items;
 	}
