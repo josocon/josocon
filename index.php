@@ -136,6 +136,9 @@ if ('' === $path) {
 				\printf ("<li><a href='/add-item-picture/?item=%d'>写真の追加…</a></li>", $item->id);
 				\printf ("<li><a href='/delete-item/?id=%d'>項目の削除…</a></li>", $item->id);
 				echo "</menu>";
+				
+				echo "<h4>関係者向け情報</h4>";
+				echo '<p>', escape ($item->vote_count), '</p>';
 			}
 			
 			echo '</section>';
