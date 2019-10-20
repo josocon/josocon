@@ -48,7 +48,7 @@ class Session
 			'samesite' => 'Lax',
 		]);
 		
-		if (!isset ($_SESSION['token']) {
+		if (!isset ($_SESSION['token'])) {
 			$_SESSION['token'] = \bin2hex (\random_bytes (16));
 		}
 	}
