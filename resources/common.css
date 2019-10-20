@@ -206,6 +206,6 @@ figcaption {
 .widescreen > :only-child {
 	position: absolute;
 	inset-block-start: 0;
-	margin: auto;
 	height: 100%;
+	width: 100%;
 }
