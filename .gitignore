@@ -5,3 +5,5 @@
 *.log
 *.sqlite
 *.sqlite3
+resources/uploads/**
+
