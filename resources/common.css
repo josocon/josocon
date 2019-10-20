@@ -203,7 +203,7 @@ figcaption {
 	position: relative;
 }
 
-.widescreen :only-child {
+.widescreen > :only-child {
 	position: absolute:
 	inset-block-start: 0;
 	margin: auto;
