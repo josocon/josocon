@@ -112,9 +112,32 @@ if ('' === $path) {
 			if (Session::isLoggedIn ()) {
 				echo "<menu class='item-menu'>";
 				\printf ("<li><a href='/edit-item/?id=%d'>項目の編集…</a></li>", $item->id);
+				\printf ("<li><a href='/add-item-picture/?item=%d'>写真の追加…</a></li>", $item->id);
 				\printf ("<li><a href='/delete-item/?id=%d'>項目の削除…</a></li>", $item->id);
 				echo "</menu>";
 			}
+			
+			
+			echo "<ul class='item-pictures'>";
+			$pictures = $db->getItemPictures ($item);
+			foreach ($pictures as $picture) {
+				echo "<li><figure>";
+				\printf ("<img src='%s'/>"
+					, escape ($picture->uri));
+				
+				if (Session::isLoggedIn ()) {
+					echo "<menu class='item-picture-menu'>";
+					\printf ("<li><a href='/delete-item-picture/?id=%d'>写真の削除…</a></li>"
+						, $picture->id);
+					echo "</menu>";
+				}
+				
+				\printf ("<figcaption>%s</figcaption>"
+					, escape ($picture->description));
+				echo "</figure></li>";
+			}
+			echo "</ul>";
+			
 			echo '</section>';
 		}
 		echo '</section>';
