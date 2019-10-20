@@ -80,11 +80,11 @@ if ('' === $path) {
 	} else {
 		print_header ('/' . $path, $event->title);
 		if (Session::isLoggedIn ()) {
-			echo "<menu class='page-menu'><ul>";
+			echo "<menu class='page-menu'>";
 			\printf ("<li><a href='%s'>ページを編集</a></li>", escape ('/edit/?name=' . \urlencode ($event->name)));
 			\printf ("<li><a href='%s'>ページを削除</a></li>", escape ('/delete/?name=' . \urlencode ($event->name)));
 			\printf ("<li><a href='%s'>項目を追加</a></li>", escape ('/add-item/?event=' . \urlencode ($event->name)));
-			echo "</ul></menu>";
+			echo "</menu>";
 		}
 		\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($event->description));
 		$subevents = $db->getSubevents ($event);
@@ -107,6 +107,12 @@ if ('' === $path) {
 				echo "<div class='vote-button'>";
 				\printf ("<a href='/vote/?id=%d'>投票する</a>", $item->id);
 				echo "</div>";
+			}
+			
+			if (Session::isLoggedIn ()) {
+				echo "<menu class='item-menu'>"
+				\printf ("<li><a href='/delete-item/?id=%d'>項目の削除…</a></li>", $item->id);
+				echo "</menu>";
 			}
 			echo '</section>';
 		}

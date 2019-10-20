@@ -205,6 +205,28 @@ class DB
 		return self::createItemList (... $items);
 	}
 	
+	public function getItemById (int $id): ?Item
+	{
+		if (!isset ($this->getItemById)) {
+			$this->getItemById = $this->dbh->prepare ('SELECT * FROM `item` WHERE item_id = :id');
+		}
+		
+		$this->getItemById->execute ([':id' => $id]);
+		$row = $this->getItemById->fetch (\PDO::FETCH_OBJ);
+		if (!$row) {
+			return null;
+		}
+		
+		$item = new Item;
+		$item->id = $row->item_id;
+		$item->event_id = $row->event_id;
+		$item->name = $row->item_name;
+		$item->description = $row->item_description;
+		$item->vote_count = $row->item_vote_count;
+		
+		return $item;
+	}
+	
 	public function getItemPictures (Item $item): ArrayList // ItemPicture
 	{
 		if (!isset ($this->getItemPictures)) {
@@ -394,6 +416,17 @@ class DB
 		
 		$this->removeEvent->execute ([
 			':id' => $event->id,
+		]);
+	}
+	
+	public function removeItem (Item $item): void
+	{
+		if (!isset ($this->removeItem)) {
+			$this->removeItem = $this->dbh->prepare ('DELETE FROM `item` WHERE item_id = :id');
+		}
+		
+		$this->removeItem->execute ([
+			':id' => $item->id,
 		]);
 	}
 	
