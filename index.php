@@ -110,7 +110,7 @@ if ('' === $path) {
 			}
 			
 			if (Session::isLoggedIn ()) {
-				echo "<menu class='item-menu'>"
+				echo "<menu class='item-menu'>";
 				\printf ("<li><a href='/delete-item/?id=%d'>項目の削除…</a></li>", $item->id);
 				echo "</menu>";
 			}
