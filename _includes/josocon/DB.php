@@ -419,6 +419,17 @@ class DB
 		]);
 	}
 	
+	public function removeItemsByEvent (Event $event): void
+	{
+		if (!isset ($this->removeItemsByEvent)) {
+			$this->removeItemsByEvent = $this->dbh->prepare ('DELETE FROM `item` WHERE event_id = :event_id');
+		}
+		
+		$this->removeItemsByEvent->execute ([
+			':event_id' => $event->id,
+		]);
+	}
+	
 	public function removeItem (Item $item): void
 	{
 		if (!isset ($this->removeItem)) {

@@ -31,7 +31,7 @@ $action = $_POST['action'] ?? '';
 $db = new DB (DB_PATH);
 if (!Session::isLoggedIn ()) {
 	throw new \Exception ('Must be logged in to do this');
-} elseif ('delete' === $action) {
+} elseif ('edit' === $action) {
 	$id = (int) ($_POST['id'] ?? '0');
 	$nonce = $_POST['nonce'] ?? '';
 	$token = $_POST['token'] ?? '';
@@ -41,29 +41,48 @@ if (!Session::isLoggedIn ()) {
 	if (!$id) {
 		throw new \Exception ('invalid id');
 	}
-	$event = $db->getEventById ($id);
+	$name = $_POST['name'] ?? '';
+	$text = $_POST['text'] ?? '';
+	if ('' === $name) {
+		throw new \Exception ('invalid name');
+	}
+	
+	// TODO: use transaction
+	$item = $db->getItemById ($id);
 	if (!$event) {
 		throw new \Exception ('page not found');
 	}
-	$db->removeItemsByEvent ($event);
-	$db->removeEvent ($event);
-	\header (\sprintf ("location: /%s", \rawurlencode ($name)));
+	
+	$item->name = $name;
+	$item->description = $text;
+	
+	$db->updateItem ($item);
+	
+	$event = $db->getEventById ($item->event_id);
+	\header (\sprintf ("location: /%s", \rawurlencode ($event->name)));
 } else {
-$name = $_GET['name'] ?? '';
+$id = $_GET['id'] ?? '';
 
-$event = $db->getEventByName ($name);
+$item = $db->getItemById ($id);
+if (!$item) {
+	throw new \Exception ('item not found');
+}
 $nonce = Session::getNonce ();
 $token = Session::getToken ($nonce);
-print_header ('/delete/', $event->title);
+print_header ('/edit-item/', '項目の編集');
 ?>
 <section class='form-wrapper edit-form-wrapper'>
-<h2>ページの削除</h2>
-<form class='edit-form input-form' action='/delete/' method='POST'>
-<input type='hidden' name='action' value='delete'/>
+<h2>項目の編集</h2>
+<form class='edit-form input-form' action='/edit-item/' method='POST'>
+<input type='hidden' name='action' value='edit'/>
 <input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
 <input type='hidden' name='token' value='<?= escape ($token) ?>'/>
-<input type='hidden' name='id' value='<?= $event->id ?>'/>
-<div class='submit'><button>削除実行</button></div>
+<input type='hidden' name='id' value='<?= $item->id ?>'/>
+<label for='edit-name'>名前：</label>
+<input class='input-field' id='edit-name' type='text' name='name' value='<?= escape ($item->name) ?>'/>
+<label for='edit-text'>説明： <br/>(<a href='https://ja.wikipedia.org/wiki/Markdown'>Markdown 形式</a>)</label>
+<textarea class='input-field' id='edit-text' name='text'><?= escape ($item->description) ?></textarea>
+<div class='submit'><button>編集実行</button></div>
 </form>
 </section>
 <?php
@@ -73,7 +92,7 @@ print_footer ();
 } catch (\Throwable $e) {
 	\ob_clean ();
 	http_status (500);
-	print_header ('/delete/', 'エラー', '');
+	print_header ('/edit/', 'エラー', '');
 	\printf ('<pre>%s</pre>', escape ($e));
 	print_footer ();
 }
