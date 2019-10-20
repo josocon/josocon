@@ -158,3 +158,28 @@ iframe {
 	min-block-size: 12.5em;
 }
 
+menu {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(10em, auto));
+	grid-auto-flow: row;
+	background-color: #fff;
+	padding: 0;
+	border: solid .125rem #915ecd;
+	margin: 0;
+}
+
+menu li {
+	list-style: none;
+	text-align: center;
+}
+
+menu li > a {
+	padding-block: 1em;
+	display: block;
+	padding-inline: 1em;
+}
+
+menu li > a:hover, menu li > a:active {
+	color: #fff;
+	background-color: #915ecd;
+}

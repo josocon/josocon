@@ -42,3 +42,15 @@
 	background-color: var(--main-color);
 	border-color: var(--main-color);
 }
+
+.item-pictures {
+	list-style: none;
+	padding: 0;
+	margin-block: 1em;
+}
+
+.item-pictures img {
+	width: 100%;
+	display: block;
+}
+
