@@ -247,6 +247,27 @@ class DB
 		return $items;
 	}
 	
+	public function getItemPictureById (int $id): ?ItemPicture
+	{
+		if (!isset ($this->getItemPictureById)) {
+			$this->getItemPictureById = $this->dbh->prepare ('SELECT * FROM `item_picture` WHERE item_picture_id = :id');
+		}
+		
+		$this->getItemPictureById->execute ([':id' => $id]);
+		$row = $this->getItemPictureById->fetch (\PDO::FETCH_OBJ);
+		if (!$row) {
+			return null;
+		}
+		
+		$item = new ItemPicture;
+		$item->id = $row->item_picture_id;
+		$item->item_id = $row->item_id;
+		$item->uri = $row->item_picture_uri;
+		$item->description = $row->item_picture_description;
+		
+		return $item;
+	}
+	
 	public function getUserByName (string $name): ?User
 	{
 		if (!isset ($this->getUserByName)) {
