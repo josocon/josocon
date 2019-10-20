@@ -64,8 +64,10 @@ if (!Session::isLoggedIn ()) {
 	
 	$hash = \hash_file ('sha256', $_FILES['file']['tmp_name']);
 	$path = __DIR__ . '/../resources/uploads/' . $hash . $ext;
-	if (!\move_uploaded_file ($_FILES['file']['tmp_name'], $path)) {
-		throw new \Exception ('file check failed');
+	if (!\file_exists ($path)) {
+		if (!\move_uploaded_file ($_FILES['file']['tmp_name'], $path)) {
+			throw new \Exception ('file check failed');
+		}
 	}
 	
 	$uri = '/resources/uploads/' . $hash . $ext;
