@@ -183,3 +183,29 @@ menu li > a:hover, menu li > a:active {
 	color: #fff;
 	background-color: #915ecd;
 }
+
+figure {
+	padding: 0;
+	margin: 0;
+	margin-block: 1em;
+}
+
+figcaption {
+	background-color: #666;
+	color: #fff;
+	padding: 1em;
+	padding-block: .125rem;
+	text-align: center;
+}
+
+.16-by-9 {
+	padding-block-start: calc(100% / 16 * 9);
+	position: relative;
+}
+
+.16-by-9:only-child {
+	position: absolute:
+	inset-block-start: 0;
+	margin: auto;
+	height: 100%;
+}

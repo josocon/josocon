@@ -54,3 +54,7 @@
 	display: block;
 }
 
+.item-pictures figure > .16-by-9 {
+	background-color: #666;
+}
+
