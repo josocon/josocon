@@ -108,7 +108,7 @@ if ('' === $path) {
 			$pictures = $db->getItemPictures ($item);
 			foreach ($pictures as $picture) {
 				echo "<li><figure>";
-				\printf ("<div class='16-by-9'><img src='%s'/></div>"
+				\printf ("<div class='widescreen'><img src='%s'/></div>"
 					, escape ($picture->uri));
 				
 				if (Session::isLoggedIn ()) {

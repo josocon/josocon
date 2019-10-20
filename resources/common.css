@@ -198,12 +198,12 @@ figcaption {
 	text-align: center;
 }
 
-.16-by-9 {
+.widescreen {
 	padding-block-start: calc(100% / 16 * 9);
 	position: relative;
 }
 
-.16-by-9:only-child {
+.widescreen:only-child {
 	position: absolute:
 	inset-block-start: 0;
 	margin: auto;
