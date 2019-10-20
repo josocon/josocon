@@ -138,7 +138,7 @@ if ('' === $path) {
 				echo "</menu>";
 				
 				echo "<h4>関係者向け情報</h4>";
-				echo '<p>', escape ($item->vote_count), '</p>';
+				echo '<p>現在の得票数：', escape ($item->vote_count), '</p>';
 			}
 			
 			echo '</section>';
