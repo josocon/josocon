@@ -49,8 +49,8 @@ if (!Session::isLoggedIn ()) {
 	
 	// TODO: use transaction
 	$item = $db->getItemById ($id);
-	if (!$event) {
-		throw new \Exception ('page not found');
+	if (!$item) {
+		throw new \Exception ('item not found');
 	}
 	
 	$item->name = $name;
