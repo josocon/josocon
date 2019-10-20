@@ -45,6 +45,7 @@ if (!Session::isLoggedIn ()) {
 	if (!$event) {
 		throw new \Exception ('page not found');
 	}
+	$db->removePicturesByEvent ($event);
 	$db->removeItemsByEvent ($event);
 	$db->removeEvent ($event);
 	\header (\sprintf ("location: /%s", \rawurlencode ($name)));

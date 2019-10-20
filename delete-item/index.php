@@ -45,6 +45,7 @@ if (!Session::isLoggedIn ()) {
 	if (!$item) {
 		throw new \Exception ('item not found');
 	}
+	$db->removePicturesByItem ($item);
 	$db->removeItem ($item);
 	$event = $db->getEventById ($item->event_id);
 	if (!$event) {

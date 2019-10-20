@@ -400,12 +400,31 @@ class DB
 	public function removeItemPicture (ItemPicture $picture): void
 	{
 		if (!isset ($this->removeItemPicture)) {
-			$this->removeItemPicture = $this->dbh->prepare ('DELETE FROM `item` WHERE item_picture_id = :id');
+			$this->removeItemPicture = $this->dbh->prepare ('DELETE FROM `item_picture` WHERE item_picture_id = :id');
 		}
 		
 		$this->removeItemPicture->execute ([
 			':id' => $picture->id,
 		]);
+	}
+	
+	public function removePicturesByItem (Item $item): void
+	{
+		if (!isset ($this->removePicturesByItem)) {
+			$this->removePicturesByItem = $this->dbh->prepare ('DELETE FROM `item_picture` WHERE item_id = :item_id');
+		}
+		
+		$this->removePicturesByItem->execute ([
+			':item_id' => $item->id,
+		]);
+	}
+	
+	public function removePicturesByEvent (Event $event): void
+	{
+		$items = $this->getItems ($event);
+		foreach ($items as $item) {
+			$this->removePicturesByItem ($item);
+		}
 	}
 	
 	public function removeEvent (Event $event): void
