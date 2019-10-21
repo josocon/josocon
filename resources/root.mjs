@@ -171,13 +171,13 @@ document.addEventListener ('submit', ev => {
 			continue;
 		}
 		
-		if (!target.action) {
+		if (!target.hasAttribute ('action')) {
 			continue;
 		}
 		
 		ev.preventDefault ();
 		
-		const action = new URL (target.action, location.href);
+		const action = new URL (target.getAttribute ('action'), location.href);
 		console.log (action);
 		if (action.host !== location.host) {
 			console.error ('cross-origin forms not supported');
