@@ -114,6 +114,8 @@
 
 #site-back-button:disabled {
 	inline-size: 0;
+	padding-inline-start: 0;
+	padding-inline-end: 0;
 }
 
 .page {
