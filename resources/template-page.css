@@ -156,6 +156,9 @@
 	padding: 1rem;
 	inline-size: calc(100% - 2rem);
 	max-inline-size: 50rem;
+	overflow: auto;
+	overflow-inline: auto;
+	overflow-block: hidden;
 }
 
 .page-notice {
