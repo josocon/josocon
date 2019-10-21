@@ -197,20 +197,23 @@ menu li > a:hover, menu li > a:active {
 figure {
 	padding: 0;
 	margin: 0;
-	margin-block: 1em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
 }
 
 figcaption {
 	background-color: #333;
 	color: #fff;
 	padding: 1em;
-	padding-block: .125rem;
+	padding-block-start: .125rem;
+	padding-block-end: .125rem;
 	text-align: center;
 }
 
 .widescreen {
 	padding-top: calc(100% / 16 * 9);
-	padding-inline: 0;
+	padding-inline-start: 0;
+	padding-inline-end: 0;
 	padding-block-start: calc(100% / 16 * 9);
 	padding-block-end: 0;
 	position: relative;
