@@ -65,12 +65,22 @@ const navigate = async uri => {
 	const res = await fetch (uri);
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
-	document.body.innerText = '';
 	console.log ('fetched document:', doc);
+	const newPage = doc.getElementsByTagName ('josocon-page')[0];
+	const page = document.getElementsByTagName ('josocon-page')[0];
+	if (!newPage) {
+		console.error ('invalid document');
+		return;
+	}
+	if (!page) {
+		console.error ('not supported');
+		return;
+	}
+	page.innerText = '';
 	
-	[... doc.body.childNodes]
+	[... newPage.childNodes]
 	.map (node => document.adoptNode (node))
-	.forEach (node => document.body.appendChild (node));
+	.forEach (node => page.appendChild (node));
 	document.title = doc.title;
 	history.replaceState ({}, "", uri);
 };
