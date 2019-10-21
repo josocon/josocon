@@ -24,7 +24,7 @@
 	"short_name": "じょそこん",
 	"start_url": "/",
 	"serviceworker": {
-		"src": "/sw.js",
+		"src": "/resources/sw.js",
 		"scope": "/",
 		"update_via_cache": "none"
 	},
