@@ -89,6 +89,7 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	position: relative;
+	background-color: #ffd9e0;
 }
 
 .site-navigation > ul > li {
@@ -117,6 +118,13 @@
 	border: none;
 	color: inherit;
 	font: inherit;
+	block-size: 100%;
+	inline-size: 4rem;
+	transition: all .5s ease-in-out;
+}
+
+.site-navigation button:disabled {
+	inline-size: 0;
 }
 
 #site-back-button::before {
@@ -125,6 +133,7 @@
 	position: fixed;
 	inline-size: 4rem;
 	left: 0;
+	box-sizing: border-box;
 	inset-inline-start: 0;
 	inset-inline-end: auto;
 	inset-block-start: auto;
@@ -133,6 +142,7 @@
 	cursor: pointer;
 	background-color: inherit;
 	color: inherit;
+	block-size: 100%;
 	border-inline-end: solid .125rem #ea0064;
 }
 
