@@ -100,7 +100,6 @@
 .site-navigation > ul > li:first-child {
 	position: -webkit-sticky;
 	position: sticky;
-	inline-size: 4rem;
 	left: 0;
 	inset-inline-start: 0;
 	inset-inline-end: auto;
@@ -139,6 +138,7 @@
 	cursor: pointer;
 	border-inline-end: solid .125rem #ea0064;
 	overflow: hidden;
+	inline-size: 4rem;
 }
 
 #site-back-button:disabled::before {
