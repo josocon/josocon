@@ -118,7 +118,6 @@
 	border: none;
 	color: inherit;
 	font: inherit;
-	block-size: 100%;
 	inline-size: 4rem;
 	transition: all .5s ease-in-out;
 }
