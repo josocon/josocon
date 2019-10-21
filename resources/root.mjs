@@ -57,7 +57,16 @@ const getTemplate = async id => {
 	return templates.getElementById (id);
 };
 
+let backButton;
 const navigation = [location.href];
+const updateBackButton = () => {
+	if (!backButton) return;
+	if (navigation.length < 2) {
+		backButton.disabled = false;
+	} else {
+		backButton.disabled = true;
+	}
+};
 
 const loadPage = async (... fetchArgs) => {
 	const res = await fetch (... fetchArgs);
@@ -158,7 +167,14 @@ customElements.define ('josocon-page', class extends HTMLElement {
 	
 	connectedCallback () {
 		this.load ()
-		.then (a => console.log ('connected:', a))
+		.then (a => {
+			console.log ('connected:', a);
+			
+			backButton = document.getElementById ('site-back-button');
+			backButton.addEventListener ('click', ev => {
+				back ();
+			});
+		})
 		.catch (e => console.error (e));
 	}
 });

@@ -91,10 +91,13 @@
 	flex-shrink: 0;
 }
 
-.site-navigation a {
+.site-navigation a, .site-navigation button {
 	display: block;
 	padding: 1rem;
 	color: inherit;
+	font: inherit;
+	border: none;
+	background-color: transparent;
 }
 
 .site-navigation li:hover, .site-navigation li:active {
