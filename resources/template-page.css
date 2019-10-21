@@ -144,10 +144,10 @@
 	color: inherit;
 	block-size: 100%;
 	border-inline-end: solid .125rem #ea0064;
+	overflow: hidden;
 }
 
 #site-back-button:disabled::before {
-	content: '';
 	inline-size: 0;
 	padding-inline-start: 0;
 	padding-inline-end: 0;
