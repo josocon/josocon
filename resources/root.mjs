@@ -84,6 +84,7 @@ const navigate = async (uri, formData) => {
 	.map (node => document.adoptNode (node))
 	.forEach (node => page.appendChild (node));
 	document.title = doc.title;
+	console.log (doc.location);
 	history.replaceState ({}, "", uri);
 };
 
