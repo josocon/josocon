@@ -218,7 +218,7 @@ figcaption {
 }
 
 .widescreen {
-	padding-top: calc(100% / 16 * 9);
+	padding-top: 56.25%;
 	padding-inline-start: 0;
 	padding-inline-end: 0;
 	padding-block-start: calc(100% / 16 * 9);
