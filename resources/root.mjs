@@ -81,7 +81,7 @@ customElements.define ('josocon-page', class extends HTMLElement {
 		const shadowRoot = this.attachShadow({ mode: 'open' });
 		console.log ('shadowRoot:', shadowRoot);
 		shadowRoots.set (this, shadowRoot);
-		this.classList.add ('removed');
+		//this.classList.add ('removed');
 	}
 	
 	async load () {
@@ -91,7 +91,7 @@ customElements.define ('josocon-page', class extends HTMLElement {
 		const template = await getTemplate ('template-page');
 		const content = document.importNode (template.content, true);
 		root.appendChild (content);
-		this.classList.remove ('removed');
+		//this.classList.remove ('removed');
 		return true;
 	}
 	
