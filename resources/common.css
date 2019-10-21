@@ -209,12 +209,20 @@ figcaption {
 }
 
 .widescreen {
+	padding-top: calc(100% / 16 * 9);
+	padding-inline: 0;
 	padding-block-start: calc(100% / 16 * 9);
+	padding-block-end: 0;
 	position: relative;
+	overflow: hidden;
 }
 
 .widescreen > :only-child {
 	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	inset-block-start: 0;
 	height: 100%;
 	width: 100%;
