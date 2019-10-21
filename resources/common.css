@@ -197,8 +197,8 @@ menu li > a:hover, menu li > a:active {
 figure {
 	padding: 0;
 	margin: 0;
-	margin-block-start: 1em;
-	margin-block-end: 1em;
+	margin-block-start: 2em;
+	margin-block-end: 2em;
 }
 
 figcaption {
