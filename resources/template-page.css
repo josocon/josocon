@@ -139,6 +139,7 @@
 	border-inline-end: solid .125rem #ea0064;
 	overflow: hidden;
 	inline-size: 4rem;
+	box-sizing: border-box;
 }
 
 #site-back-button:disabled::before {
