@@ -28,5 +28,6 @@
 		"scope": "/",
 		"update_via_cache": "none"
 	},
-	"orientation": "portrait-primary"
+	"orientation": "portrait-primary",
+	"scope": "/"
 }
