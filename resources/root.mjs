@@ -57,17 +57,28 @@ const getTemplate = async id => {
 	return templates.getElementById (id);
 };
 
+const navigation = [location.href];
+
 const navigate = async (uri, formData) => {
 	if (new URL (uri, location.href).host !== location.host) {
 		throw new TypeError ('Navigation target must be on the same origin');
 	}
 	
-	const res = formData instanceof FormData
-		? (await fetch (uri, {method: 'POST', body: formData, credentials: 'same-origin'}))
-		: (await fetch (uri, {credentials: 'same-origin'}));
+	let method, fetchOptions;
+	if (formData instanceof FormData) {
+		method = 'POST';
+		fetchOptions = {method, body: formData, credentials: 'same-origin'};
+	} else {
+		method = 'GET';
+		fetchOptions = {credentials: 'same-origin'};
+	}
+	
+	const res = await fetch (uri, fetchOptions);
+	
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
 	console.log ('fetched document:', doc);
+	
 	const newPage = doc.getElementsByTagName ('josocon-page')[0];
 	const page = document.getElementsByTagName ('josocon-page')[0];
 	if (!newPage) {
@@ -78,14 +89,22 @@ const navigate = async (uri, formData) => {
 		console.error ('not supported');
 		return;
 	}
+	
 	page.innerText = '';
 	
 	[... newPage.childNodes]
 	.map (node => document.adoptNode (node))
 	.forEach (node => page.appendChild (node));
+	
 	document.title = doc.title;
-	console.log (doc.location);
-	history.replaceState ({}, "", uri);
+	
+	if ('GET' === method) {
+		const prev = navigation[navigation.length - 1];
+		if (prev !== res.url) {
+			navigation.push (res.url);
+		}
+	}
+	history.replaceState ({}, "", res.url);
 };
 
 customElements.define ('josocon-page', class extends HTMLElement {
