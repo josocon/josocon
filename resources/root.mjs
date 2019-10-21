@@ -75,7 +75,7 @@ const navigate = async uri => {
 	history.replaceState ({}, "", uri);
 };
 
-customElements.define ('josocon-page', class extends HTMLBodyElement {
+customElements.define ('josocon-page', class extends HTMLElement {
 	constructor () {
 		super ();
 		const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -100,7 +100,7 @@ customElements.define ('josocon-page', class extends HTMLBodyElement {
 		.then (a => console.log ('connected:', a))
 		.catch (e => console.error (e));
 	}
-}, {extends: 'body'});
+});
 
 customElements.define ('josocon-markdown', class extends HTMLElement {
 	constructor () {

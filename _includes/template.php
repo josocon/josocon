@@ -129,7 +129,7 @@ echo "<script src='/resources/root.mjs'/>";
 
 echo "</head>";
 
-echo "<body is='josocon-page'>";
+echo "<body><josocon-page>";
 
 ?><div slot='page-notice'><?= escape ($site_notice) ?><?php
 if (isset ($_SESSION['user'])) {
@@ -145,7 +145,7 @@ echo "<div slot='page-content'>";
 /** フッタ部。 */
 function print_footer ()
 {
-	echo "</div></body></html>";
+echo "</div></josocon-page></body></html>";
 }
 
 
