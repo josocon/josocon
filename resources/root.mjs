@@ -122,7 +122,7 @@ const navigate = async (uri, formData) => {
 	history.replaceState ({}, "", target.href);
 };
 
-const back = () => {
+const back = async () => {
 	if (navigation.length < 2) {
 		return;
 	}
