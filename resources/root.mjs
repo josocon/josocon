@@ -62,9 +62,9 @@ const navigation = [location.href];
 const updateBackButton = () => {
 	if (!backButton) return;
 	if (navigation.length < 2) {
-		backButton.disabled = false;
-	} else {
 		backButton.disabled = true;
+	} else {
+		backButton.disabled = false;
 	}
 };
 
