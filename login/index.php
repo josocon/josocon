@@ -116,9 +116,9 @@ if (\count ($users) < 1) {
 </form>
 </section>
 <?php
-	echo "<h2>現在のブラウザ</h2>";
-	\printf ('<pre>%s</pre>', escape ($_SERVER['HTTP_USER_AGENT'] ?? ''));
 }
+echo "<h2>現在のブラウザ</h2>";
+\printf ('<pre>%s</pre>', escape ($_SERVER['HTTP_USER_AGENT'] ?? ''));
 print_footer ();
 }
 \ob_flush ();
