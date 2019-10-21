@@ -99,7 +99,7 @@ if ('' === $path) {
 		echo '<h2>項目一覧</h2>';
 		$items = $db->getItems ($event);
 		foreach ($items as $item) {
-			echo '<section>';
+			echo '<section class=\'item\'>';
 			echo '<h3>', escape ($item->name), '</h3>';
 			\printf ('<josocon-markdown>%s</josocon-markdown>'
 				, escape ($item->description));

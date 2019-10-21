@@ -26,7 +26,8 @@
 }
 
 .items ul > li {
-	margin-block: 1rem;
+	margin-block-start: 1rem;
+	margin-block-end: 1rem;
 }
 
 .items ul > li > a {
@@ -43,10 +44,18 @@
 	border-color: var(--main-color);
 }
 
+.item {
+	margin-block-start: 2em;
+	margin-block-end: 2em;
+	background-color: #ffeeee;
+	padding: 1em;
+}
+
 .item-pictures {
 	list-style: none;
 	padding: 0;
-	margin-block: 1em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
 }
 
 .item-pictures img {
