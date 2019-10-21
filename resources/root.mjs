@@ -63,7 +63,7 @@ const navigate = async (uri, formData) => {
 	}
 	
 	const res = formData instanceof FormData
-		? (await fetch (uri, {method: 'POST', body: formData, credentials: 'same-origin'))
+		? (await fetch (uri, {method: 'POST', body: formData, credentials: 'same-origin'}))
 		: (await fetch (uri, {credentials: 'same-origin'}));
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
