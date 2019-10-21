@@ -89,12 +89,12 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	position: relative;
-	background-color: #ffd9e0;
 }
 
 .site-navigation > ul > li {
 	margin: 0;
 	flex-shrink: 0;
+	background-color: #ffd9e0;
 }
 
 .site-navigation a, #site-back-button::before {
