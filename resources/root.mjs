@@ -98,13 +98,14 @@ const navigate = async (uri, formData) => {
 	
 	document.title = doc.title;
 	
+	const target = new URL (res.url);
 	if ('GET' === method) {
 		const prev = navigation[navigation.length - 1];
-		if (prev !== res.url) {
-			navigation.push (res.url);
+		if (prev !== target.href && '' === target.search) {
+			navigation.push (target.href);
 		}
 	}
-	history.replaceState ({}, "", res.url);
+	history.replaceState ({}, "", target.href);
 };
 
 customElements.define ('josocon-page', class extends HTMLElement {
