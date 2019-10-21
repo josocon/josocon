@@ -128,6 +128,7 @@
 	border: none;
 	color: inherit;
 	font: inherit;
+	box-shadow: none;
 }
 
 #site-back-button::before {
