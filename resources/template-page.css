@@ -108,6 +108,8 @@
 
 #site-back-button {
 	transition: all .5s ease-in-out;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 #site-back-button:disabled {
