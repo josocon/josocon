@@ -79,6 +79,7 @@ customElements.define ('josocon-page', class extends HTMLBodyElement {
 	constructor () {
 		super ();
 		const shadowRoot = this.attachShadow({ mode: 'open' });
+		console.log ('shadowRoot:', shadowRoot);
 		shadowRoots.set (this, shadowRoot);
 		this.classList.add ('removed');
 	}
