@@ -129,6 +129,7 @@ const navigate = async (uri, formData) => {
 	}
 	
 	history.replaceState ({}, "", target.href);
+	updateBackButton ();
 };
 
 const back = async () => {
@@ -143,6 +144,8 @@ const back = async () => {
 	const uri = navigation[navigation.length - 1];
 	const res = await loadPage (uri, {credentials: 'same-origin'});
 	history.replaceState ({}, "", res.url);
+	
+	updateBackButton ();
 };
 
 customElements.define ('josocon-page', class extends HTMLElement {
