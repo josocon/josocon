@@ -115,6 +115,10 @@ iframe {
 	position: absolute;
 	inline-size: 100%;
 	block-size: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	inset-block-start: 0;
 }
 
