@@ -123,7 +123,7 @@ echo "<meta property='og:type' content='article'/>";
 
 
 // scripts
-echo "<script src='/resources/custom-elements-builtin@0.2.7_min.js'/>";
+echo "<script src='/resources/webcomponents-bundle@2.3.0.js'/>";
 echo "<script src='/resources/markdown-it_10.0.0.min.js'/>";
 echo "<script src='/resources/root.mjs'/>";
 
