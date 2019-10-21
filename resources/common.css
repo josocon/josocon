@@ -79,6 +79,12 @@ h2 {
 	margin-block: 1em;
 }
 
+h3 {
+	font-size: 125%;
+	margin-inline: 0;
+	margin-block: 1em;
+}
+
 a {
 	text-decoration: none;
 	color: #915ecd
