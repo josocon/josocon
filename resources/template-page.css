@@ -105,7 +105,7 @@
 	font: inherit;
 }
 
-.site-navigation li:hover, .site-navigation li:active, #site-back-button::before:hover, #site-back-button::before:active {
+.site-navigation li:hover, .site-navigation li:active {
 	background-color: #ea0064;
 	color: #fff;
 }
