@@ -59,21 +59,8 @@ const getTemplate = async id => {
 
 const navigation = [location.href];
 
-const navigate = async (uri, formData) => {
-	if (new URL (uri, location.href).host !== location.host) {
-		throw new TypeError ('Navigation target must be on the same origin');
-	}
-	
-	let method, fetchOptions;
-	if (formData instanceof FormData) {
-		method = 'POST';
-		fetchOptions = {method, body: formData, credentials: 'same-origin'};
-	} else {
-		method = 'GET';
-		fetchOptions = {credentials: 'same-origin'};
-	}
-	
-	const res = await fetch (uri, fetchOptions);
+const loadPage = async (... fetchArgs) => {
+	const res = await fetch (... fetchArgs);
 	
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
@@ -98,14 +85,55 @@ const navigate = async (uri, formData) => {
 	
 	document.title = doc.title;
 	
-	const target = new URL (res.url);
-	if ('GET' === method) {
-		const prev = navigation[navigation.length - 1];
-		if (prev !== target.href && '' === target.search) {
-			navigation.push (target.href);
-		}
+	return res;
+};
+
+const navigate = async (uri, formData) => {
+	if (new URL (uri, location.href).host !== location.host) {
+		throw new TypeError ('Navigation target must be on the same origin');
 	}
+	
+	let method, fetchOptions;
+	if (formData instanceof FormData) {
+		method = 'POST';
+		fetchOptions = {method, body: formData, credentials: 'same-origin'};
+	} else {
+		method = 'GET';
+		fetchOptions = {credentials: 'same-origin'};
+	}
+	
+	const res = await loadPage (uri, fetchOptions);
+	
+	const target = new URL (res.url);
+	
+	const nonEmpty = navigation.filter (s => '' !== s);
+	let prev = nonEmpty[nonEmpty.length - 1];
+	
+	if (prev === target.href) {
+		while ('' === navigation[navigation.length - 1]) {
+			navigation.pop ();
+		}
+	} else if ('' === target.search) {
+		navigation.push (target.href);
+	} else {
+		navigation.push ('');
+	}
+	
 	history.replaceState ({}, "", target.href);
+};
+
+const back = () => {
+	if (navigation.length < 2) {
+		return;
+	}
+	navigation.pop ();
+	while ('' === navigation[navigation.length - 1]) {
+		navigation.pop ();
+	}
+	
+	const uri = navigation[navigation.length - 1];
+	const res = await loadPage (uri, {credentials: 'same-origin'});
+	history.replaceState ({}, "", res.url);
 };
 
 customElements.define ('josocon-page', class extends HTMLElement {
