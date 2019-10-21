@@ -106,6 +106,14 @@
 	color: #fff;
 }
 
+#site-back-button {
+	transition: all .5s ease-in-out;
+}
+
+#site-back-button:disabled {
+	inline-size: 0;
+}
+
 .page {
 	flex-grow: 1;
 	margin: auto;

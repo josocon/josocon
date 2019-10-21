@@ -169,11 +169,12 @@ customElements.define ('josocon-page', class extends HTMLElement {
 	}
 	
 	connectedCallback () {
+		const root = shadowRoots.get (this);
 		this.load ()
 		.then (a => {
 			console.log ('connected:', a);
 			
-			backButton = document.getElementById ('site-back-button');
+			backButton = root.getElementById ('site-back-button');
 			backButton.addEventListener ('click', ev => {
 				back ();
 			});
