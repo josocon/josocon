@@ -97,6 +97,17 @@
 	background-color: #ffd9e0;
 }
 
+.site-navigation > ul > li:first-child {
+	position: -webkit-sticky;
+	position: sticky;
+	inline-size: 4rem;
+	left: 0;
+	inset-inline-start: 0;
+	inset-inline-end: auto;
+	inset-block-start: auto;
+	inset-block-end: auto;
+}
+
 .site-navigation a, #site-back-button::before {
 	display: block;
 	padding: 1rem;
@@ -114,33 +125,18 @@
 	display: block;
 	margin: 0;
 	padding: 0;
-	background-color: inherit;
+	background-color: transparent;
 	border: none;
 	color: inherit;
 	font: inherit;
-	inline-size: 4rem;
-	transition: all .5s ease-in-out;
-}
-
-.site-navigation button:disabled {
-	inline-size: 0;
 }
 
 #site-back-button::before {
+	display: block;
 	content: '<';
-	transition: all .5s ease-in-out;
-	position: fixed;
-	inline-size: 4rem;
-	left: 0;
-	box-sizing: border-box;
-	inset-inline-start: 0;
-	inset-inline-end: auto;
-	inset-block-start: auto;
-	inset-block-end: auto;
+	transition: all .25s ease-in-out;
 	text-align: center;
 	cursor: pointer;
-	background-color: inherit;
-	color: inherit;
 	border-inline-end: solid .125rem #ea0064;
 	overflow: hidden;
 }
