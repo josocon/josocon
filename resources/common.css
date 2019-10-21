@@ -33,6 +33,7 @@
 	display: flex;
 	flex-direction: column;
 	min-block-size: 100%;
+	transition: opacity .25s ease-in;
 }
 
 body {
@@ -123,7 +124,7 @@ iframe {
 }
 
 .removed {
-	visibility: hidden;
+	opacity: 0;
 }
 
 .form-wrapper {
