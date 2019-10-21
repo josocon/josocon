@@ -107,6 +107,7 @@ echo "<link rel='stylesheet' href='/resources/root.css'/>";
 
 echo "<link rel='icon' href='/resources/icon.png' type='image/png'/>";
 echo "<link rel='manifest' href='/resources/app.webmanifest'/>";
+echo "<link rel='apple-touch-icon' href='/resources/app-icon_192.png'/>";
 
 
 // Meta properties
