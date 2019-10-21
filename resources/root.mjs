@@ -57,12 +57,14 @@ const getTemplate = async id => {
 	return templates.getElementById (id);
 };
 
-const navigate = async uri => {
+const navigate = async (uri, formData) => {
 	if (new URL (uri, location.href).host !== location.host) {
 		throw new TypeError ('Navigation target must be on the same origin');
 	}
 	
-	const res = await fetch (uri);
+	const res = formData instanceof FormData
+		? (await fetch (uri, {method: 'POST', body: formData, credentials: 'same-origin'))
+		: (await fetch (uri, {credentials: 'same-origin'}));
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
 	const doc = new DOMParser().parseFromString(await res.text(), type);
 	console.log ('fetched document:', doc);
@@ -156,6 +158,33 @@ document.addEventListener ('click', ev => {
 			window.open (action.href, '_blank');
 		} else {
 			navigate (action.href);
+		}
+		return;
+	}
+});
+
+document.addEventListener ('submit', ev => {
+	const composedPath = ev.composedPath ();
+	for (let target of composedPath) {
+		//console.log (target);
+		if (!target.tagName || 'form' !== target.tagName.toLowerCase ()) {
+			continue;
+		}
+		
+		if (!target.action) {
+			continue;
+		}
+		
+		ev.preventDefault ();
+		
+		const action = new URL (target.action, location.href);
+		console.log (action);
+		if (action.host !== location.host) {
+			console.error ('cross-origin forms not supported');
+			return;
+		} else {
+			const formData = new FormData (target);
+			navigate (action.href, formData);
 		}
 		return;
 	}
