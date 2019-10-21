@@ -32,8 +32,19 @@ $db = new DB (DB_PATH);
 if (Session::isLoggedIn () && '' === $action) {
 	$users = $db->getUsers ();
 	print_header ('/' . $path, '管理画面', '');
+	echo "<h2>現在のブラウザ</h2>";
+	\printf ('<pre>%s</pre>', escape ($_SERVER['HTTP_USER_AGENT'] ?? ''));
 	echo "<h2>ユーザ一覧</h2>";
-	\printf ('<pre>%s</pre>', escape (\print_r ($users, true)));
+	$usersArray = [];
+	foreach ($users as $user) {
+		$obj = [];
+		$obj['id'] = $user->id;
+		$obj['name'] = $user->name;
+		$obj['long_name'] = $user->long_name;
+		$obj['description'] = $user->description;
+		$usersArray[] = $obj;
+	}
+	\printf ('<pre>%s</pre>', escape (\json_encode ($usersArray, \JSON_INVALID_UTF8_SUBSTITUTE | \JSON_PRETTY_PRINT | \ JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE | \JSON_THROW_ON_ERROR)));
 	?>
 <section class='form-wrapper'>
 <h2>ユーザー登録</h2>
