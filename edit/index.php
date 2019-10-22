@@ -102,7 +102,7 @@ print_footer ();
 } catch (\Throwable $e) {
 	\ob_clean ();
 	http_status (500);
-	print_header ('/edit/', 'エラー', '');
+	print_header ('/edit/', 'エラー');
 	\printf ('<pre>%s</pre>', escape ($e));
 	print_footer ();
 }

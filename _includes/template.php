@@ -109,6 +109,7 @@ echo "<meta name='robots' content='noarchive, nostore'/>";
 
 echo "<meta name='viewport' content='width=device-width, initial-scale=1'/>";
 echo "<link rel='stylesheet' href='/resources/root.css'/>";
+echo "<link rel='preload' href='/resources/template-page.css' as='style'/>";
 
 echo "<link rel='icon' href='/resources/icon.png' type='image/png'/>";
 echo "<link rel='manifest' href='/resources/app.webmanifest'/>";
@@ -129,7 +130,7 @@ echo "<meta property='og:type' content='article'/>";
 
 
 // scripts
-echo "<script src='/resources/webcomponents-bundle@2.3.0.js'/>";
+//echo "<script src='/resources/webcomponents-bundle@2.3.0.js'/>";
 echo "<script src='/resources/markdown-it_10.0.0.min.js'/>";
 echo "<script src='/resources/root.mjs'/>";
 
