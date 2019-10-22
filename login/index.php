@@ -60,6 +60,9 @@ EOF;
 			| \JSON_UNESCAPED_UNICODE
 			| \JSON_THROW_ON_ERROR)));
 	
+	$nonce = Session::getNonce ();
+	$token = Session::getToken ($nonce);
+	
 	?>
 <section class='form-wrapper'>
 <h2>全データのダウンロード</h2>
@@ -72,6 +75,8 @@ EOF;
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='signup'/>
+<input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
+<input type='hidden' name='token' value='<?= escape ($token) ?>'/>
 <label for='signup-name'>名前：</label>
 <input class='input-field' id='signup-name' type='text' name='name'/>
 <label for='signup-pass'>パスワード：</label>
@@ -86,8 +91,14 @@ EOF;
 	\header ('content-disposition: attachment; filename="josocon.sqlite3"');
 	\readfile (DB_PATH);
 } elseif ('signup' === $action) {
+	
+	$nonce = $_POST['nonce'] ?? '';
+	$token = $_POST['token'] ?? '';
+	if (!Session::verifyToken ($nonce, $token)) {
+		throw new \Exception ('invalid token');
+	}
+	
 	$users = $db->getUsers ();
-	// TODO: safely allow multiple accounts
 	if (\count ($users) > 0 && !Session::isLoggedIn ()) {
 		throw new \Exception ('user already exists');
 	}
@@ -129,11 +140,17 @@ print_header ('/login/', '関係者向けログイン', '');
 </section>
 <?php
 if (\count ($users) < 1) {
+
+$nonce = Session::getNonce ();
+$token = Session::getToken ($nonce);
+
 ?>
 <section class='form-wrapper'>
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='signup'/>
+<input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
+<input type='hidden' name='token' value='<?= escape ($token) ?>'/>
 <label for='signup-name'>名前：</label>
 <input class='input-field' id='signup-name' type='text' name='name'/>
 <label for='signup-pass'>パスワード：</label>
