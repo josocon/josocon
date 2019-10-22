@@ -34,6 +34,8 @@ const AVAILABILITY = true;
 
 const DB_PATH = __DIR__ . '/../../db/josocon-db-v1.sqlite3';
 
+const SITE_NOTICE = 'site-notice';
+
 
 Session::init ();
 
@@ -76,12 +78,15 @@ function print_header ($uri, $title, $postfix = ' | 東大女装子コンテス�
 		'/login/' => '関係者向け',
 	];
 
-	if (AVAILABILITY) {
-		$site_notice = '';
+	$db = new DB (DB_PATH);
+	$page = $db->getEventByName (SITE_NOTICE);
+	if (!$page) {
+		$site_notice_text = 'サイト準備中';
 	} else {
-		$site_notice = 'サイト準備中';
+		$site_notice_text = $page->description;
 	}
 	
+	$site_notice = '';
 	if (isset ($_SESSION['user'])) {
 		$site_notice .= \sprintf (' (%sとしてログイン中)', $_SESSION['user']);
 	}
@@ -132,7 +137,7 @@ echo "</head>";
 
 echo "<body><josocon-page>";
 
-?><div slot='page-notice'><?= escape ($site_notice) ?><?php
+?><div slot='page-notice'><josocon-markdown><?= escape ($site_notice_text) ?></josocon-markdown><?= escape ($site_notice) ?><?php
 if (isset ($_SESSION['user'])) {
 	echo " <a href='/logout/'>ログアウト</a>";
 }
