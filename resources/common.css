@@ -71,18 +71,24 @@ h1 {
 	font-size: 200%;
 	margin-inline: 0;
 	margin-block: 1em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
 }
 
 h2 {
 	font-size: 150%;
 	margin-inline: 0;
 	margin-block: 1em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
 }
 
 h3 {
 	font-size: 125%;
 	margin-inline: 0;
 	margin-block: 1em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
 }
 
 a {
@@ -139,7 +145,11 @@ img {
 
 .form-wrapper {
 	margin-inline: auto;
+	margin-inline-start: auto;
+	margin-inline-end: auto;
 	margin-block: 1em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
 	max-inline-size: 20rem;
 	padding: 1em;
 	background-color: #ffeeee;
