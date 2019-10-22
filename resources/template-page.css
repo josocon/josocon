@@ -55,7 +55,9 @@
 	grid-row: 2;
 	font-size: 1.25rem;
 	color: #888;
+	padding: 0 1rem;
 	padding-inline: 1rem;
+	padding-block: 0;
 }
 
 .site-subtitle {
@@ -64,7 +66,9 @@
 	grid-row: 3;
 	font-size: 1rem;
 	text-align: end;
+	padding: 0 1rem;
 	padding-inline: 1rem;
+	padding-block: 0;
 }
 
 .site-navigation {
