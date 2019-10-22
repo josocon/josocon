@@ -31,7 +31,7 @@ const PRECACHE = [
 	'/resources/templates.xhtml',
 	'/resources/template-page.css',
 	'/resources/icon.png',
-	'/resources/isshin-map.png',
+	'/resources/isshin-map.jpg',
 	'https://fonts.menherausercontent.org/mplus-1-light-sub.woff',
 	'https://fonts.menherausercontent.org/mplus-1-medium-sub.woff',
 ];
