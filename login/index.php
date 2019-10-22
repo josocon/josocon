@@ -32,8 +32,16 @@ $db = new DB (DB_PATH);
 if (Session::isLoggedIn () && '' === $action) {
 	$users = $db->getUsers ();
 	print_header ('/' . $path, '管理画面', '');
+	
+	$info = <<<'EOF'
+サイトの運用や仕組みに関しては[このページ](/policy)を参照してください。
+EOF;
+	echo "<h2>案内</h2>";
+	\printf ('<josocon-markdown>%s</josocon-markdown>', escape ($info));
+	
 	echo "<h2>現在のブラウザ</h2>";
 	\printf ('<pre>%s</pre>', escape ($_SERVER['HTTP_USER_AGENT'] ?? ''));
+	
 	echo "<h2>ユーザ一覧</h2>";
 	$usersArray = [];
 	foreach ($users as $user) {
@@ -44,7 +52,14 @@ if (Session::isLoggedIn () && '' === $action) {
 		$obj['description'] = $user->description;
 		$usersArray[] = $obj;
 	}
-	\printf ('<pre>%s</pre>', escape (\json_encode ($usersArray, \JSON_INVALID_UTF8_SUBSTITUTE | \JSON_PRETTY_PRINT | \ JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE | \JSON_THROW_ON_ERROR)));
+	\printf ('<pre>%s</pre>'
+		, escape (\json_encode ($usersArray
+			, \JSON_INVALID_UTF8_SUBSTITUTE
+			| \JSON_PRETTY_PRINT
+			| \ JSON_UNESCAPED_SLASHES
+			| \JSON_UNESCAPED_UNICODE
+			| \JSON_THROW_ON_ERROR)));
+	
 	?>
 <section class='form-wrapper'>
 <h2>ユーザー登録</h2>
