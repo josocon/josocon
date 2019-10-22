@@ -109,6 +109,10 @@ iframe {
 	padding: 0;
 }
 
+img {
+	pointer-events: none;
+}
+
 .square {
 	display: block;
 	position: relative;
