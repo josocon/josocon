@@ -259,6 +259,10 @@ document.addEventListener ('submit', ev => {
 			continue;
 		}
 		
+		if (target.classList.contains ('form-direct')) {
+			continue;
+		}
+		
 		ev.preventDefault ();
 		
 		const action = new URL (target.getAttribute ('action'), location.href);

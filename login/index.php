@@ -62,6 +62,13 @@ EOF;
 	
 	?>
 <section class='form-wrapper'>
+<h2>全データのダウンロード</h2>
+<form class='form-direct download-form input-form' action='/login/' method='POST'>
+<input type='hidden' name='action' value='dump'/>
+<div class='submit'><button>ダウンロード</button></div>
+</form>
+</section>
+<section class='form-wrapper'>
 <h2>ユーザー登録</h2>
 <form class='signup-form input-form' action='/login/' method='POST'>
 <input type='hidden' name='action' value='signup'/>
@@ -74,6 +81,10 @@ EOF;
 </section>
 <?php
 	print_footer ();
+} elseif (Session::isLoggedIn () && 'dump' === $action) {
+	\header ('content-type: application/octet-stream');
+	\header ('content-disposition: attachment; filename="josocon.sqlite3"');
+	\readfile (DB_PATH);
 } elseif ('signup' === $action) {
 	$users = $db->getUsers ();
 	// TODO: safely allow multiple accounts
