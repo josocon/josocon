@@ -40,13 +40,13 @@ class Session
 		]);
 		\session_name ('js');
 		\session_start ();
-		\setcookie (\session_name (), \session_id (), [
-			'expires' => time () + $lifetime,
+		/*\setcookie (\session_name (), \session_id (), [
+			'expires' => \time () + $lifetime,
 			'path' => '/',
 			'secure' => true,
 			'httponly' => true,
 			'samesite' => 'Lax',
-		]);
+		]);*/
 		
 		if (!isset ($_SESSION['token'])) {
 			$_SESSION['token'] = \bin2hex (\random_bytes (16));
