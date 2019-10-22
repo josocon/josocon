@@ -28,7 +28,7 @@ class Session
 	public static function init (): void
 	{
 		// TODO: too long gc maxlifetime may cause storage bloat
-		$lifetime = 60 * 60 * 24 * 365 * 2;
+		$lifetime = 60 * 60 * 24;
 		\ini_set ('session.use_strict_mode', 1);
 		\ini_set ('session.gc_maxlifetime', $lifetime);
 		\session_set_cookie_params ([
