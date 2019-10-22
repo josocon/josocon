@@ -86,7 +86,7 @@ const loadPage = async (... fetchArgs) => {
 		return;
 	}
 	
-	page.innerText = '';
+	page.textContent = '';
 	
 	[... newPage.childNodes]
 	.map (node => document.adoptNode (node))
@@ -190,15 +190,30 @@ customElements.define ('josocon-markdown', class extends HTMLElement {
 		shadowRoots.set (this, shadowRoot);
 	}
 	
-	connectedCallback () {
+	render () {
 		const shadowRoot = shadowRoots.get (this);
 		const html = '<div>' + md.render(this.textContent) + '</div>';
 		const node = new DOMParser ().parseFromString (html, 'text/html').body.children[0];
 		const link = document.createElement ('link');
 		link.rel = 'stylesheet';
 		link.href = '/resources/common.css';
+		shadowRoot.textContent = '';
 		shadowRoot.appendChild (link);
 		shadowRoot.appendChild (document.adoptNode (node));
+	}
+	
+	connectedCallback () {
+		this.render ();
+		
+		const observer = new MutationObserver (mutations => {
+			this.render ();
+		});
+		
+		observer.observe (this, {
+			characterData: true,
+			childList: true,
+			subtree: true,
+		});
 	}
 });
 
