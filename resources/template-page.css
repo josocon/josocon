@@ -28,7 +28,7 @@
 	grid-template-columns: 5rem 1fr;
 	max-width: 50rem;
 	max-inline-size: 50rem;
-	max-block-size: auto;
+	max-block-size: initial;
 	margin: auto;
 	margin-inline: auto;
 	margin-block: 0;
@@ -42,7 +42,7 @@
 	grid-row: 1 / 5;
 	min-height: 5rem;
 	min-block-size: 5rem;
-	min-inline-size: auto;
+	min-inline-size: initial;
 	background-repeat: no-repeat;
 	background-image: url(/resources/icon.png);
 	background-size: 4rem;
@@ -86,7 +86,7 @@
 
 .site-navigation > ul {
 	max-width: max-content;
-	max-block-size: auto;
+	max-block-size: initial;
 	max-inline-size: max-content;
 	overflow: auto;
 	overflow-inline: auto;
