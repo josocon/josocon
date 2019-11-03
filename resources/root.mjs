@@ -43,6 +43,51 @@
 
 
 const shadowRoots = new WeakMap ();
+const STATES_MAX = 100;
+const STATES_STEP = 10;
+const states = new Map ();
+const resolveURI = uri => new URL (uri, location.href).href;
+const hasState = uri => states.has (resolveURI (uri));
+const setState = (uri, state) => {
+	if (!hasState (uri) & states.size >= STATES_MAX) {
+		let i = 0;
+		for (let [key, value] of states) {
+			states.delete (key);
+			i++;
+			if (i >= STATES_STEP) {
+				break;
+			}
+		}
+	}
+	states.set (resolveURI (uri), state);
+};
+const getState = uri => states.get (resolveURI (uri));
+
+const saveState = uri => {
+	let state;
+	if (hasState (uri)) {
+		state = getState (uri);
+	} else {
+		state = Object.create (null);
+	}
+	state.scrollX = window.scrollX;
+	state.scrollY = window.scrollY;
+	
+	setState (uri, state);
+};
+
+const restoreState = uri => {
+	let state;
+	if (hasState (uri)) {
+		state = getState (uri);
+	} else {
+		state = Object.create (null);
+		state.scrollX = 0;
+		state.scrollY = 0;
+	}
+	
+	scrollTo (state.scrollX, state.scrollY);
+};
 
 const md = markdownit ();
 
@@ -128,6 +173,9 @@ const navigate = async (uri, formData) => {
 		navigation.push ('');
 	}
 	
+	saveState (location.href);
+	restoreState (target.href);
+	
 	history.replaceState ({}, "", target.href);
 	updateBackButton ();
 };
@@ -143,6 +191,10 @@ const back = async () => {
 	
 	const uri = navigation[navigation.length - 1];
 	const res = await loadPage (uri, {credentials: 'same-origin'});
+	
+	saveState (location.href);
+	restoreState (res.url);
+	
 	history.replaceState ({}, "", res.url);
 	
 	updateBackButton ();
