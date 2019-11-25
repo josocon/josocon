@@ -25,6 +25,15 @@ namespace josocon;
 
 require_once __DIR__ . '/../_includes/template.php';
 
-Session::logOut ();
-\header ('location: /');
+try {
+	\ob_start ();
+	Session::logOut ();
+	\header ('location: /');
+} catch (\Throwable $e) {
+	\ob_clean ();
+	http_status (500);
+	print_header ('/logout/', 'エラー');
+	\printf ('<pre>%s</pre>', escape ($e));
+	print_footer ();
+}
 

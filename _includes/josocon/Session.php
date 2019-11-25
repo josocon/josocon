@@ -84,6 +84,8 @@ class Session
 	public static function logOut (): bool
 	{
 		unset ($_SESSION['user']);
+		$_SESSION['token'] = \bin2hex (\random_bytes (16));
+		self::updateShortLivedToken ();
 	}
 	
 	public static function getNonce (): string
