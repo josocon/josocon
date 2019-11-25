@@ -124,9 +124,10 @@ if ('' === $path) {
 			}
 			echo "</ul>";
 			
-			if ($event->vote_status) {
+			$voted = Session::get ("voted-{$event->id}");
+			if ($event->vote_status && (!$voted)) {
 				echo "<div class='vote-button'>";
-				\printf ("<a href='/vote/?id=%d'>投票する…</a>", $item->id);
+				\printf ("<a href='/vote/?id=%d&token=%s'>投票する…</a>", $item->id, Session::getShortLivedToken ("vote_" . $item->id));
 				echo "</div>";
 			}
 			

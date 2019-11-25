@@ -50,6 +50,7 @@ class Session
 		
 		if (!isset ($_SESSION['token'])) {
 			$_SESSION['token'] = \bin2hex (\random_bytes (16));
+			self::updateShortLivedToken ();
 		}
 	}
 	
@@ -57,6 +58,17 @@ class Session
 	{
 		$_SESSION['user'] = $name;
 		$_SESSION['token'] = \bin2hex (\random_bytes (16));
+		self::updateShortLivedToken ();
+	}
+	
+	public static function updateShortLivedToken (): void
+	{
+		$_SESSION['token_shortlived'] = \bin2hex (\random_bytes (16));
+	}
+	
+	public static function getShortLivedToken (string $tag = 'main_token'): string
+	{
+		return \hash_hmac ('sha512', $tag, $_SESSION['token_shortlived'] ?? \random_bytes (16));
 	}
 	
 	public static function getUserName (): string
