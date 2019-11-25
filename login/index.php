@@ -60,6 +60,12 @@ EOF;
 			| \JSON_UNESCAPED_UNICODE
 			| \JSON_THROW_ON_ERROR)));
 	
+	echo "<h2>サーバ環境</h2>";
+	echo "<table><tbody><tr>";
+	echo "<th>", escape ('PHP ' . \PHP_VERSION), "</th>";
+	echo "<td>", escape (\implode (', ', \get_loaded_extensions ())), "</td>";
+	echo "</tr></tbody></table>";
+	
 	$nonce = Session::getNonce ();
 	$token = Session::getToken ($nonce);
 	
