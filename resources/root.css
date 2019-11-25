@@ -94,3 +94,10 @@
 	text-align: center;
 }
 
+#vote_semiprime {
+	-ms-user-select: text;
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	user-select: text;
+}
+

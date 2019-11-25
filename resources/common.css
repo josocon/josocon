@@ -49,6 +49,7 @@ body {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	color: #333;
+	word-break; break-all;
 }
 
 josocon-page {
