@@ -554,6 +554,10 @@ const compute = async (port, data) => {
 	if (submitted) return;
 	port.postMessage ({type: 'factors', factors, duration: end - start});
 	
+	if (!target) {
+		return;
+	}
+	
 	const query = new URLSearchParams (params);
 	try {
 		if (factors.length < 2) {
