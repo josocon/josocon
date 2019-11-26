@@ -42,6 +42,82 @@
 }) ();
 
 
+let notificationUnsupported = false;
+const notify = msg => {
+	if (!('Notification' in window)) {
+		if (!notificationUnsupported) {
+			notificationUnsupported = true;
+			alert (msg || 'Notification not supported');
+		} else if (msg) {
+			alert (msg);
+		}
+	} else if (Notification.permission === 'granted' && msg) {
+		const notification = new Notification (msg);
+	} else if (Notification.permission === 'denied') {
+		Notification.requestPermission ()
+		.then (permission => {
+			if (permission === 'granted') {
+				const notification = new Notification (msg || 'Notification enabled!');
+			} else {
+				console.warn ('Notification denied:', msg);
+			}
+		});
+	}
+};
+
+
+const mainWorker = new SharedWorker ('/resources/shared-worker.js');
+mainWorker.port.start ();
+
+let submitted = false;
+mainWorker.port.addEventListener ('message', ev => {
+	const vote_proof_form = document.getElementById ('vote_proof_form');
+	const vote_p = vote_proof_form && vote_proof_form.vote_p;
+	const vote_q = vote_proof_form && vote_proof_form.vote_q;
+	const vote_gcd = vote_proof_form && vote_proof_form.vote_gcd;
+	const vote_progress = vote_proof_form && vote_proof_form.querySelector ('.submit button');
+	
+	if (!ev.data) {
+		console.log ('Empty message from shared worker');
+		return;
+	}
+	
+	if ('factors' == ev.data.type) {
+		submitted = true;
+		console.log ('factors:', ... ev.data.factors);
+		if (vote_p) {
+			vote_p.value = ev.data.factors[0] || '1';
+		}
+		if (vote_q) {
+			vote_q.value = ev.data.factors[1] || '1';
+		}
+		const gcd = bigInt.gcd (... ev.data.factors);
+		if (vote_progress) {
+			vote_progress.textContent = 'Factored in ' + ev.data.duration + 'ms; Voting...';
+		}
+		if (vote_gcd) {
+			vote_gcd.value = gcd;
+		}
+	} else if ('voted' == ev.data.type) {
+		console.log ('Vote succeeded!');
+		if (vote_progress) {
+			vote_progress.textContent = 'Voted';
+		}
+		if (ev.data.loadUri) {
+			setTimeout (() => loadPage (ev.data.loadUri), 1000);
+		}
+	} else if ('vote_error' == ev.data.type) {
+		console.error ('Error during vote:', ev.data.msg);
+		if (vote_progress) {
+			vote_progress.textContent = 'Failed';
+		}
+		notify ('Error during vote');
+	} else {
+		console.log ('Unknown message from shared worker:', ev.data);
+	}
+});
+
+
 const shadowRoots = new WeakMap ();
 const STATES_MAX = 100;
 const STATES_STEP = 10;
@@ -94,7 +170,7 @@ const md = markdownit ();
 const templatesPromise = (async () => {
 	const res = await fetch ('/resources/templates.xhtml');
 	const type = res.headers.get ('content-type').split (';')[0].trim ();
-	return new DOMParser().parseFromString(await res.text(), type);
+	return new DOMParser ().parseFromString (await res.text (), type);
 }) ();
 
 const getTemplate = async id => {
@@ -113,33 +189,111 @@ const updateBackButton = () => {
 	}
 };
 
-const loadPage = async (... fetchArgs) => {
-	const res = await fetch (... fetchArgs);
+const loadedCallback = () => {
+	const vote_semiprime = document.getElementById ('vote_semiprime');
+	const vote_proof_form = document.getElementById ('vote_proof_form');
+	const formData = vote_proof_form ? new FormData (vote_proof_form) : new FormData;
+	const params = new URLSearchParams (formData).toString ();
+	const target = vote_proof_form && vote_proof_form.target;
+	const vote_progress = vote_proof_form && vote_proof_form.querySelector ('.submit button');
 	
-	const type = res.headers.get ('content-type').split (';')[0].trim ();
-	const doc = new DOMParser().parseFromString(await res.text(), type);
-	console.log ('fetched document:', doc);
-	
-	const newPage = doc.getElementsByTagName ('josocon-page')[0];
-	const page = document.getElementsByTagName ('josocon-page')[0];
-	if (!newPage) {
-		console.error ('invalid document');
-		return;
+	if (vote_proof_form && target) {
+		vote_proof_form.addEventListener ('change', ev => {
+			const p = vote_proof_form.vote_p && vote_proof_form.vote_p.value;
+			const q = vote_proof_form.vote_q && vote_proof_form.vote_q.value;
+			if (p && q) {
+				const gcd = bigInt.gcd (p, q);
+				if (vote_proof_form.vote_gcd) {
+					vote_proof_form.vote_gcd.value = gcd;
+				}
+				
+				if (submitted) {
+					return;
+				}
+				if (gcd.equals (1)) {
+					mainWorker.port.postMessage ({type: 'voted'});
+					if (vote_progress) {
+						vote_progress.textContent = 'Voting...';
+					}
+					setTimeout (() => vote_proof_form.submit (), 1000);
+				} else if (vote_progress) {
+					vote_progress.textContent = 'Incorrect';
+				}
+			}
+		});
 	}
+	if (vote_semiprime && target) {
+		const input = vote_semiprime.textContent;
+		mainWorker.port.postMessage ({type: 'pf', input, params, target});
+		if (vote_progress) {
+			vote_progress.textContent = 'Computing...';
+		}
+	}
+};
+
+const errorPage = (page, msg) => {
+	console.error (msg);
+	
 	if (!page) {
-		console.error ('not supported');
-		return;
+		return false;
 	}
+	
+	const notice = document.createElement ('div');
+	notice.slot = 'page-notice';
+	notice.textContent = 'Failed to load.';
+	
+	const title = document.createElement ('div');
+	title.slot = 'page-title';
+	title.textContent = 'Error';
+	
+	const content = document.createElement ('div');
+	content.slot = 'page-content';
+	const paragraph = document.createElement ('p');
+	paragraph.textContent = String (msg);
+	content.appendChild (paragraph);
 	
 	page.textContent = '';
+	page.appendChild (notice);
+	page.appendChild (title);
+	page.appendChild (content);
 	
-	[... newPage.childNodes]
-	.map (node => document.adoptNode (node))
-	.forEach (node => page.appendChild (node));
+	document.title = 'Error';
 	
-	document.title = doc.title;
-	
-	return res;
+	return true;
+};
+
+const loadPage = async (... fetchArgs) => {
+	try {
+		const res = await fetch (... fetchArgs);
+		
+		const type = res.headers.get ('content-type').split (';')[0].trim ();
+		const doc = new DOMParser().parseFromString(await res.text(), type);
+		console.log ('fetched document:', doc);
+		
+		const newPage = doc.getElementsByTagName ('josocon-page')[0];
+		const page = document.getElementsByTagName ('josocon-page')[0];
+		if (!newPage) {
+			errorPage (page, 'invalid document');
+			return res;
+		}
+		if (!page) {
+			console.error ('not supported');
+			return res;
+		}
+		
+		page.textContent = '';
+		
+		[... newPage.childNodes]
+		.map (node => document.adoptNode (node))
+		.forEach (node => page.appendChild (node));
+		
+		document.title = doc.title;
+		
+		return res;
+	} catch (error) {
+		const page = document.getElementsByTagName ('josocon-page')[0];
+		errorPage (page, error);
+	}
 };
 
 const navigate = async (uri, formData) => {
@@ -149,6 +303,9 @@ const navigate = async (uri, formData) => {
 	
 	let method, fetchOptions;
 	if (formData instanceof FormData) {
+		method = 'POST';
+		fetchOptions = {method, body: formData, credentials: 'same-origin'};
+	} else if (formData instanceof URLSearchParams) {
 		method = 'POST';
 		fetchOptions = {method, body: formData, credentials: 'same-origin'};
 	} else {
@@ -178,6 +335,8 @@ const navigate = async (uri, formData) => {
 	
 	history.replaceState ({}, "", target.href);
 	updateBackButton ();
+	
+	loadedCallback ();
 };
 
 const back = async () => {
@@ -198,6 +357,8 @@ const back = async () => {
 	history.replaceState ({}, "", res.url);
 	
 	updateBackButton ();
+	
+	loadedCallback ();
 };
 
 customElements.define ('josocon-page', class extends HTMLElement {
@@ -274,6 +435,10 @@ window.addEventListener ('load', e => {
 	console.log (decodeURIComponent ('________________________________________________________________________________%0A%0A%E6%9D%B1%E5%A4%A7%E5%A5%B3%E8%A3%85%E5%AD%90%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C%E5%A7%94%E5%93%A1%E4%BC%9A2017-2019%0AWeb%E9%96%8B%E7%99%BA%E8%80%85%E5%8B%9F%E9%9B%86%EF%BC%81%0A%E5%88%9D%E5%BF%83%E8%80%85%E5%8F%AF%E3%83%BB%E7%B5%8C%E9%A8%93%E8%80%85%E6%AD%93%E8%BF%8E%E3%83%BB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%9F%A5%E8%AD%98%E4%B8%8D%E5%95%8F%E3%83%BB%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%84%E3%82%BF%E3%82%A4%E3%83%9D%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%81%AB%E8%88%88%E5%91%B3%E3%81%8C%E3%81%82%E3%82%8B%E4%BA%BA%E6%AD%93%E8%BF%8E%0A%E9%80%A3%E7%B5%A1%E5%85%88%20Twitter%3A%20%40_uts2%0A________________________________________________________________________________'));
 });
 
+window.addEventListener ('beforeunload', ev => {
+	mainWorker.port.postMessage ({type: 'closing'});
+});
+
 document.addEventListener ('click', ev => {
 	const composedPath = ev.composedPath ();
 	for (let target of composedPath) {
@@ -287,6 +452,8 @@ document.addEventListener ('click', ev => {
 		}
 		
 		ev.preventDefault ();
+		
+		notify ();
 		
 		const action = new URL (target.href, location.href);
 		console.log (action);

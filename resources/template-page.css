@@ -140,6 +140,8 @@
 	font: inherit;
 	box-shadow: none;
 	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 #site-back-button::before {

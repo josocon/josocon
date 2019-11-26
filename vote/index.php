@@ -78,8 +78,8 @@ if ('vote' === $action) {
 	
 	// RSA quiz
 	
-	$bits = 512;
-	$min_bits = 510;
+	$bits = 45;
+	$min_bits = 43;
 	
 	do {
 		do {
@@ -104,8 +104,8 @@ if ('vote' === $action) {
 </josocon-markdown>
 <section class='form-wrapper edit-form-wrapper'>
 <p>投票を公正に行うために、以下の問題を計算中です。手動で答えを入力することで、この画面をスキップすることもできます（任意）。入力しない場合は、自動で計算が終了するまでお待ちください。</p>
-<p><strong id="vote_semiprime"><?= escape (\gmp_strval ($pq)) ?></strong> = pq であるような p, q を求めよ。 (p, q は互いに素である 2 以上の整数)</p>
-<form class='edit-form input-form' action='/vote/' method='POST'>
+<p><strong id='vote_semiprime'><?= escape (\gmp_strval ($pq)) ?></strong> = pq であるような p, q を求めよ。 (p, q は互いに素である 2 以上の整数)</p>
+<form id='vote_proof_form' class='edit-form input-form' action='/vote/' method='POST'>
 <input type='hidden' name='action' value='vote_proof'/>
 <input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
 <input type='hidden' name='token' value='<?= escape ($token) ?>'/>
@@ -115,7 +115,7 @@ if ('vote' === $action) {
 <label for='vote_q'>q = </label>
 <input class='input-field' id='vote_q' type='text' name='vote_q' placeholder='（2以上の整数）'/>
 <label for='vote_gcd'>gcd(p, q) = </label>
-<input class='input-field' id='vote_gcd' type='text' name='vote_gcd' placeholder='（最大公約数）'/>
+<input class='input-field' id='vote_gcd' type='text' name='vote_gcd' readonly='' placeholder='（最大公約数）'/>
 <div class='submit'><button disabled=''>計算中…</button></div>
 </form>
 </section>
