@@ -69,6 +69,9 @@ const notify = msg => {
 
 
 const mainWorker = new SharedWorker ('/resources/shared-worker.js');
+mainWorker.onerror = e => {
+	console.error (e);
+};
 
 let submitted = false;
 mainWorker.port.addEventListener ('message', ev => {
