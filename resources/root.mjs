@@ -110,7 +110,7 @@ mainWorker.port.addEventListener ('message', ev => {
 			vote_progress.textContent = 'Voted';
 		}
 		if (ev.data.loadUri) {
-			setTimeout (() => loadPage (ev.data.loadUri), 1000);
+			setTimeout (() => navigate (ev.data.loadUri), 1000);
 		}
 	} else if ('vote_error' == ev.data.type) {
 		console.error ('Error during vote:', ev.data.msg);
