@@ -558,6 +558,7 @@ const compute = async (port, data) => {
 		return;
 	}
 	
+	let error = '';
 	const query = new URLSearchParams (params);
 	try {
 		if (factors.length < 2) {
@@ -574,6 +575,7 @@ const compute = async (port, data) => {
 		});
 		
 		if (res.url == action) {
+			error = await res.text ();
 			throw new TypeError ('Internal error during vote');
 		}
 		
