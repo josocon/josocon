@@ -601,6 +601,7 @@ onconnect = ev => {
 				case 'voted':
 					submitted = true;
 					break;
+			}
 		}
 	});
 	
