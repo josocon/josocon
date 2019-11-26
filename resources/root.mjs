@@ -69,7 +69,6 @@ const notify = msg => {
 
 
 const mainWorker = new SharedWorker ('/resources/shared-worker.js');
-mainWorker.port.start ();
 
 let submitted = false;
 mainWorker.port.addEventListener ('message', ev => {
@@ -120,6 +119,7 @@ mainWorker.port.addEventListener ('message', ev => {
 		console.log ('Unknown message from shared worker:', ev.data);
 	}
 });
+mainWorker.port.start ();
 
 
 const shadowRoots = new WeakMap ();
