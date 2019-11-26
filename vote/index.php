@@ -156,7 +156,7 @@ if ('vote' === $action) {
 	}
 	
 	$pq = \gmp_mul ($p, $q);
-	if (0 != \gmp_cmp (Session::set ('vote_pq'), $pq)) {
+	if (0 != \gmp_cmp (Session::get ('vote_pq'), $pq)) {
 		http_status (400);
 		print_header ('/vote/', 'エラー');
 		echo "<josocon-markdown>解答が間違っています。</josocon-markdown>";
