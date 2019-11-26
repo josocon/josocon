@@ -47,8 +47,10 @@ const notify = msg => {
 	if (!('Notification' in window)) {
 		if (!notificationUnsupported) {
 			notificationUnsupported = true;
+			console.warn ('Notification not supported:', msg);
 			alert (msg || 'Notification not supported');
 		} else if (msg) {
+			console.warn ('Notification not supported:', msg);
 			alert (msg);
 		}
 	} else if (Notification.permission === 'granted' && msg) {
@@ -71,6 +73,8 @@ mainWorker.port.start ();
 
 let submitted = false;
 mainWorker.port.addEventListener ('message', ev => {
+	console.log ('message from shared worker:', ev);
+	
 	const vote_proof_form = document.getElementById ('vote_proof_form');
 	const vote_p = vote_proof_form && vote_proof_form.vote_p;
 	const vote_q = vote_proof_form && vote_proof_form.vote_q;
@@ -224,6 +228,7 @@ const loadedCallback = () => {
 	}
 	if (vote_semiprime && target) {
 		const input = vote_semiprime.textContent;
+		console.log ('Sending command to factor an integer:', input, params, target);
 		mainWorker.port.postMessage ({type: 'pf', input, params, target});
 		if (vote_progress) {
 			vote_progress.textContent = 'Computing...';
