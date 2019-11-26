@@ -78,8 +78,8 @@ if ('vote' === $action) {
 	
 	// RSA quiz
 	
-	$bits = 45;
-	$min_bits = 43;
+	$bits = 48;
+	$min_bits = 45;
 	
 	do {
 		do {
