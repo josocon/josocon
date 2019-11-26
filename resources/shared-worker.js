@@ -576,12 +576,13 @@ const compute = async (port, data) => {
 		
 		if (res.url == action) {
 			error = await res.text ();
+			console.error (error);
 			throw new TypeError ('Internal error during vote');
 		}
 		
 		port.postMessage ({type: 'voted', loadUri: res.url});
 	} catch (e) {
-		port.postMessage ({type: 'vote_error', msg: String (e)});
+		port.postMessage ({type: 'vote_error', msg: String (e), error});
 		throw e;
 	}
 };
