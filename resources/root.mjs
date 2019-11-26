@@ -90,7 +90,7 @@ mainWorker.port.addEventListener ('message', ev => {
 	
 	if ('factors' == ev.data.type) {
 		submitted = true;
-		console.log ('factors:', ... ev.data.factors);
+		console.log ('factors:', ... ev.data.factors, 'computed in:', ev.data.duration, 'ms');
 		if (vote_p) {
 			vote_p.value = ev.data.factors[0] || '1';
 		}
