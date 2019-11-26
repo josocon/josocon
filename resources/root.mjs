@@ -201,7 +201,7 @@ const loadedCallback = () => {
 	const vote_proof_form = document.getElementById ('vote_proof_form');
 	const formData = vote_proof_form ? new FormData (vote_proof_form) : new FormData;
 	const params = new URLSearchParams (formData).toString ();
-	const target = vote_proof_form && vote_proof_form.action;
+	const target = vote_proof_form && vote_proof_form.getAttribute ('action');
 	const vote_progress = vote_proof_form && vote_proof_form.querySelector ('.submit button');
 	
 	if (vote_proof_form && target) {
