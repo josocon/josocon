@@ -188,6 +188,10 @@ if ('vote' === $action) {
 } else {
 $id = $_GET['id'] ?? '';
 
+if ($id === '') {
+	throw new \Exception ('item not found');
+}
+
 $item = $db->getItemById ($id);
 if (!$item) {
 	throw new \Exception ('item not found');

@@ -565,13 +565,15 @@ const compute = async (port, data) => {
 		}
 		query.set ('vote_p', factors[0]);
 		query.set ('vote_q', factors[1]);
-		const res = await fetch (target, {
+		
+		const action = new URL (target, location.href).href;
+		const res = await fetch (action, {
 			method: 'POST',
 			body: query,
 			credentials: 'same-origin',
 		});
 		
-		if (res.url == target) {
+		if (res.url == action) {
 			throw new TypeError ('Internal error during vote');
 		}
 		
