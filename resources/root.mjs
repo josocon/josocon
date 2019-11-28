@@ -57,17 +57,21 @@ const notify = msg => {
 		if (!msg) return;
 		const notification = new Notification (msg);
 	} else {
-		(Notification.requestPermission () || {then () {}})
-		.then (permission => {
-			if (permission === 'granted') {
-				const notification = new Notification (msg || 'Notification enabled!');
-			} else {
-				console.warn ('Notification denied:', msg);
-				if (msg) {
-					alert (msg);
+		try {
+			Notification.requestPermission ()
+			.then (permission => {
+				if (permission === 'granted') {
+					const notification = new Notification (msg || 'Notification enabled!');
+				} else {
+					console.warn ('Notification denied:', msg);
+					if (msg) {
+						alert (msg);
+					}
 				}
-			}
-		});
+			});
+		} catch (e) {
+			console.error (e);
+		}
 	}
 };
 
