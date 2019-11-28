@@ -53,10 +53,11 @@ const notify = msg => {
 			console.warn ('Notification not supported:', msg);
 			alert (msg);
 		}
-	} else if (Notification.permission === 'granted' && msg) {
+	} else if (Notification.permission === 'granted') {
+		if (!msg) return;
 		const notification = new Notification (msg);
-	} else if (Notification.permission !== 'granted') {
-		Notification.requestPermission ()
+	} else {
+		(Notification.requestPermission () || {then () {}})
 		.then (permission => {
 			if (permission === 'granted') {
 				const notification = new Notification (msg || 'Notification enabled!');
@@ -135,7 +136,13 @@ try {
 	mainWorker.port.start ();
 	sendMessageToWorker = msg => mainWorker.port.postMessage (msg);
 } catch (e) {
+	const dedicatedWorker = new Worker ('/resources/dedicated-worker.js');
+	dedicatedWorker.onerror = e => {
+		console.error (e);
+	};
 	
+	dedicatedWorker.addEventListener ('message', workerMessageListener);
+	sendMessageToWorker = msg => dedicatedWorker.postMessage (msg);
 }
 
 
