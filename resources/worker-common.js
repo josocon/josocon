@@ -21,10 +21,13 @@ importScripts ('/resources/BigInteger.min.js');
 importScripts ('/resources/factorization.js');
 
 const notify = msg => {
-	if ('undefined' == typeof Notification) return;
+	if ('undefined' == typeof Notification) return false;
 	if ('granted' === Notification.permission) {
 		const notification = new Notification (msg);
+		return true;
 	}
+	
+	return false;
 };
 
 const submitted = false;
@@ -81,9 +84,10 @@ const compute = async (port, data) => {
 			throw new TypeError ('Internal error during vote');
 		}
 		
-		notify ('Voted: ' + query.get ('name'));
+		const name = query.get ('name') || '';
+		const notified = notify ('Voted: ' + name);
 		
-		port.postMessage ({type: 'voted', loadUri: res.url});
+		port.postMessage ({type: 'voted', loadUri: res.url, notified, name});
 	} catch (e) {
 		port.postMessage ({type: 'vote_error', msg: String (e), error});
 		throw e;

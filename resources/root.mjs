@@ -76,7 +76,7 @@ let lastNonce = '';
 let sendMessageToWorker = () => void 0;
 
 const workerMessageListener = ev => {
-	console.log ('message from shared worker:', ev);
+	console.log ('message from shared worker:', ev.data);
 	
 	const vote_proof_form = document.getElementById ('vote_proof_form');
 	const vote_p = vote_proof_form && vote_proof_form.vote_p;
@@ -114,6 +114,9 @@ const workerMessageListener = ev => {
 		}
 		if (ev.data.loadUri) {
 			setTimeout (() => navigate (ev.data.loadUri), 1000);
+		}
+		if ((!ev.data.notified) && ev.data.name) {
+			notify ('Voted: ' + ev.data.name);
 		}
 	} else if ('vote_error' == ev.data.type) {
 		console.error ('Error during vote:', ev.data.msg);
