@@ -55,26 +55,26 @@ const notify = msg => {
 		}
 	} else if (Notification.permission === 'granted' && msg) {
 		const notification = new Notification (msg);
-	} else if (Notification.permission === 'denied') {
+	} else if (Notification.permission !== 'granted') {
 		Notification.requestPermission ()
 		.then (permission => {
 			if (permission === 'granted') {
 				const notification = new Notification (msg || 'Notification enabled!');
 			} else {
 				console.warn ('Notification denied:', msg);
+				if (msg) {
+					alert (msg);
+				}
 			}
 		});
 	}
 };
 
 
-const mainWorker = new SharedWorker ('/resources/shared-worker.js');
-mainWorker.onerror = e => {
-	console.error (e);
-};
+let lastNonce = '';
+let sendMessageToWorker = () => void 0;
 
-let submitted = false;
-mainWorker.port.addEventListener ('message', ev => {
+const workerMessageListener = ev => {
 	console.log ('message from shared worker:', ev);
 	
 	const vote_proof_form = document.getElementById ('vote_proof_form');
@@ -89,7 +89,9 @@ mainWorker.port.addEventListener ('message', ev => {
 	}
 	
 	if ('factors' == ev.data.type) {
-		submitted = true;
+		if (ev.data.nonce != '') {
+			lastNonce = ev.data.nonce;
+		}
 		console.log ('factors:', ... ev.data.factors, 'computed in:', ev.data.duration, 'ms');
 		if (vote_p) {
 			vote_p.value = ev.data.factors[0] || '1';
@@ -121,8 +123,20 @@ mainWorker.port.addEventListener ('message', ev => {
 	} else {
 		console.log ('Unknown message from shared worker:', ev.data);
 	}
-});
-mainWorker.port.start ();
+};
+
+try {
+	const mainWorker = new SharedWorker ('/resources/shared-worker.js');
+	mainWorker.onerror = e => {
+		console.error (e);
+	};
+	
+	mainWorker.port.addEventListener ('message', workerMessageListener);
+	mainWorker.port.start ();
+	sendMessageToWorker = msg => mainWorker.port.postMessage (msg);
+} catch (e) {
+	
+}
 
 
 const shadowRoots = new WeakMap ();
@@ -214,11 +228,11 @@ const loadedCallback = () => {
 					vote_proof_form.vote_gcd.value = gcd;
 				}
 				
-				if (submitted) {
+				if (vote_proof_form.nonce.value == lastNonce) {
 					return;
 				}
 				if (gcd.equals (1)) {
-					mainWorker.port.postMessage ({type: 'voted'});
+					sendMessageToWorker ({type: 'voted'});
 					if (vote_progress) {
 						vote_progress.textContent = 'Voting...';
 					}
@@ -232,7 +246,7 @@ const loadedCallback = () => {
 	if (vote_semiprime && target) {
 		const input = vote_semiprime.textContent;
 		console.log ('Sending command to factor an integer:', input, params, target);
-		mainWorker.port.postMessage ({type: 'pf', input, params, target});
+		sendMessageToWorker ({type: 'pf', input, params, target});
 		if (vote_progress) {
 			vote_progress.textContent = 'Computing...';
 		}
@@ -441,10 +455,6 @@ customElements.define ('josocon-markdown', class extends HTMLElement {
 window.addEventListener ('load', e => {
 	document.documentElement.classList.remove ('removed');
 	console.log (decodeURIComponent ('________________________________________________________________________________%0A%0A%E6%9D%B1%E5%A4%A7%E5%A5%B3%E8%A3%85%E5%AD%90%E3%82%B3%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C%E5%A7%94%E5%93%A1%E4%BC%9A2017-2019%0AWeb%E9%96%8B%E7%99%BA%E8%80%85%E5%8B%9F%E9%9B%86%EF%BC%81%0A%E5%88%9D%E5%BF%83%E8%80%85%E5%8F%AF%E3%83%BB%E7%B5%8C%E9%A8%93%E8%80%85%E6%AD%93%E8%BF%8E%E3%83%BB%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%9F%A5%E8%AD%98%E4%B8%8D%E5%95%8F%E3%83%BB%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%84%E3%82%BF%E3%82%A4%E3%83%9D%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%81%AB%E8%88%88%E5%91%B3%E3%81%8C%E3%81%82%E3%82%8B%E4%BA%BA%E6%AD%93%E8%BF%8E%0A%E9%80%A3%E7%B5%A1%E5%85%88%20Twitter%3A%20%40_uts2%0A________________________________________________________________________________'));
-});
-
-window.addEventListener ('beforeunload', ev => {
-	mainWorker.port.postMessage ({type: 'closing'});
 });
 
 document.addEventListener ('click', ev => {

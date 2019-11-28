@@ -27,6 +27,8 @@ const PRECACHE = [
 	'/resources/root.css',
 	'/resources/root.mjs',
 	'/resources/shared-worker.js',
+	'/resources/dedicated-worker.js',
+	'/resources/worker-commin.js',
 	'/resources/markdown-it_10.0.0.min.js',
 	'/resources/BigInteger.min.js',
 	'/resources/common.css',

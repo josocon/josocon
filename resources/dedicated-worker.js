@@ -19,29 +19,23 @@
 
 importScripts ('/resources/worker-common.js');
 
-onconnect = ev => {
-	const [port] = ev.ports;
-	
-	port.addEventListener ('message', ev => {
-		if (ev.data && ev.data.type) {
-			switch (ev.data.type) {
-				case 'pf':
-					compute (port, ev.data)
-					.then (() => {
-						console.log ('Computation completed');
-					})
-					.catch (e => {
-						console.error (e);
-					});
-					break;
-				
-				case 'voted':
-					markAsSubmitted ();
-					break;
-			}
+onmessage = ev => {
+	if (ev.data && ev.data.type) {
+		switch (ev.data.type) {
+			case 'pf':
+				compute (self, ev.data)
+				.then (() => {
+					console.log ('Computation completed');
+				})
+				.catch (e => {
+					console.error (e);
+				});
+				break;
+			
+			case 'voted':
+				markAsSubmitted ();
+				break;
 		}
-	});
-	
-	port.start ();
+	}
 };
 

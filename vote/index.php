@@ -79,7 +79,7 @@ if ('vote' === $action) {
 	// RSA quiz
 	
 	$bits = 48;
-	$min_bits = 45;
+	$min_bits = 47;
 	
 	do {
 		do {
@@ -230,7 +230,8 @@ print_header ('/vote/', $item->name);
 <input type='hidden' name='action' value='vote'/>
 <input type='hidden' name='nonce' value='<?= escape ($nonce) ?>'/>
 <input type='hidden' name='token' value='<?= escape ($token) ?>'/>
-<input type='hidden' name='id' value='<?= $item->id ?>'/>
+<input type='hidden' name='id' value='<?= escape ($item->id) ?>'/>
+<input type='hidden' name='name' value='<?= escape ($item->name) ?>'/>
 <label for='edit-text'>画像の文字を入力：</label>
 <input class='input-field' id='edit-text' type='text' name='captcha' placeholder='（画像上に見える文字を入力）'/>
 <div class='submit'><button>投票実行</button></div>
