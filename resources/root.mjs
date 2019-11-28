@@ -76,7 +76,7 @@ let lastNonce = '';
 let sendMessageToWorker = () => void 0;
 
 const workerMessageListener = ev => {
-	console.log ('message from shared worker:', ev.data);
+	console.log ('message from worker:', ev.data);
 	
 	const vote_proof_form = document.getElementById ('vote_proof_form');
 	const vote_p = vote_proof_form && vote_proof_form.vote_p;
