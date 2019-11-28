@@ -21,6 +21,7 @@ importScripts ('/resources/BigInteger.min.js');
 importScripts ('/resources/factorization.js');
 
 const notify = msg => {
+	if ('undefined' == typeof Notification) return;
 	if ('granted' === Notification.permission) {
 		const notification = new Notification (msg);
 	}
