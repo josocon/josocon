@@ -2,7 +2,7 @@
 
 'use strict'; // for non-module scripts
 
-importScripts ('/factors/BigInteger.min.js');
+importScripts ('/resources/BigInteger.min.js');
 
 // Linear algebra over finite field F_2
 const BitMatrix = class extends Uint8Array {
