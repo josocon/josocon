@@ -20,30 +20,6 @@ import {factorize, getPrimeDecomposition} from './factorization-master.mjs';
 (async ({document, window, navigator, location, fetch, console, alert, Notification, SharedWorker, Worker, URL, FormData, MutationObserver, DOMParser, HTMLElement, URLSearchParams, markdownit, Object, history, customElements}) => {
 
 
-(async () => {
-	if (!('serviceWorker' in navigator)) {
-		console.log ('Service workers are not supported.');
-		return false;
-	}
-	
-	let registration = await navigator.serviceWorker.getRegistration ('/');
-	console.log ('registration:', registration);
-	
-	if (registration) {
-		return;
-	}
-	
-	try {
-		console.log ('trying to register');
-		registration = await navigator.serviceWorker
-		.register ('/resources/sw.js', {scope: '/'});
-		console.log ('register returned');
-	} catch (error) {
-		console.log ('Service worker registration failed:', error);
-	}
-}) ();
-
-
 let notificationUnsupported = false;
 const notify = msg => {
 	if (!('Notification' in window)) {
