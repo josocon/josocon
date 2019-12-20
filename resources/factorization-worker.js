@@ -1688,7 +1688,7 @@ const factor = async (input, smoothSquareFactors, smoothRoots, primeBase) => {
 		for (let j = 0; j < rootsCount; j++) {
 			if (0 == basis[j]) continue;
 			
-			x = x.multiply (smoothRoots[j]).mod (n);
+			x = x.multiply (bigInt (smoothRoots[j])).mod (n);
 			for (let i = 0; i < primeBaseSize; i++) {
 				e[i] += smoothSquareFactors[j][i];
 			}
