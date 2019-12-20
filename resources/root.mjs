@@ -17,7 +17,7 @@
 
 import {factorize, getPrimeDecomposition} from './factorization-master.mjs';
 
-(async ({document, window, navigator, location, fetch, console, alert, Notification, SharedWorker, Worker, URL, FormData, MutationObserver, DOMParser, HTMLElement, URLSearchParams, markdownit, Object, history, customElements}) => {
+(async ({document, window, navigator, location, fetch, console, alert, Notification, URL, FormData, MutationObserver, DOMParser, HTMLElement, URLSearchParams, markdownit, Object, history, customElements}) => {
 
 
 let notificationUnsupported = false;
