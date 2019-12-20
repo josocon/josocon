@@ -17,7 +17,7 @@
 
 import {factorize, getPrimeDecomposition} from './factorization-master.mjs';
 
-(async ({document, window, navigator, location, fetch, console, alert, Notification, SharedWorker, Worker, URL, FormData, MutationObserver, DOMParser, HTMLElement, URLSearchParams, markdownit}) => {
+(async ({document, window, navigator, location, fetch, console, alert, Notification, SharedWorker, Worker, URL, FormData, MutationObserver, DOMParser, HTMLElement, URLSearchParams, markdownit, Object}) => {
 
 
 (async () => {
@@ -312,7 +312,7 @@ const navigate = async (uri, formData) => {
 	saveState (location.href);
 	restoreState (target.href);
 	
-	history.replaceState ({}, "", target.href);
+	history.replaceState (Object.create (null), "", target.href);
 	updateBackButton ();
 	
 	loadedCallback ();
@@ -333,7 +333,7 @@ const back = async () => {
 	saveState (location.href);
 	restoreState (res.url);
 	
-	history.replaceState ({}, "", res.url);
+	history.replaceState (Object.create (null), "", res.url);
 	
 	updateBackButton ();
 	
