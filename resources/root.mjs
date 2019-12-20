@@ -125,6 +125,26 @@ const updateBackButton = () => {
 	}
 };
 
+const submit = async target => {
+	if (!target.hasAttribute ('action')) {
+		return false;
+	}
+	
+	if (target.classList.contains ('form-direct')) {
+		return target.submit ();
+	}
+	
+	const action = new URL (target.getAttribute ('action'), location.href);
+	console.log (action);
+	if (action.host !== location.host) {
+		console.error ('cross-origin forms not supported');
+		return false;
+	} else {
+		const formData = new FormData (target);
+		return navigate (action.href, formData);
+	}
+};
+
 const loadedCallback = () => {
 	const vote_semiprime = document.getElementById ('vote_semiprime');
 	const vote_proof_form = document.getElementById ('vote_proof_form');
@@ -147,7 +167,7 @@ const loadedCallback = () => {
 					if (vote_progress) {
 						vote_progress.textContent = 'Voting...';
 					}
-					setTimeout (() => vote_proof_form.submit (), 1000);
+					setTimeout (() => submit (vote_proof_form), 1000);
 				} else if (vote_progress) {
 					vote_progress.textContent = 'Incorrect';
 				}
@@ -171,7 +191,7 @@ const loadedCallback = () => {
 						vote_proof_form.vote_gcd.value = gcd;
 						if (gcd.equals (1)) {
 							vote_progress.textContent = 'Voting...';
-							setTimeout (() => vote_proof_form.submit (), 1000);
+							setTimeout (() => submit (vote_proof_form), 1000);
 						} else {
 							vote_progress.textContent = 'Error!';
 							console.error ('Not a semiprime, or square?');
@@ -435,15 +455,7 @@ document.addEventListener ('submit', ev => {
 		
 		ev.preventDefault ();
 		
-		const action = new URL (target.getAttribute ('action'), location.href);
-		console.log (action);
-		if (action.host !== location.host) {
-			console.error ('cross-origin forms not supported');
-			return;
-		} else {
-			const formData = new FormData (target);
-			navigate (action.href, formData);
-		}
+		submit (target);
 		return;
 	}
 });
