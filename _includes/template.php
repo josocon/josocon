@@ -132,8 +132,7 @@ echo "<meta property='og:type' content='article'/>";
 // scripts
 //echo "<script src='/resources/webcomponents-bundle@2.3.0.js'/>";
 echo "<script src='/resources/markdown-it_10.0.0.min.js'/>";
-echo "<script src='/resources/BigInteger.min.js'/>";
-echo "<script src='/resources/root.mjs'/>";
+echo "<iframe srcdoc='&lt;!doctype html&gt;&lt;script type=&apos;module&apos; src=&apos;/resources/root.mjs&apos;&gt;&lt;/script&gt;'></iframe>";
 
 echo "</head>";
 

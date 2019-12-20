@@ -15,7 +15,9 @@
 	limitations under the License.
 */
 
-'use strict'; // for non-module scripts
+import {factorize, getPrimeDecomposition} from './factorization-master.mjs';
+
+(async ({document, window, navigator, location, fetch, console, alert, Notification, SharedWorker, Worker, URL, FormData, MutationObserver, DOMParser, HTMLElement, URLSearchParams}) => {
 
 
 (async () => {
@@ -74,83 +76,6 @@ const notify = msg => {
 		}
 	}
 };
-
-
-let lastNonce = '';
-let sendMessageToWorker = () => void 0;
-
-const workerMessageListener = ev => {
-	console.log ('message from worker:', ev.data);
-	
-	const vote_proof_form = document.getElementById ('vote_proof_form');
-	const vote_p = vote_proof_form && vote_proof_form.vote_p;
-	const vote_q = vote_proof_form && vote_proof_form.vote_q;
-	const vote_gcd = vote_proof_form && vote_proof_form.vote_gcd;
-	const vote_progress = vote_proof_form && vote_proof_form.querySelector ('.submit button');
-	
-	if (!ev.data) {
-		console.log ('Empty message from shared worker');
-		return;
-	}
-	
-	if ('factors' == ev.data.type) {
-		if (ev.data.nonce != '') {
-			lastNonce = ev.data.nonce;
-		}
-		console.log ('factors:', ... ev.data.factors, 'computed in:', ev.data.duration, 'ms');
-		if (vote_p) {
-			vote_p.value = ev.data.factors[0] || '1';
-		}
-		if (vote_q) {
-			vote_q.value = ev.data.factors[1] || '1';
-		}
-		const gcd = bigInt.gcd (... ev.data.factors);
-		if (vote_progress) {
-			vote_progress.textContent = 'Factored in ' + ev.data.duration + 'ms; Voting...';
-		}
-		if (vote_gcd) {
-			vote_gcd.value = gcd;
-		}
-	} else if ('voted' == ev.data.type) {
-		console.log ('Vote succeeded!');
-		if (vote_progress) {
-			vote_progress.textContent = 'Voted';
-		}
-		if (ev.data.loadUri) {
-			setTimeout (() => navigate (ev.data.loadUri), 1000);
-		}
-		if ((!ev.data.notified) && ev.data.name) {
-			notify ('Voted: ' + ev.data.name);
-		}
-	} else if ('vote_error' == ev.data.type) {
-		console.error ('Error during vote:', ev.data.msg);
-		if (vote_progress) {
-			vote_progress.textContent = 'Failed';
-		}
-		notify ('Error during vote');
-	} else {
-		console.log ('Unknown message from shared worker:', ev.data);
-	}
-};
-
-try {
-	const mainWorker = new SharedWorker ('/resources/shared-worker.js');
-	mainWorker.onerror = e => {
-		console.error (e);
-	};
-	
-	mainWorker.port.addEventListener ('message', workerMessageListener);
-	mainWorker.port.start ();
-	sendMessageToWorker = msg => mainWorker.port.postMessage (msg);
-} catch (e) {
-	const dedicatedWorker = new Worker ('/resources/dedicated-worker.js');
-	dedicatedWorker.onerror = e => {
-		console.error (e);
-	};
-	
-	dedicatedWorker.addEventListener ('message', workerMessageListener);
-	sendMessageToWorker = msg => dedicatedWorker.postMessage (msg);
-}
 
 
 const shadowRoots = new WeakMap ();
@@ -242,11 +167,7 @@ const loadedCallback = () => {
 					vote_proof_form.vote_gcd.value = gcd;
 				}
 				
-				if (vote_proof_form.nonce.value == lastNonce) {
-					return;
-				}
 				if (gcd.equals (1)) {
-					sendMessageToWorker ({type: 'voted'});
 					if (vote_progress) {
 						vote_progress.textContent = 'Voting...';
 					}
@@ -257,13 +178,35 @@ const loadedCallback = () => {
 			}
 		});
 	}
-	if (vote_semiprime && target) {
+	if (vote_semiprime && target && vote_proof_form) {
 		const input = vote_semiprime.textContent;
-		console.log ('Sending command to factor an integer:', input, params, target);
-		sendMessageToWorker ({type: 'pf', input, params, target});
-		if (vote_progress) {
-			vote_progress.textContent = 'Computing...';
-		}
+		vote_progress.textContent = 'Computing...';
+		(async () => {
+			try {
+				const factors = [];
+				for await (let prime of factorize (input)) {
+					factors.push (prime);
+					if (factors.length == 2) {
+						const [p, q] = factors;
+						vote_proof_form.vote_p.value = p;
+						vote_proof_form.vote_q.value = q;
+						
+						const gcd = bigInt.gcd (p, q);
+						vote_proof_form.vote_gcd.value = gcd;
+						if (gcd.equals (1)) {
+							vote_progress.textContent = 'Voting...';
+							setTimeout (() => vote_proof_form.submit (), 1000);
+						} else {
+							vote_progress.textContent = 'Error!';
+							console.error ('Not a semiprime, or square?');
+						}
+						break;
+					}
+				}
+			} catch (e) {
+				console.error ('Factorization failed:', e)
+			}
+		}) ();
 	}
 };
 
@@ -528,4 +471,6 @@ document.addEventListener ('submit', ev => {
 		return;
 	}
 });
+
+}) (top);
 
