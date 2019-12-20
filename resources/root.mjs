@@ -125,7 +125,7 @@ const updateBackButton = () => {
 	}
 };
 
-const submit = async target => {
+const submit = async (target, msg) => {
 	if (!target.hasAttribute ('action')) {
 		return false;
 	}
@@ -141,9 +141,13 @@ const submit = async target => {
 		return false;
 	} else {
 		const formData = new FormData (target);
-		return navigate (action.href, formData);
+		await navigate (action.href, formData);
+		msg && notify (msg);
+		return true;
 	}
 };
+
+
 
 const loadedCallback = () => {
 	const vote_semiprime = document.getElementById ('vote_semiprime');
@@ -167,7 +171,8 @@ const loadedCallback = () => {
 					if (vote_progress) {
 						vote_progress.textContent = 'Voting...';
 					}
-					setTimeout (() => submit (vote_proof_form), 1000);
+					const msg = 'Voted: ' + vote_proof_form.name.value;
+					setTimeout (() => submit (vote_proof_form, msg), 1000);
 				} else if (vote_progress) {
 					vote_progress.textContent = 'Incorrect';
 				}
@@ -191,7 +196,8 @@ const loadedCallback = () => {
 						vote_proof_form.vote_gcd.value = gcd;
 						if (gcd.equals (1)) {
 							vote_progress.textContent = 'Voting...';
-							setTimeout (() => submit (vote_proof_form), 1000);
+							const msg = 'Voted: ' + vote_proof_form.name.value;
+							setTimeout (() => submit (vote_proof_form, msg), 1000);
 						} else {
 							vote_progress.textContent = 'Error!';
 							console.error ('Not a semiprime, or square?');
