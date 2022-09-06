@@ -131,7 +131,7 @@ echo "<meta property='og:type' content='article'/>";
 
 // scripts
 //echo "<script src='/resources/webcomponents-bundle@2.3.0.js'/>";
-echo "<script src='/resources/markdown-it_10.0.0.min.js'/>";
+echo "<script src='/resources/markdown-it.min.js'/>";
 echo "<script src='/resources/sw-loader.js'/>";
 
 echo "</head>";
